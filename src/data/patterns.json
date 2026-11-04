@@ -1,0 +1,80 @@
+[
+  {
+    "id": "geo-rhombus-weave",
+    "name": "几何菱格交织",
+    "image": "/patterns/geo-rhombus-weave.svg",
+    "category": "几何纹样",
+    "keywords": ["几何", "对称", "实验"],
+    "description": "以菱格与折线构成的数字实验纹样，用于展示纹样档案与筛选交互。",
+    "features": ["重复单元清晰", "对称结构", "适合平铺延展"],
+    "source": "纹语项目原创 · 数字设计实验素材",
+    "verificationStatus": "experimental",
+    "relatedCraftIds": ["draft", "wax-dot", "dye"],
+    "culturalNote": "本条目为项目演示用原创几何纹样，不代表特定非遗登记纹样；文化释义待团队核实后补充。"
+  },
+  {
+    "id": "line-spiral-flow",
+    "name": "流线旋纹",
+    "image": "/patterns/line-spiral-flow.svg",
+    "category": "线条纹样",
+    "keywords": ["线条", "流动", "实验"],
+    "description": "连续曲线与留白节奏构成的线条实验纹样，强调蜡刀线条的抽象表达。",
+    "features": ["曲线主导", "留白对比", "方向性流动"],
+    "source": "纹语项目原创 · 数字设计实验素材",
+    "verificationStatus": "experimental",
+    "relatedCraftIds": ["wax-dot", "de-wax"],
+    "culturalNote": "待核实：若与地方传统纹样存在对应关系，需补充田野与文献来源。"
+  },
+  {
+    "id": "symmetry-eight-petal",
+    "name": "八向对称花形",
+    "image": "/patterns/symmetry-eight-petal.svg",
+    "category": "对称图形",
+    "keywords": ["对称", "放射", "实验"],
+    "description": "八向放射对称的结构实验，用于博物馆网格展示与详情页版式演示。",
+    "features": ["八向对称", "中心聚焦", "可缩放单元"],
+    "source": "纹语项目原创 · 数字设计实验素材",
+    "verificationStatus": "experimental",
+    "relatedCraftIds": ["draft", "dye", "finish"],
+    "culturalNote": "文化寓意未作断言；展示用途为数字交互与视觉设计验证。"
+  },
+  {
+    "id": "abstract-indigo-mist",
+    "name": "靛蓝雾纹",
+    "image": "/patterns/abstract-indigo-mist.svg",
+    "category": "抽象花纹",
+    "keywords": ["抽象", "靛蓝", "层次"],
+    "description": "多层块面与细线叠加的抽象纹样，呼应蜡染蓝白对比的视觉气质。",
+    "features": ["层次叠加", "蓝白对比", "不规则边缘"],
+    "source": "纹语项目原创 · 数字设计实验素材",
+    "verificationStatus": "experimental",
+    "relatedCraftIds": ["dye", "oxidize"],
+    "culturalNote": "待核实。"
+  },
+  {
+    "id": "geo-fish-bone",
+    "name": "折线骨纹",
+    "image": "/patterns/geo-fish-bone.svg",
+    "category": "几何纹样",
+    "keywords": ["折线", "重复", "实验"],
+    "description": "折线单元往复排列，模拟传统蜡染中常见的线性节奏结构（演示级）。",
+    "features": ["线性重复", "节奏感强", "易于平铺"],
+    "source": "纹语项目原创 · 数字设计实验素材",
+    "verificationStatus": "experimental",
+    "relatedCraftIds": ["wax-dot", "de-wax"],
+    "culturalNote": "待核实。"
+  },
+  {
+    "id": "line-cross-stitch",
+    "name": "经纬交错的线",
+    "image": "/patterns/line-cross-stitch.svg",
+    "category": "线条纹样",
+    "keywords": ["经纬", "交织", "实验"],
+    "description": "纵横线条交织的实验图形，呼应「纹语」品牌中经纬与叙事的意象。",
+    "features": ["交织结构", "网格感", "品牌关联"],
+    "source": "纹语项目原创 · 数字设计实验素材",
+    "verificationStatus": "experimental",
+    "relatedCraftIds": ["draft", "finish"],
+    "culturalNote": "待核实。"
+  }
+]

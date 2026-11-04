@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#183B56"/>
+  <g fill="#F4F0E6" transform="translate(400 500)">
+    <ellipse rx="50" ry="100"/>
+    <ellipse rx="100" ry="50"/>
+  </g>
+  <text x="100" y="120" fill="#C69B5D" font-size="48" font-family="serif">ùð±b</text>
+  <text x="100" y="920" fill="#9AA6AD" font-size="18">:\Á · w¥7‹</text>
+</svg>

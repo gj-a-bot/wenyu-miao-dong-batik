@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#F4F0E6"/>
+  <g fill="none" stroke="#183B56" stroke-width="2">
+    <path d="M100 200h600v600H100z"/>
+    <path d="M150 250l100 100-100 100-100-100z M350 250l100 100-100 100-100-100z M550 250l100 100-100 100-100-100z"/>
+    <path d="M150 550l100 100-100 100-100-100z M350 550l100 100-100 100-100-100z M550 550l100 100-100 100-100-100z"/>
+  </g>
+  <text x="100" y="920" fill="#9AA6AD" font-size="18">:\Á · [ÝQ<¾¡</text>
+</svg>

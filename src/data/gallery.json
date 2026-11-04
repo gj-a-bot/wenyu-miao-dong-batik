@@ -1,0 +1,38 @@
+[
+  {
+    "id": "demo-indigo-grid",
+    "title": "靛蓝网格再设计",
+    "category": "数字再创作",
+    "image": "/gallery/demo-indigo-grid.svg",
+    "thumbnail": "/gallery/demo-indigo-grid.svg",
+    "description": "基于项目原创几何纹样进行的配色与重复排列实验。本作品为系统内置演示条目，非真实用户投稿。",
+    "createdAt": "2026-03-01",
+    "isDemo": true,
+    "sourcePatternId": "geo-rhombus-weave",
+    "palette": ["#183B56", "#F4F0E6", "#C69B5D"]
+  },
+  {
+    "id": "demo-flow-lines",
+    "title": "流线留白研究",
+    "category": "研究稿",
+    "image": "/gallery/demo-flow-lines.svg",
+    "thumbnail": "/gallery/demo-flow-lines.svg",
+    "description": "以线条实验纹样为源，调整背景与主色对比，探索数字媒介下的蜡染式留白。演示作品。",
+    "createdAt": "2026-03-08",
+    "isDemo": true,
+    "sourcePatternId": "line-spiral-flow",
+    "palette": ["#0B1F33", "#F4F0E6", "#5B7C99"]
+  },
+  {
+    "id": "demo-symmetry-poster",
+    "title": "对称花形海报",
+    "category": "视觉设计",
+    "image": "/gallery/demo-symmetry-poster.svg",
+    "thumbnail": "/gallery/demo-symmetry-poster.svg",
+    "description": "放射对称结构用于展览海报式构图的演示，标注为项目样例。",
+    "createdAt": "2026-03-12",
+    "isDemo": true,
+    "sourcePatternId": "symmetry-eight-petal",
+    "palette": ["#183B56", "#C69B5D", "#F4F0E6"]
+  }
+]

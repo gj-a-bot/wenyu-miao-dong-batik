@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-primary: #183b56;
+  --brand-dark: #0b1f33;
+  --brand-cream: #f4f0e6;
+  --brand-gold: #c69b5d;
+  --brand-gray: #9aa6ad;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-brand-cream text-brand-dark antialiased;
+}
+
+::selection {
+  background: rgba(198, 155, 93, 0.35);
+  color: var(--brand-dark);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.pattern-grid-bg {
+  background-image: linear-gradient(
+      rgba(24, 59, 86, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(24, 59, 86, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
