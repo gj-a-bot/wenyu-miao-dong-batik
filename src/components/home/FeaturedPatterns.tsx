@@ -11,7 +11,7 @@ export function FeaturedPatterns() {
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs tracking-[0.3em] text-brand-gold uppercase">
+            <p className="text-xs tracking-[0.3em] text-brand-goldInk uppercase">
               纹样精选
             </p>
             <h2 className="mt-2 font-serif text-3xl text-brand-primary">

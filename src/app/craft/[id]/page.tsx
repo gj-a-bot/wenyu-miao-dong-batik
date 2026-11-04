@@ -31,7 +31,7 @@ export default function CraftDetailPage({
 
   return (
     <article className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-      <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">
+      <p className="text-xs uppercase tracking-[0.35em] text-brand-goldInk">
         步骤 {step.order} / {craftSteps.length}
       </p>
       <h1 className="mt-3 font-serif text-4xl text-brand-primary">{step.name}</h1>

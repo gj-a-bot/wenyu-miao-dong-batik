@@ -28,7 +28,11 @@ export function HeroSection() {
             <Button href="/patterns" variant="gold">
               探索纹样
             </Button>
-            <Button href="/studio" variant="secondary" className="border-brand-cream/30 text-brand-cream hover:bg-white/10">
+            <Button
+              href="/studio"
+              variant="secondary"
+              className="border-brand-cream/30 text-brand-cream hover:border-brand-cream hover:bg-white/10"
+            >
               开始创作
             </Button>
           </div>

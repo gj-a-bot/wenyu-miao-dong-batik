@@ -7,7 +7,7 @@ export function CraftFlow() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
       <header className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">
+        <p className="text-xs uppercase tracking-[0.35em] text-brand-goldInk">
           工艺数字课堂
         </p>
         <h1 className="mt-3 font-serif text-4xl text-brand-primary md:text-5xl text-balance">
@@ -48,7 +48,7 @@ export function CraftFlow() {
               <div
                 className={cn("p-6", i === 0 && "lg:flex lg:flex-col lg:justify-center")}
               >
-                <span className="text-xs text-brand-gold">步骤 {step.order}</span>
+                <span className="text-xs text-brand-goldInk">步骤 {step.order}</span>
                 <h2 className="mt-1 font-serif text-2xl text-brand-primary group-hover:text-brand-gold">
                   {step.name}
                 </h2>

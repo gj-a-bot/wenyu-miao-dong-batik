@@ -68,7 +68,7 @@ export function GalleryExhibition() {
               </span>
             </div>
             <div className="md:col-span-5 md:[direction:ltr]">
-              <p className="text-xs uppercase tracking-widest text-brand-gold">
+              <p className="text-xs uppercase tracking-widest text-brand-goldInk">
                 {work.category}
               </p>
               <h2 className="mt-2 font-serif text-3xl text-brand-primary group-hover:text-brand-gold">

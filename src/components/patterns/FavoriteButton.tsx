@@ -30,7 +30,7 @@ export function FavoriteButton({ patternId }: { patternId: string }) {
         "inline-flex items-center gap-2 rounded-sm border px-4 py-2 text-sm transition",
         active
           ? "border-brand-gold bg-brand-gold/10 text-brand-primary"
-          : "border-brand-primary/20 text-brand-gray hover:border-brand-primary"
+          : "border-brand-primary/20 text-brand-muted hover:border-brand-primary"
       )}
       aria-pressed={active}
     >

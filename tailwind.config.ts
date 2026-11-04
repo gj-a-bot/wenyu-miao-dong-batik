@@ -14,6 +14,7 @@ const config: Config = {
           dark: "#0B1F33",
           cream: "#F4F0E6",
           gold: "#C69B5D",
+          goldInk: "#8A6A33",
           gray: "#9AA6AD",
           muted: "#5F6B73",
         },

@@ -33,7 +33,7 @@ export function PatternsArchive() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
       <header className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">
+        <p className="text-xs uppercase tracking-[0.35em] text-brand-goldInk">
           纹样博物馆
         </p>
         <h1 className="mt-3 font-serif text-4xl text-brand-primary md:text-5xl">
