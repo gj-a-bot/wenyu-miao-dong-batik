@@ -6,10 +6,29 @@ import Link from "next/link";
 import { Search, Star } from "lucide-react";
 import { filterPatterns, patternCategories } from "@/lib/data";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Tag } from "@/components/ui/Tag";
 import { getFavorites } from "@/lib/storage";
 import { cn } from "@/lib/cn";
+import {
+  CoverImageWithHotspots,
+  type CoverHotspot,
+} from "@/components/ui/CoverImageWithHotspots";
+
+const MUSEUM_COVER_SRC = "/images/museum/pattern-museum-cover.png";
+const COVER_W = 1920;
+const COVER_H = 1080;
+
+const MUSEUM_COVER_HOTSPOTS: CoverHotspot[] = [
+  { href: "/", label: "纹语 WENYU 首页", x: 0.01, y: 0.028, w: 0.28, h: 0.23 },
+  {
+    href: "#pattern-archive",
+    label: "探索纹样",
+    x: 0.042,
+    y: 0.675,
+    w: 0.2,
+    h: 0.14,
+  },
+];
 
 export function PatternsArchive() {
   const [category, setCategory] = useState("全部");
@@ -33,14 +52,28 @@ export function PatternsArchive() {
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
-      <SectionHeading
-        eyebrow="Digital Pattern Archive"
-        title="纹样博物馆"
-        subtitle="分类、搜索与收藏。实验素材与传统类型参考将明确区分标注。"
-      />
+    <>
+      <section
+        className="relative w-full overflow-hidden bg-logo-surface"
+        aria-label="纹样博物馆封面"
+      >
+        <CoverImageWithHotspots
+          src={MUSEUM_COVER_SRC}
+          width={COVER_W}
+          height={COVER_H}
+          priority
+          hotspots={MUSEUM_COVER_HOTSPOTS}
+        />
+        <h1 className="sr-only">
+          纹样博物馆 — 探索苗侗蜡染的纹样之美。在数字世界中，遇见千年传承的纹样艺术。
+        </h1>
+      </section>
 
-      <div className="mt-14 flex flex-col gap-10 lg:flex-row">
+      <div
+        id="pattern-archive"
+        className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
+      >
+      <div className="flex flex-col gap-10 lg:flex-row">
         <aside className="lg:w-56 shrink-0">
           <p className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">
             分类
@@ -143,6 +176,7 @@ export function PatternsArchive() {
           )}
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

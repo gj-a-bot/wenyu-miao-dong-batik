@@ -63,7 +63,7 @@ export function SiteHeader() {
           "sticky top-0 z-50 border-b transition-all duration-300",
           scrolled
             ? "border-brand-border bg-brand-warm/95 shadow-sm backdrop-blur-md"
-            : "border-transparent bg-brand-paper/90 backdrop-blur-sm"
+            : "border-transparent bg-brand-paper/95 backdrop-blur-sm"
         )}
       >
         <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between px-4 md:h-[4.75rem] md:px-8">

@@ -23,6 +23,7 @@ const config: Config = {
           border: "#DED9CE",
           gray: "#9AA6AD",
         },
+        "logo-surface": "var(--logo-surface)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "PingFang SC", "Microsoft YaHei", "sans-serif"],
