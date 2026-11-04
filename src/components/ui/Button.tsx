@@ -30,7 +30,7 @@ export function Button({
   disabled?: boolean;
 }) {
   const base =
-    "inline-flex items-center justify-center gap-2 px-6 py-3 text-sm tracking-wide transition-all duration-300 rounded-sm disabled:opacity-50 disabled:pointer-events-none";
+    "inline-flex items-center justify-center gap-2 px-6 py-3 text-sm tracking-wide transition-all duration-300 rounded-sm disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2";
 
   const classes = cn(base, variants[variant], className);
 

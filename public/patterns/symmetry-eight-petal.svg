@@ -3,10 +3,13 @@
   <g fill="#F4F0E6" opacity="0.9">
     <ellipse cx="200" cy="200" rx="40" ry="80"/>
     <ellipse cx="200" cy="200" rx="80" ry="40"/>
-    <ellipse cx="200" cy="200" rx="60" ry="60" fill="none" stroke="#C69B5D" stroke-width="2"/>
+    <g transform="translate(200 200) rotate(45)">
+      <ellipse rx="40" ry="80"/>
+      <ellipse rx="80" ry="40"/>
+    </g>
   </g>
-  <g stroke="#C69B5D" stroke-width="1" fill="none" opacity="0.6">
-    <circle cx="200" cy="200" r="120"/>
-    <circle cx="200" cy="200" r="160"/>
+  <g stroke="#C69B5D" stroke-width="2" fill="none" opacity="0.85">
+    <circle cx="200" cy="200" r="60"/>
+    <circle cx="200" cy="200" r="120" opacity="0.6"/>
   </g>
 </svg>

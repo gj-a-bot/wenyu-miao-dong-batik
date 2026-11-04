@@ -4,7 +4,7 @@ import galleryData from "@/data/gallery.json";
 import { CraftStep, GalleryWork, Pattern } from "@/types";
 
 export const patterns = patternsData as Pattern[];
-export const craftSteps = (craftData as CraftStep[]).sort(
+export const craftSteps = [...(craftData as CraftStep[])].sort(
   (a, b) => a.order - b.order
 );
 export const galleryWorks = galleryData as GalleryWork[];
@@ -34,8 +34,15 @@ export const galleryCategories = [
 export function filterPatterns(options: {
   category?: string;
   query?: string;
+  favoritesOnly?: boolean;
+  favoriteIds?: string[];
 }): Pattern[] {
-  const { category = "全部", query = "" } = options;
+  const {
+    category = "全部",
+    query = "",
+    favoritesOnly = false,
+    favoriteIds = [],
+  } = options;
   const q = query.trim().toLowerCase();
   return patterns.filter((p) => {
     const matchCat = category === "全部" || p.category === category;
@@ -44,6 +51,8 @@ export function filterPatterns(options: {
       p.name.toLowerCase().includes(q) ||
       p.keywords.some((k) => k.toLowerCase().includes(q)) ||
       p.description.toLowerCase().includes(q);
-    return matchCat && matchQuery;
+    const matchFav =
+      !favoritesOnly || favoriteIds.includes(p.id);
+    return matchCat && matchQuery && matchFav;
   });
 }

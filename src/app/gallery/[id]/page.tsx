@@ -6,9 +6,20 @@ import {
   getGalleryWorkById,
   getPatternById,
 } from "@/lib/data";
+import type { Metadata } from "next";
 
 export function generateStaticParams() {
   return galleryWorks.map((w) => ({ id: w.id }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Metadata {
+  const work = getGalleryWorkById(params.id);
+  if (!work) return { title: "作品未找到" };
+  return { title: work.title };
 }
 
 export default function GalleryDetailPage({
@@ -31,7 +42,7 @@ export default function GalleryDetailPage({
       <h1 className="mt-3 font-serif text-4xl text-brand-primary md:text-5xl">
         {work.title}
       </h1>
-      <p className="mt-2 text-sm text-brand-gray">{work.createdAt}</p>
+      <p className="mt-2 text-sm text-brand-muted">{work.createdAt}</p>
 
       <div className="mt-12 relative aspect-[3/4] max-h-[80vh] w-full overflow-hidden bg-brand-dark md:aspect-auto md:h-[70vh]">
         <Image src={work.image} alt={work.title} fill className="object-contain" />
@@ -42,7 +53,7 @@ export default function GalleryDetailPage({
           <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
             创作说明
           </h2>
-          <p className="mt-4 leading-relaxed text-brand-gray">{work.description}</p>
+          <p className="mt-4 leading-relaxed text-brand-muted">{work.description}</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {work.palette.map((c) => (
               <span
@@ -72,7 +83,7 @@ export default function GalleryDetailPage({
                 <Image src={work.image} alt="" fill className="object-cover" />
               </div>
             </div>
-            <p className="mt-4 text-sm text-brand-gray">
+            <p className="mt-4 text-sm text-brand-muted">
               左：档案纹样「{source.name}」 · 右：本演示再设计
             </p>
             <Link
@@ -93,7 +104,7 @@ export default function GalleryDetailPage({
         >
           下载 SVG 演示文件
         </a>
-        <Link href="/gallery" className="inline-flex items-center px-6 py-3 text-sm text-brand-gray hover:text-brand-primary">
+        <Link href="/gallery" className="inline-flex items-center px-6 py-3 text-sm text-brand-muted hover:text-brand-primary">
           ← 返回展厅
         </Link>
       </div>

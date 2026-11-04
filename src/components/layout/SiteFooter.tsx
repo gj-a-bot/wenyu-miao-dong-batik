@@ -14,9 +14,7 @@ export function SiteFooter() {
     <footer className="border-t border-brand-primary/10 bg-brand-dark text-brand-cream">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-2 lg:grid-cols-4 md:px-8">
         <div className="lg:col-span-2">
-          <div className="[&_a]:text-brand-cream [&_.font-serif]:!text-brand-cream [&_span]:text-brand-gray">
-            <Logo />
-          </div>
+          <Logo tone="light" />
           <p className="mt-6 max-w-md text-sm leading-relaxed text-brand-gray">
             纹语 WENYU — 苗侗蜡染数字文化交互系统。让纹样有故事，让工艺可体验，让传统文化能够被重新理解和创造。
           </p>

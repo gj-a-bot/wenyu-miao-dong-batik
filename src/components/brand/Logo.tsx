@@ -1,6 +1,16 @@
 import Link from "next/link";
+import { cn } from "@/lib/cn";
 
-export function Logo({ compact = false }: { compact?: boolean }) {
+type LogoTone = "default" | "light";
+
+export function Logo({
+  compact = false,
+  tone = "default",
+}: {
+  compact?: boolean;
+  tone?: LogoTone;
+}) {
+  const isLight = tone === "light";
   return (
     <Link
       href="/"
@@ -13,7 +23,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
         viewBox="0 0 48 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 transition-transform duration-500 group-hover:rotate-3"
+        className="shrink-0 transition-transform duration-500 group-hover:rotate-3 motion-reduce:transition-none motion-reduce:group-hover:rotate-0"
         aria-hidden
       >
         <rect
@@ -22,7 +32,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
           width="40"
           height="40"
           rx="2"
-          className="stroke-brand-primary"
+          className={isLight ? "stroke-brand-cream" : "stroke-brand-primary"}
           strokeWidth="1.2"
         />
         <path
@@ -31,14 +41,29 @@ export function Logo({ compact = false }: { compact?: boolean }) {
           strokeWidth="1"
           strokeLinecap="round"
         />
-        <circle cx="24" cy="24" r="3" className="fill-brand-primary" />
+        <circle
+          cx="24"
+          cy="24"
+          r="3"
+          className={isLight ? "fill-brand-cream" : "fill-brand-primary"}
+        />
       </svg>
       <div className="leading-tight">
-        <span className="block font-serif text-lg tracking-[0.2em] text-brand-primary md:text-xl">
+        <span
+          className={cn(
+            "block font-serif text-lg tracking-[0.2em] md:text-xl",
+            isLight ? "text-brand-cream" : "text-brand-primary"
+          )}
+        >
           纹语
         </span>
         {!compact && (
-          <span className="block text-[10px] uppercase tracking-[0.35em] text-brand-gray">
+          <span
+            className={cn(
+              "block text-[10px] uppercase tracking-[0.35em]",
+              isLight ? "text-brand-gray" : "text-brand-muted"
+            )}
+          >
             WENYU
           </span>
         )}

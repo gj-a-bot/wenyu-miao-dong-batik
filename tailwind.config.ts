@@ -15,6 +15,7 @@ const config: Config = {
           cream: "#F4F0E6",
           gold: "#C69B5D",
           gray: "#9AA6AD",
+          muted: "#5F6B73",
         },
       },
       fontFamily: {

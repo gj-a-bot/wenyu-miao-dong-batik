@@ -43,11 +43,11 @@ export function FeaturedPatterns() {
                 />
               </div>
               <div className="border border-brand-primary/10 p-5">
-                <p className="text-xs text-brand-gray">{p.category}</p>
+                <p className="text-xs text-brand-muted">{p.category}</p>
                 <h3 className="mt-1 font-serif text-lg text-brand-primary">
                   {p.name}
                 </h3>
-                <p className="mt-2 line-clamp-2 text-sm text-brand-gray">
+                <p className="mt-2 line-clamp-2 text-sm text-brand-muted">
                   {p.description}
                 </p>
               </div>

@@ -2,9 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { craftSteps, getCraftStepById } from "@/lib/data";
+import type { Metadata } from "next";
 
 export function generateStaticParams() {
   return craftSteps.map((s) => ({ id: s.id }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Metadata {
+  const step = getCraftStepById(params.id);
+  if (!step) return { title: "工艺步骤未找到" };
+  return { title: `${step.name} · 工艺课堂` };
 }
 
 export default function CraftDetailPage({
@@ -24,7 +35,7 @@ export default function CraftDetailPage({
         步骤 {step.order} / {craftSteps.length}
       </p>
       <h1 className="mt-3 font-serif text-4xl text-brand-primary">{step.name}</h1>
-      <p className="mt-4 max-w-2xl text-lg text-brand-gray">{step.summary}</p>
+      <p className="mt-4 max-w-2xl text-lg text-brand-muted">{step.summary}</p>
 
       <div className="mt-12 grid gap-12 lg:grid-cols-2">
         <div className="relative aspect-video overflow-hidden bg-brand-primary/5 lg:aspect-[4/3]">
@@ -47,7 +58,7 @@ export default function CraftDetailPage({
               {step.tools.map((t) => (
                 <li
                   key={t}
-                  className="border border-brand-primary/15 px-3 py-1 text-sm text-brand-gray"
+                  className="border border-brand-primary/15 px-3 py-1 text-sm text-brand-muted"
                 >
                   {t}
                 </li>
@@ -58,7 +69,7 @@ export default function CraftDetailPage({
             <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
               注意事项
             </h2>
-            <ul className="mt-3 list-inside list-disc text-sm text-brand-gray">
+            <ul className="mt-3 list-inside list-disc text-sm text-brand-muted">
               {step.notes.map((n) => (
                 <li key={n}>{n}</li>
               ))}
@@ -76,7 +87,7 @@ export default function CraftDetailPage({
             ← {prev.name}
           </Link>
         ) : (
-          <Link href="/craft" className="text-sm text-brand-gray hover:text-brand-primary">
+          <Link href="/craft" className="text-sm text-brand-muted hover:text-brand-primary">
             ← 课堂首页
           </Link>
         )}

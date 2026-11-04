@@ -17,7 +17,7 @@ export function CultureSection() {
           <p>
             「纹语」并非替代田野与传承，而是提供数字化的纹样档案、工艺可视化与共创工具，帮助公众以可交互的方式接近这门工艺的结构之美。
           </p>
-          <p className="text-sm text-brand-gray">
+          <p className="text-sm text-brand-muted">
             本站文化叙述以可核实资料为准；未获确证的内容不会写定为传统定说。
           </p>
         </div>

@@ -1,60 +1,42 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   DEFAULT_STUDIO_CONFIG,
   layoutPresets,
   presetPalettes,
   studioAssets,
 } from "@/data/studio-assets";
-import { StudioConfig } from "@/types";
+import { SavedStudioWork, StudioConfig } from "@/types";
 import { saveStudioWork } from "@/lib/storage";
+import {
+  drawStudio,
+  scaleStudioConfigForCanvas,
+  STUDIO_CANVAS_SIZE,
+  STUDIO_EXPORT_SIZE,
+} from "@/lib/studio-canvas";
+import { StudioSavedWorksList } from "@/components/studio/StudioSavedWorksList";
 import { Download, RotateCcw, Save, Sparkles } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-function drawStudio(
-  ctx: CanvasRenderingContext2D,
-  width: number,
-  height: number,
-  config: StudioConfig
-) {
-  const asset = studioAssets.find((a) => a.id === config.assetId);
-  if (!asset) return;
-
-  ctx.fillStyle = config.backgroundColor;
-  ctx.fillRect(0, 0, width, height);
-
-  const cellSize =
-    (Math.min(width, height) / Math.max(config.repeatX, config.repeatY)) *
-    config.scale;
-  const totalW = config.repeatX * cellSize + (config.repeatX - 1) * config.spacing;
-  const totalH = config.repeatY * cellSize + (config.repeatY - 1) * config.spacing;
-  const startX = (width - totalW) / 2 + config.offsetX;
-  const startY = (height - totalH) / 2 + config.offsetY;
-
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${asset.viewBox}"><path d="${asset.svgPath}" fill="none" stroke="${config.primaryColor}" stroke-width="2"/></svg>`;
-  const img = new Image();
-  const blob = new Blob([svg], { type: "image/svg+xml" });
-  const url = URL.createObjectURL(blob);
-
-  return new Promise<void>((resolve) => {
-    img.onload = () => {
-      for (let row = 0; row < config.repeatY; row++) {
-        for (let col = 0; col < config.repeatX; col++) {
-          const x = startX + col * (cellSize + config.spacing);
-          const y = startY + row * (cellSize + config.spacing);
-          ctx.save();
-          ctx.translate(x + cellSize / 2, y + cellSize / 2);
-          ctx.rotate((config.rotation * Math.PI) / 180);
-          ctx.drawImage(img, -cellSize / 2, -cellSize / 2, cellSize, cellSize);
-          ctx.restore();
-        }
-      }
-      URL.revokeObjectURL(url);
-      resolve();
-    };
-    img.src = url;
-  });
+function createPreviewThumbnail(
+  source: HTMLCanvasElement,
+  maxSize = 128
+): string | undefined {
+  const scale = Math.min(1, maxSize / Math.max(source.width, source.height));
+  const tw = Math.max(1, Math.round(source.width * scale));
+  const th = Math.max(1, Math.round(source.height * scale));
+  const thumb = document.createElement("canvas");
+  thumb.width = tw;
+  thumb.height = th;
+  const tctx = thumb.getContext("2d");
+  if (!tctx) return undefined;
+  tctx.drawImage(source, 0, 0, tw, th);
+  try {
+    return thumb.toDataURL("image/jpeg", 0.72);
+  } catch {
+    return undefined;
+  }
 }
 
 export function StudioWorkspace() {
@@ -62,21 +44,18 @@ export function StudioWorkspace() {
   const [config, setConfig] = useState<StudioConfig>(DEFAULT_STUDIO_CONFIG);
   const [title, setTitle] = useState("未命名实验");
   const [assistMsg, setAssistMsg] = useState("");
+  const [worksRefresh, setWorksRefresh] = useState(0);
 
-  const render = useCallback(async () => {
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    await drawStudio(ctx, canvas.width, canvas.height, config);
+    drawStudio(ctx, canvas.width, canvas.height, config);
   }, [config]);
 
-  useEffect(() => {
-    render();
-  }, [render]);
-
   const update = (partial: Partial<StudioConfig>) => {
-    setConfig((c) => ({ ...c, ...partial }));
+    setConfig((prev) => ({ ...prev, ...partial }));
   };
 
   const reset = () => {
@@ -85,31 +64,56 @@ export function StudioWorkspace() {
   };
 
   const exportPng = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const off = document.createElement("canvas");
+    off.width = STUDIO_EXPORT_SIZE;
+    off.height = STUDIO_EXPORT_SIZE;
+    const ctx = off.getContext("2d");
+    if (!ctx) return;
+    const scaled = scaleStudioConfigForCanvas(
+      config,
+      STUDIO_CANVAS_SIZE,
+      STUDIO_EXPORT_SIZE
+    );
+    drawStudio(ctx, STUDIO_EXPORT_SIZE, STUDIO_EXPORT_SIZE, scaled);
     const link = document.createElement("a");
     link.download = `${title || "wenyu-studio"}.png`;
-    link.href = canvas.toDataURL("image/png");
+    link.href = off.toDataURL("image/png");
     link.click();
   };
 
   const saveWork = () => {
     const canvas = canvasRef.current;
-    const preview = canvas?.toDataURL("image/png");
-    saveStudioWork({
+    if (!canvas) {
+      setAssistMsg("无法读取画布，保存失败。");
+      return;
+    }
+    const previewDataUrl = createPreviewThumbnail(canvas);
+    const ok = saveStudioWork({
       id: `local-${Date.now()}`,
       title,
       createdAt: new Date().toISOString().slice(0, 10),
       config,
-      previewDataUrl: preview,
+      previewDataUrl,
     });
-    setAssistMsg("已保存到浏览器本地存储。");
+    setAssistMsg(
+      ok
+        ? "已保存到浏览器本地存储（含缩略图预览）。"
+        : "保存失败：浏览器存储不可用或空间已满，请导出 PNG 备份。"
+    );
+    if (ok) setWorksRefresh((k) => k + 1);
+  };
+
+  const loadSavedWork = (work: SavedStudioWork) => {
+    setConfig({ ...DEFAULT_STUDIO_CONFIG, ...work.config });
+    setTitle(work.title);
+    setAssistMsg(`已加载：${work.title}`);
   };
 
   const applyPalette = (p: (typeof presetPalettes)[0]) => {
     update({
       primaryColor: p.primary,
       backgroundColor: p.background,
+      accentColor: p.accent,
     });
     setAssistMsg(`已应用配色方案：${p.name}（规则驱动，非 AI 生成）。`);
   };
@@ -124,7 +128,6 @@ export function StudioWorkspace() {
     setAssistMsg(`已应用排列方案：${l.name}（规则驱动）。`);
   };
 
-  /** 预留 AI 接口 */
   const aiAssistPlaceholder = () => {
     setAssistMsg(
       "AI 模型接口尚未配置。当前提供配色与排列预设；接入后可通过 storageApiExtension 同步。"
@@ -192,6 +195,13 @@ export function StudioWorkspace() {
               </li>
             ))}
           </ul>
+          <h2 className="mt-8 text-xs uppercase tracking-wider text-brand-gray">
+            我的作品
+          </h2>
+          <StudioSavedWorksList
+            refreshKey={worksRefresh}
+            onLoad={loadSavedWork}
+          />
         </aside>
 
         <div className="flex items-center justify-center p-4 bg-brand-primary/20">
@@ -213,6 +223,15 @@ export function StudioWorkspace() {
                 type="color"
                 value={config.primaryColor}
                 onChange={(e) => update({ primaryColor: e.target.value })}
+                className="mt-1 h-10 w-full cursor-pointer"
+              />
+            </label>
+            <label className="block">
+              <span className="text-brand-gray">点缀色</span>
+              <input
+                type="color"
+                value={config.accentColor}
+                onChange={(e) => update({ accentColor: e.target.value })}
                 className="mt-1 h-10 w-full cursor-pointer"
               />
             </label>

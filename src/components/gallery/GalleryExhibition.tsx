@@ -23,7 +23,7 @@ export function GalleryExhibition() {
         <h1 className="font-serif text-4xl text-brand-primary md:text-5xl">
           数字作品展厅
         </h1>
-        <p className="mt-4 max-w-xl text-brand-gray">
+        <p className="mt-4 max-w-xl text-brand-muted">
           展览式呈现项目演示作品。所有条目均标注为样例，非真实用户投稿。
         </p>
       </header>
@@ -38,7 +38,7 @@ export function GalleryExhibition() {
               "px-4 py-2 text-sm transition",
               category === cat
                 ? "bg-brand-primary text-brand-cream"
-                : "border border-brand-primary/15 text-brand-gray hover:text-brand-primary"
+                : "border border-brand-primary/15 text-brand-muted hover:text-brand-primary"
             )}
           >
             {cat}
@@ -74,7 +74,7 @@ export function GalleryExhibition() {
               <h2 className="mt-2 font-serif text-3xl text-brand-primary group-hover:text-brand-gold">
                 {work.title}
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-brand-gray">
+              <p className="mt-4 text-sm leading-relaxed text-brand-muted">
                 {work.description}
               </p>
             </div>

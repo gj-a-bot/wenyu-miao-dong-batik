@@ -9,9 +9,20 @@ import {
 } from "@/lib/data";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
 import { FavoriteButton } from "@/components/patterns/FavoriteButton";
+import type { Metadata } from "next";
 
 export function generateStaticParams() {
   return patterns.map((p) => ({ id: p.id }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Metadata {
+  const pattern = getPatternById(params.id);
+  if (!pattern) return { title: "纹样未找到" };
+  return { title: pattern.name };
 }
 
 export default function PatternDetailPage({
@@ -43,7 +54,7 @@ export default function PatternDetailPage({
           <h1 className="mt-4 font-serif text-4xl text-brand-primary">
             {pattern.name}
           </h1>
-          <p className="mt-2 text-sm text-brand-gray">{pattern.category}</p>
+            <p className="mt-2 text-sm text-brand-muted">{pattern.category}</p>
           <p className="mt-6 leading-relaxed text-brand-primary/85">
             {pattern.description}
           </p>
@@ -54,7 +65,7 @@ export default function PatternDetailPage({
             <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
               图案特征
             </h2>
-            <ul className="mt-3 list-inside list-disc text-sm text-brand-gray">
+            <ul className="mt-3 list-inside list-disc text-sm text-brand-muted">
               {pattern.features.map((f) => (
                 <li key={f}>{f}</li>
               ))}
@@ -64,13 +75,13 @@ export default function PatternDetailPage({
             <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
               资料来源
             </h2>
-            <p className="mt-2 text-sm text-brand-gray">{pattern.source}</p>
+            <p className="mt-2 text-sm text-brand-muted">{pattern.source}</p>
           </section>
           <section className="mt-8">
             <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
               文化说明
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-brand-gray">
+            <p className="mt-2 text-sm leading-relaxed text-brand-muted">
               {pattern.culturalNote}
             </p>
           </section>

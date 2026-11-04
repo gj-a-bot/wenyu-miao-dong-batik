@@ -60,6 +60,7 @@ export interface StudioConfig {
   assetId: string;
   primaryColor: string;
   backgroundColor: string;
+  accentColor: string;
   scale: number;
   rotation: number;
   offsetX: number;

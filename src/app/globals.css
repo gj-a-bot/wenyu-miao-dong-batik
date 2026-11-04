@@ -10,12 +10,23 @@
   --brand-gray: #9aa6ad;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   @apply bg-brand-cream text-brand-dark antialiased;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-none ring-2 ring-brand-gold/70 ring-offset-2 ring-offset-brand-cream;
+  }
 }
 
 ::selection {
