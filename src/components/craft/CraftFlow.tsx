@@ -1,62 +1,68 @@
 import Link from "next/link";
-import Image from "next/image";
 import { craftSteps } from "@/lib/data";
 import { cn } from "@/lib/cn";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { CraftStepNav } from "@/components/craft/CraftStepNav";
 
 export function CraftFlow() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-      <header className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.35em] text-brand-goldInk">
-          工艺数字课堂
-        </p>
-        <h1 className="mt-3 font-serif text-4xl text-brand-primary md:text-5xl text-balance">
-          一场关于蜡与蓝的创作。
-        </h1>
-        <p className="mt-6 text-brand-muted">
-          以下步骤为交互式导读，内容以可核实资料为准，不构成唯一标准工艺流程。
-        </p>
-      </header>
+    <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
+      <SectionHeading
+        eyebrow="Craft Manual"
+        title="一场关于蜡与蓝的创作。"
+        subtitle="七步导读以可核实资料为准，示意图均标注为演示，不构成唯一标准工艺。"
+      />
 
-      <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {craftSteps.map((step, i) => {
-          const href = `/craft/${step.id}`;
-          return (
+      <div className="mt-16 grid gap-12 lg:grid-cols-[220px_1fr]">
+        <aside className="hidden lg:block">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">
+            步骤索引
+          </p>
+          <div className="mt-4">
+            <CraftStepNav />
+          </div>
+        </aside>
+
+        <div className="grid gap-6 sm:grid-cols-2">
+          {craftSteps.map((step, i) => (
             <Link
               key={step.id}
-              href={href}
+              href={`/craft/${step.id}`}
               className={cn(
-                "group flex flex-col overflow-hidden border border-brand-primary/10 bg-brand-cream transition hover:shadow-xl",
-                i === 0 && "lg:col-span-2 lg:flex-row"
+                "group overflow-hidden border border-brand-border bg-brand-warm transition hover:shadow-archive",
+                i === 0 && "sm:col-span-2 sm:grid sm:grid-cols-2"
               )}
             >
               <div
                 className={cn(
-                  "relative bg-brand-primary/5",
+                  "relative bg-brand-primary/[0.04]",
                   i === 0
-                    ? "aspect-video lg:w-1/2 lg:aspect-auto lg:min-h-[240px]"
+                    ? "aspect-video sm:aspect-auto sm:min-h-[220px]"
                     : "aspect-video"
                 )}
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={step.image}
-                  alt={step.name}
-                  fill
-                  className="object-cover"
+                  alt=""
+                  className="h-full w-full object-cover"
                 />
+                <span className="absolute left-3 top-3 bg-brand-warm/90 px-2 py-0.5 text-[10px] uppercase tracking-wider text-brand-muted">
+                  示意图
+                </span>
               </div>
-              <div
-                className={cn("p-6", i === 0 && "lg:flex lg:flex-col lg:justify-center")}
-              >
-                <span className="text-xs text-brand-goldInk">步骤 {step.order}</span>
-                <h2 className="mt-1 font-serif text-2xl text-brand-primary group-hover:text-brand-gold">
+              <div className="border-t border-brand-border p-5">
+                <span className="text-xs text-brand-goldInk">
+                  步骤 {String(step.order).padStart(2, "0")}
+                </span>
+                <h2 className="mt-1 font-serif text-2xl text-brand-primary group-hover:text-brand-goldInk">
                   {step.name}
                 </h2>
                 <p className="mt-2 text-sm text-brand-muted">{step.summary}</p>
               </div>
             </Link>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );

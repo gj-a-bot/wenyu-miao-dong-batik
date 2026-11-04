@@ -18,12 +18,12 @@ export function Logo({
       aria-label="纹语 WENYU 首页"
     >
       <svg
-        width={compact ? 32 : 40}
-        height={compact ? 32 : 40}
+        width={compact ? 32 : 44}
+        height={compact ? 32 : 44}
         viewBox="0 0 48 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 transition-transform duration-500 group-hover:rotate-3 motion-reduce:transition-none motion-reduce:group-hover:rotate-0"
+        className="shrink-0 transition-transform duration-500 group-hover:rotate-2 motion-reduce:transition-none"
         aria-hidden
       >
         <rect
@@ -31,28 +31,28 @@ export function Logo({
           y="4"
           width="40"
           height="40"
-          rx="2"
-          className={isLight ? "stroke-brand-cream" : "stroke-brand-primary"}
-          strokeWidth="1.2"
+          rx="1"
+          className={isLight ? "stroke-brand-warm/80" : "stroke-brand-primary"}
+          strokeWidth="1"
         />
         <path
           d="M8 24 H40 M24 8 V40 M14 14 L34 34 M34 14 L14 34"
           className="stroke-brand-gold"
-          strokeWidth="1"
+          strokeWidth="0.9"
           strokeLinecap="round"
         />
         <circle
           cx="24"
           cy="24"
-          r="3"
-          className={isLight ? "fill-brand-cream" : "fill-brand-primary"}
+          r="2.5"
+          className={isLight ? "fill-brand-warm" : "fill-brand-primary"}
         />
       </svg>
       <div className="leading-tight">
         <span
           className={cn(
-            "block font-serif text-lg tracking-[0.2em] md:text-xl",
-            isLight ? "text-brand-cream" : "text-brand-primary"
+            "block font-serif text-lg tracking-[0.25em] md:text-xl",
+            isLight ? "text-brand-warm" : "text-brand-primary"
           )}
         >
           纹语
@@ -60,7 +60,7 @@ export function Logo({
         {!compact && (
           <span
             className={cn(
-              "block text-[10px] uppercase tracking-[0.35em]",
+              "block text-[9px] uppercase tracking-[0.45em]",
               isLight ? "text-brand-gray" : "text-brand-muted"
             )}
           >

@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "secondary" | "ghost" | "gold";
+type Variant = "primary" | "secondary" | "ghost" | "gold" | "outline-light";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-brand-primary text-brand-cream hover:bg-brand-dark border border-transparent",
+    "bg-brand-primary text-brand-warm border border-brand-primary hover:bg-brand-dark",
   secondary:
-    "bg-transparent text-brand-primary border border-brand-primary/30 hover:border-brand-primary hover:bg-brand-primary/5",
-  ghost: "bg-transparent text-brand-primary hover:bg-brand-primary/10",
-  gold: "bg-brand-gold text-brand-dark hover:brightness-105 border border-brand-gold",
+    "bg-transparent text-brand-primary border border-brand-border hover:border-brand-primary hover:bg-brand-warm",
+  ghost: "bg-transparent text-brand-primary hover:bg-brand-border/40 border border-transparent",
+  gold: "bg-brand-gold text-brand-ink border border-brand-gold hover:brightness-105",
+  "outline-light":
+    "bg-transparent text-brand-warm border border-brand-warm/40 hover:border-brand-warm hover:bg-brand-warm/10",
 };
 
 export function Button({
@@ -30,7 +32,7 @@ export function Button({
   disabled?: boolean;
 }) {
   const base =
-    "inline-flex items-center justify-center gap-2 px-6 py-3 text-sm tracking-wide transition-all duration-300 rounded-sm disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 focus-visible:ring-offset-2";
+    "inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm tracking-[0.12em] transition-all duration-300 rounded-sm disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper";
 
   const classes = cn(base, variants[variant], className);
 

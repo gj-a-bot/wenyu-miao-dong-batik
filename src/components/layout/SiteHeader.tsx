@@ -25,13 +25,20 @@ function isNavActive(pathname: string, href: string) {
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuId = useId();
-
   const closeMenu = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
     closeMenu();
   }, [pathname, closeMenu]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -51,10 +58,17 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-brand-primary/10 bg-brand-cream/90 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:h-20 md:px-8">
+      <header
+        className={cn(
+          "sticky top-0 z-50 border-b transition-all duration-300",
+          scrolled
+            ? "border-brand-border bg-brand-warm/95 shadow-sm backdrop-blur-md"
+            : "border-transparent bg-brand-paper/90 backdrop-blur-sm"
+        )}
+      >
+        <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between px-4 md:h-[4.75rem] md:px-8">
           <Logo />
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="主导航">
+          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="主导航">
             {navItems.map((item) => {
               const active = isNavActive(pathname, item.href);
               return (
@@ -62,7 +76,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative rounded-sm px-4 py-2 text-sm tracking-wide transition-colors",
+                    "relative px-4 py-2 text-[13px] tracking-wide transition-colors",
                     active
                       ? "text-brand-primary"
                       : "text-brand-muted hover:text-brand-primary"
@@ -84,7 +98,7 @@ export function SiteHeader() {
             aria-controls={menuId}
             aria-label={open ? "关闭菜单" : "打开菜单"}
           >
-            {open ? <X size={24} /> : <Menu size={24} />}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </header>
@@ -92,13 +106,13 @@ export function SiteHeader() {
         <>
           <button
             type="button"
-            className="fixed inset-0 z-40 bg-brand-dark/40 lg:hidden"
+            className="fixed inset-0 z-40 bg-brand-dark/50 lg:hidden"
             aria-label="关闭导航"
             onClick={closeMenu}
           />
           <nav
             id={menuId}
-            className="fixed inset-x-0 top-16 z-50 max-h-[calc(100vh-4rem)] overflow-y-auto border-b border-brand-primary/10 bg-brand-cream px-4 py-6 shadow-lg lg:hidden md:top-20"
+            className="fixed inset-x-0 top-[4.25rem] z-50 max-h-[calc(100vh-4.25rem)] overflow-y-auto border-b border-brand-border bg-brand-warm px-4 py-8 shadow-archive md:top-[4.75rem] lg:hidden"
             aria-label="移动导航"
           >
             <ul className="flex flex-col gap-1">
@@ -110,9 +124,9 @@ export function SiteHeader() {
                       href={item.href}
                       onClick={closeMenu}
                       className={cn(
-                        "block rounded-sm border-b border-brand-primary/5 py-3 text-base",
+                        "block border-b border-brand-border/60 py-3.5 font-serif text-lg",
                         active
-                          ? "bg-brand-primary/5 font-medium text-brand-primary"
+                          ? "text-brand-primary"
                           : "text-brand-muted hover:text-brand-primary"
                       )}
                       aria-current={active ? "page" : undefined}

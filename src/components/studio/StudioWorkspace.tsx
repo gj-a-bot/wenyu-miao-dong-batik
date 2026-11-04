@@ -16,6 +16,8 @@ import {
   STUDIO_EXPORT_SIZE,
 } from "@/lib/studio-canvas";
 import { StudioSavedWorksList } from "@/components/studio/StudioSavedWorksList";
+import { ColorField, RangeField } from "@/components/ui/Field";
+import { Logo } from "@/components/brand/Logo";
 import { Download, RotateCcw, Save, Sparkles } from "lucide-react";
 import { cn } from "@/lib/cn";
 
@@ -135,222 +137,111 @@ export function StudioWorkspace() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-5rem)] flex-col bg-brand-dark text-brand-cream">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-4 py-4 md:px-8">
-        <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-gold">
-            数字共创实验室
-          </p>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 bg-transparent font-serif text-xl outline-none border-b border-transparent focus:border-brand-gold"
-            aria-label="项目名称"
-          />
+    <div className="flex min-h-[calc(100vh-5rem)] flex-col bg-brand-paper">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-border bg-brand-warm px-4 py-4 md:px-8">
+        <div className="flex items-center gap-6">
+          <Logo compact />
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-brand-muted">
+              数字共创实验室
+            </p>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="mt-1 w-full max-w-xs border-b border-transparent bg-transparent font-serif text-xl text-brand-primary outline-none focus:border-brand-gold"
+              aria-label="项目名称"
+            />
+          </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={reset}
-            className="inline-flex items-center gap-2 border border-white/20 px-4 py-2 text-sm hover:bg-white/5"
-          >
-            <RotateCcw size={16} /> 重置
+          <button type="button" onClick={reset} className="wenyu-chip gap-2">
+            <RotateCcw size={15} /> 重置
           </button>
-          <button
-            type="button"
-            onClick={saveWork}
-            className="inline-flex items-center gap-2 border border-white/20 px-4 py-2 text-sm hover:bg-white/5"
-          >
-            <Save size={16} /> 保存
+          <button type="button" onClick={saveWork} className="wenyu-chip gap-2">
+            <Save size={15} /> 保存
           </button>
           <button
             type="button"
             onClick={exportPng}
-            className="inline-flex items-center gap-2 bg-brand-gold px-4 py-2 text-sm text-brand-dark"
+            className="inline-flex items-center gap-2 bg-brand-primary px-5 py-2.5 text-sm tracking-wide text-brand-warm"
           >
-            <Download size={16} /> 导出 PNG
+            <Download size={15} /> 导出 PNG
           </button>
         </div>
       </div>
 
-      <div className="grid flex-1 lg:grid-cols-[240px_1fr_280px]">
-        <aside className="border-b border-white/10 p-4 lg:border-b-0 lg:border-r overflow-y-auto max-h-[40vh] lg:max-h-none">
-          <h2 className="text-xs uppercase tracking-wider text-brand-gray">素材</h2>
-          <ul className="mt-3 space-y-2">
+      <div className="grid flex-1 lg:grid-cols-[260px_1fr_300px]">
+        <aside className="border-b border-brand-border bg-brand-warm/80 p-5 lg:border-b-0 lg:border-r overflow-y-auto max-h-[42vh] lg:max-h-none">
+          <h2 className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">素材库</h2>
+          <ul className="mt-4 space-y-2">
             {studioAssets.map((a) => (
               <li key={a.id}>
                 <button
                   type="button"
                   onClick={() => update({ assetId: a.id })}
                   className={cn(
-                    "w-full border px-3 py-2 text-left text-sm transition",
+                    "w-full border px-3 py-3 text-left transition",
                     config.assetId === a.id
-                      ? "border-brand-gold bg-brand-gold/10"
-                      : "border-white/10 hover:border-white/30"
+                      ? "border-brand-primary bg-brand-primary text-brand-warm"
+                      : "border-brand-border bg-brand-paper hover:border-brand-secondary"
                   )}
                 >
-                  <span className="block text-brand-cream">{a.name}</span>
-                  <span className="text-[10px] text-brand-gray">{a.label}</span>
+                  <span className="block text-sm">{a.name}</span>
+                  <span className="text-[10px] opacity-80">{a.label}</span>
                 </button>
               </li>
             ))}
           </ul>
-          <h2 className="mt-8 text-xs uppercase tracking-wider text-brand-gray">
+          <h2 className="mt-8 text-[11px] uppercase tracking-[0.3em] text-brand-muted">
             我的作品
           </h2>
-          <StudioSavedWorksList
-            refreshKey={worksRefresh}
-            onLoad={loadSavedWork}
-          />
+          <StudioSavedWorksList refreshKey={worksRefresh} onLoad={loadSavedWork} />
         </aside>
 
-        <div className="flex items-center justify-center p-4 bg-brand-primary/20">
-          <canvas
-            ref={canvasRef}
-            width={640}
-            height={640}
-            className="max-w-full shadow-2xl"
-            aria-label="创作画布"
-          />
+        <div className="flex items-center justify-center p-6 md:p-10 bg-[#EBE6DC]">
+          <div className="border border-brand-border bg-brand-warm p-3 shadow-archive">
+            <canvas
+              ref={canvasRef}
+              width={640}
+              height={640}
+              className="max-w-full"
+              aria-label="创作画布"
+            />
+          </div>
         </div>
 
-        <aside className="border-t border-white/10 p-4 lg:border-t-0 lg:border-l overflow-y-auto">
-          <h2 className="text-xs uppercase tracking-wider text-brand-gray">参数</h2>
-          <div className="mt-4 space-y-4 text-sm">
-            <label className="block">
-              <span className="text-brand-gray">主色</span>
-              <input
-                type="color"
-                value={config.primaryColor}
-                onChange={(e) => update({ primaryColor: e.target.value })}
-                className="mt-1 h-10 w-full cursor-pointer"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">点缀色</span>
-              <input
-                type="color"
-                value={config.accentColor}
-                onChange={(e) => update({ accentColor: e.target.value })}
-                className="mt-1 h-10 w-full cursor-pointer"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">背景色</span>
-              <input
-                type="color"
-                value={config.backgroundColor}
-                onChange={(e) => update({ backgroundColor: e.target.value })}
-                className="mt-1 h-10 w-full cursor-pointer"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">尺度 {config.scale.toFixed(2)}</span>
-              <input
-                type="range"
-                min={0.2}
-                max={1.5}
-                step={0.05}
-                value={config.scale}
-                onChange={(e) => update({ scale: parseFloat(e.target.value) })}
-                className="mt-1 w-full"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">旋转 {config.rotation}°</span>
-              <input
-                type="range"
-                min={0}
-                max={360}
-                value={config.rotation}
-                onChange={(e) => update({ rotation: parseInt(e.target.value, 10) })}
-                className="mt-1 w-full"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">横向重复 {config.repeatX}</span>
-              <input
-                type="range"
-                min={1}
-                max={8}
-                value={config.repeatX}
-                onChange={(e) => update({ repeatX: parseInt(e.target.value, 10) })}
-                className="mt-1 w-full"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">纵向重复 {config.repeatY}</span>
-              <input
-                type="range"
-                min={1}
-                max={8}
-                value={config.repeatY}
-                onChange={(e) => update({ repeatY: parseInt(e.target.value, 10) })}
-                className="mt-1 w-full"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">间距 {config.spacing}px</span>
-              <input
-                type="range"
-                min={0}
-                max={40}
-                value={config.spacing}
-                onChange={(e) => update({ spacing: parseInt(e.target.value, 10) })}
-                className="mt-1 w-full"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">水平偏移 {config.offsetX}px</span>
-              <input
-                type="range"
-                min={-120}
-                max={120}
-                value={config.offsetX}
-                onChange={(e) => update({ offsetX: parseInt(e.target.value, 10) })}
-                className="mt-1 w-full"
-              />
-            </label>
-            <label className="block">
-              <span className="text-brand-gray">垂直偏移 {config.offsetY}px</span>
-              <input
-                type="range"
-                min={-120}
-                max={120}
-                value={config.offsetY}
-                onChange={(e) => update({ offsetY: parseInt(e.target.value, 10) })}
-                className="mt-1 w-full"
-              />
-            </label>
+        <aside className="border-t border-brand-border bg-brand-warm/80 p-5 lg:border-t-0 lg:border-l overflow-y-auto">
+          <h2 className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">设计参数</h2>
+          <div className="mt-5 space-y-5">
+            <ColorField label="主色" value={config.primaryColor} onChange={(v) => update({ primaryColor: v })} />
+            <ColorField label="点缀色" value={config.accentColor} onChange={(v) => update({ accentColor: v })} />
+            <ColorField label="背景色" value={config.backgroundColor} onChange={(v) => update({ backgroundColor: v })} />
+            <RangeField label="尺度" value={config.scale} min={0.2} max={1.5} step={0.05} onChange={(v) => update({ scale: v })} format={(v) => v.toFixed(2)} />
+            <RangeField label="旋转" value={config.rotation} min={0} max={360} onChange={(v) => update({ rotation: v })} format={(v) => `${v}°`} />
+            <RangeField label="横向重复" value={config.repeatX} min={1} max={8} onChange={(v) => update({ repeatX: v })} />
+            <RangeField label="纵向重复" value={config.repeatY} min={1} max={8} onChange={(v) => update({ repeatY: v })} />
+            <RangeField label="间距" value={config.spacing} min={0} max={40} onChange={(v) => update({ spacing: v })} format={(v) => `${v}px`} />
+            <RangeField label="水平偏移" value={config.offsetX} min={-120} max={120} onChange={(v) => update({ offsetX: v })} format={(v) => `${v}px`} />
+            <RangeField label="垂直偏移" value={config.offsetY} min={-120} max={120} onChange={(v) => update({ offsetY: v })} format={(v) => `${v}px`} />
           </div>
 
-          <div className="mt-8 border-t border-white/10 pt-6">
-            <h3 className="flex items-center gap-2 text-xs uppercase tracking-wider text-brand-gold">
+          <div className="mt-8 border-t border-brand-border pt-6">
+            <h3 className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-brand-goldInk">
               <Sparkles size={14} /> 规则辅助（非 AI）
             </h3>
-            <p className="mt-2 text-[11px] text-brand-gray">
+            <p className="mt-2 text-[11px] leading-relaxed text-brand-muted">
               预设配色与排列由本地规则生成；未接入大模型 API。
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {presetPalettes.map((p) => (
-                <button
-                  key={p.name}
-                  type="button"
-                  onClick={() => applyPalette(p)}
-                  className="border border-white/15 px-2 py-1 text-xs hover:border-brand-gold"
-                >
+                <button key={p.name} type="button" onClick={() => applyPalette(p)} className="wenyu-chip text-[11px]">
                   {p.name}
                 </button>
               ))}
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
               {layoutPresets.map((l) => (
-                <button
-                  key={l.name}
-                  type="button"
-                  onClick={() => applyLayout(l)}
-                  className="border border-white/15 px-2 py-1 text-xs hover:border-brand-gold"
-                >
+                <button key={l.name} type="button" onClick={() => applyLayout(l)} className="wenyu-chip text-[11px]">
                   {l.name}
                 </button>
               ))}
@@ -358,12 +249,20 @@ export function StudioWorkspace() {
             <button
               type="button"
               onClick={aiAssistPlaceholder}
-              className="mt-4 w-full border border-dashed border-brand-gray/40 py-2 text-xs text-brand-gray hover:border-brand-gold hover:text-brand-cream"
+              className="mt-4 w-full border border-dashed border-brand-border py-2.5 text-[11px] text-brand-muted hover:border-brand-gold hover:text-brand-primary"
             >
               AI 辅助入口（接口预留）
             </button>
             {assistMsg && (
-              <p className="mt-3 text-xs leading-relaxed text-brand-gold/90">{assistMsg}</p>
+              <p
+                className={cn(
+                  "mt-3 text-xs leading-relaxed",
+                  assistMsg.includes("失败") ? "text-red-800" : "text-brand-goldInk"
+                )}
+                role="status"
+              >
+                {assistMsg}
+              </p>
             )}
           </div>
         </aside>

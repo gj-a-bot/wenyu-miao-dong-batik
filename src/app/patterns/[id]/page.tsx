@@ -38,89 +38,98 @@ export default function PatternDetailPage({
   );
 
   return (
-    <article className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-      <div className="grid gap-12 lg:grid-cols-2">
-        <div className="relative aspect-square overflow-hidden bg-brand-primary/5 lg:aspect-[4/5]">
-          <Image
-            src={pattern.image}
-            alt={pattern.name}
-            fill
-            className="object-cover"
-            priority
-          />
+    <article className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
+      <div className="grid gap-10 lg:grid-cols-12">
+        <div className="lg:col-span-7">
+          <div className="relative aspect-square overflow-hidden border border-brand-border bg-brand-warm lg:aspect-[4/5]">
+            <Image
+              src={pattern.image}
+              alt={pattern.name}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
-        <div>
-          <VerificationBadge status={pattern.verificationStatus} />
+        <div className="lg:col-span-5">
+          <p className="text-[10px] uppercase tracking-[0.45em] text-brand-muted">
+            Archive Record
+          </p>
+          <VerificationBadge status={pattern.verificationStatus} className="mt-3" />
           <h1 className="mt-4 font-serif text-4xl text-brand-primary">
             {pattern.name}
           </h1>
-            <p className="mt-2 text-sm text-brand-muted">{pattern.category}</p>
-          <p className="mt-6 leading-relaxed text-brand-primary/85">
+          <p className="mt-2 text-sm text-brand-muted">{pattern.category}</p>
+          <p className="mt-6 leading-relaxed text-brand-ink/85">
             {pattern.description}
           </p>
           <div className="mt-8">
             <FavoriteButton patternId={pattern.id} />
           </div>
-          <section className="mt-10 border-t border-brand-primary/10 pt-8">
-            <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
-              图案特征
-            </h2>
-            <ul className="mt-3 list-inside list-disc text-sm text-brand-muted">
-              {pattern.features.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-          </section>
-          <section className="mt-8">
-            <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
-              资料来源
-            </h2>
-            <p className="mt-2 text-sm text-brand-muted">{pattern.source}</p>
-          </section>
-          <section className="mt-8">
-            <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
-              文化说明
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-brand-muted">
-              {pattern.culturalNote}
-            </p>
-          </section>
-          <section className="mt-8">
-            <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
-              相关工艺
-            </h2>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {pattern.relatedCraftIds.map((cid) => {
-                const step = getCraftStepById(cid);
-                if (!step) return null;
-                return (
-                  <li key={cid}>
+
+          <dl className="mt-10 space-y-8 border-t border-brand-border pt-8">
+            <div>
+              <dt className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+                图案特征
+              </dt>
+              <dd className="mt-2">
+                <ul className="list-inside list-disc text-sm text-brand-muted">
+                  {pattern.features.map((f) => (
+                    <li key={f}>{f}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+                资料来源
+              </dt>
+              <dd className="mt-2 text-sm text-brand-muted">{pattern.source}</dd>
+            </div>
+            <div>
+              <dt className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+                文化说明
+              </dt>
+              <dd className="mt-2 text-sm leading-relaxed text-brand-muted">
+                {pattern.culturalNote}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+                相关工艺
+              </dt>
+              <dd className="mt-3 flex flex-wrap gap-2">
+                {pattern.relatedCraftIds.map((cid) => {
+                  const step = getCraftStepById(cid);
+                  if (!step) return null;
+                  return (
                     <Link
+                      key={cid}
                       href={`/craft/${cid}`}
-                      className="inline-block border border-brand-primary/20 px-3 py-1 text-sm hover:border-brand-gold"
+                      className="wenyu-chip hover:border-brand-secondary"
                     >
                       {step.name}
                     </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
+                  );
+                })}
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
 
       {relatedWorks.length > 0 && (
-        <section className="mt-20">
+        <section className="mt-20 border-t border-brand-border pt-16">
           <h2 className="font-serif text-2xl text-brand-primary">相关演示作品</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {relatedWorks.map((w) => (
               <Link key={w.id} href={`/gallery/${w.id}`} className="group">
-                <div className="relative aspect-[3/4] overflow-hidden bg-brand-dark">
+                <div className="relative aspect-[3/4] overflow-hidden border border-brand-border">
                   <Image
                     src={w.thumbnail}
                     alt={w.title}
                     fill
-                    className="object-cover transition group-hover:scale-105"
+                    className="object-cover transition group-hover:scale-[1.02]"
                   />
                 </div>
                 <p className="mt-3 text-sm text-brand-primary">{w.title}</p>

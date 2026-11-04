@@ -1,8 +1,24 @@
 import type { Metadata } from "next";
+import { Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { PageFade } from "@/components/layout/PageFade";
+
+const notoSans = Noto_Sans_SC({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const notoSerif = Noto_Serif_SC({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -22,11 +38,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
-      <body className="min-h-screen flex flex-col">
+    <html lang="zh-CN" className={`${notoSans.variable} ${notoSerif.variable}`}>
+      <body className="min-h-screen flex flex-col paper-texture font-sans">
         <AppProviders>
           <SiteHeader />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <PageFade>{children}</PageFade>
+          </main>
           <SiteFooter />
         </AppProviders>
       </body>

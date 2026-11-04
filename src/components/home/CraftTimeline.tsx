@@ -3,49 +3,50 @@
 import Link from "next/link";
 import { craftSteps } from "@/lib/data";
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function CraftTimeline() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">
-      <h2 className="font-serif text-3xl text-brand-primary md:text-4xl">
-        工艺体验
-      </h2>
-      <p className="mt-4 max-w-2xl text-brand-muted">
-        从起稿到成品，蜡染的每个阶段都在塑造最终的纹样对比。点击下方步骤进入数字课堂。
-      </p>
-      <div className="mt-12 overflow-x-auto pb-4">
-        <div className="flex min-w-max gap-0 md:min-w-0 md:flex-wrap md:justify-between">
-          {craftSteps.map((step, i) => (
-            <motion.div
-              key={step.id}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="relative flex flex-col items-center px-4 md:flex-1"
-            >
-              {i < craftSteps.length - 1 && (
-                <span className="absolute left-[calc(50%+24px)] top-5 hidden h-px w-[calc(100%-48px)] bg-brand-gold/40 md:block" />
-              )}
-              <Link
-                href={`/craft/${step.id}`}
-                className="group flex flex-col items-center text-center"
+    <section className="border-y border-brand-border bg-brand-paper pattern-grid-bg">
+      <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
+        <SectionHeading
+          index="03"
+          eyebrow="Craft Process"
+          title="工艺体验"
+          subtitle="从起稿到成品，每个阶段都在塑造最终的纹样对比。"
+        />
+        <div className="mt-14 overflow-x-auto pb-2">
+          <div className="flex min-w-max gap-0 md:min-w-0 md:justify-between">
+            {craftSteps.map((step, i) => (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="relative flex flex-col items-center px-3 md:flex-1"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-primary/20 bg-brand-cream text-sm text-brand-primary transition group-hover:border-brand-gold group-hover:bg-brand-primary group-hover:text-brand-cream">
-                  {i + 1}
-                </span>
-                <span className="mt-3 text-sm font-medium text-brand-primary group-hover:text-brand-gold">
-                  {step.name}
-                </span>
-              </Link>
-            </motion.div>
-          ))}
+                {i < craftSteps.length - 1 && (
+                  <span className="absolute left-[calc(50%+20px)] top-4 hidden h-px w-[calc(100%-40px)] bg-brand-border md:block" />
+                )}
+                <Link
+                  href={`/craft/${step.id}`}
+                  className="group flex flex-col items-center text-center"
+                >
+                  <span className="flex h-9 w-9 items-center justify-center border border-brand-border bg-brand-warm font-serif text-sm text-brand-primary transition group-hover:border-brand-gold group-hover:bg-brand-primary group-hover:text-brand-warm">
+                    {String(step.order).padStart(2, "0")}
+                  </span>
+                  <span className="mt-3 max-w-[5rem] text-xs leading-snug text-brand-muted group-hover:text-brand-primary">
+                    {step.name}
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="mt-8">
         <Link
           href="/craft"
-          className="text-sm text-brand-primary underline-offset-4 hover:underline"
+          className="mt-10 inline-block text-sm tracking-wide text-brand-primary underline-offset-4 hover:underline"
         >
           进入工艺数字课堂 →
         </Link>

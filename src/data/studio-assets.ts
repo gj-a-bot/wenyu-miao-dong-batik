@@ -44,10 +44,10 @@ export const studioAssets: StudioAsset[] = [
 ];
 
 export const presetPalettes = [
-  { name: "经典靛蓝", primary: "#183B56", background: "#F4F0E6", accent: "#183B56" },
-  { name: "深夜蓝", primary: "#0B1F33", background: "#E8E4DA", accent: "#C69B5D" },
-  { name: "暖金点缀", primary: "#183B56", background: "#F4F0E6", accent: "#C69B5D" },
-  { name: "雾灰研究", primary: "#5B7C99", background: "#F4F0E6", accent: "#183B56" },
+  { name: "经典靛蓝", primary: "#173B50", background: "#F5F1E8", accent: "#173B50" },
+  { name: "深夜蓝", primary: "#102B38", background: "#E8E4DA", accent: "#C49A62" },
+  { name: "暖金点缀", primary: "#173B50", background: "#F5F1E8", accent: "#C49A62" },
+  { name: "雾灰研究", primary: "#426D7D", background: "#F5F1E8", accent: "#173B50" },
 ];
 
 export const layoutPresets = [
@@ -59,9 +59,9 @@ export const layoutPresets = [
 
 export const DEFAULT_STUDIO_CONFIG = {
   assetId: "asset-rhombus",
-  primaryColor: "#183B56",
-  backgroundColor: "#F4F0E6",
-  accentColor: "#183B56",
+  primaryColor: "#173B50",
+  backgroundColor: "#F5F1E8",
+  accentColor: "#C49A62",
   scale: 0.8,
   rotation: 0,
   offsetX: 0,

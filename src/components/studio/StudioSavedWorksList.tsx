@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { deleteStudioWork, getStudioWorks } from "@/lib/storage";
 import { SavedStudioWork } from "@/types";
 import { Trash2 } from "lucide-react";
@@ -14,17 +14,13 @@ export function StudioSavedWorksList({
 }) {
   const [works, setWorks] = useState<SavedStudioWork[]>([]);
 
-  const reload = useCallback(() => {
-    setWorks(getStudioWorks<SavedStudioWork>());
-  }, []);
-
   useEffect(() => {
-    reload();
-  }, [reload, refreshKey]);
+    setWorks(getStudioWorks<SavedStudioWork>());
+  }, [refreshKey]);
 
   if (works.length === 0) {
     return (
-      <p className="mt-4 text-[11px] leading-relaxed text-brand-gray">
+      <p className="mt-4 text-[11px] leading-relaxed text-brand-muted">
         暂无本地保存。保存后在此加载或删除。
       </p>
     );
@@ -35,17 +31,17 @@ export function StudioSavedWorksList({
       {works.map((w) => (
         <li
           key={w.id}
-          className="flex items-start gap-2 border border-white/10 p-2 text-left"
+          className="flex items-start gap-2 border border-brand-border bg-brand-paper p-2"
         >
           {w.previewDataUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={w.previewDataUrl}
               alt=""
-              className="h-10 w-10 shrink-0 object-cover"
+              className="h-10 w-10 shrink-0 object-cover border border-brand-border"
             />
           ) : (
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-white/5 text-[10px] text-brand-gray">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-brand-border text-[10px] text-brand-muted">
               无预览
             </span>
           )}
@@ -53,19 +49,19 @@ export function StudioSavedWorksList({
             <button
               type="button"
               onClick={() => onLoad(w)}
-              className="block w-full truncate text-left text-xs text-brand-cream hover:text-brand-gold"
+              className="block w-full truncate text-left text-xs text-brand-primary hover:text-brand-goldInk"
             >
               {w.title || "未命名"}
             </button>
-            <p className="text-[10px] text-brand-gray">{w.createdAt}</p>
+            <p className="text-[10px] text-brand-muted">{w.createdAt}</p>
           </div>
           <button
             type="button"
             onClick={() => {
               deleteStudioWork(w.id);
-              reload();
+              setWorks(getStudioWorks<SavedStudioWork>());
             }}
-            className="shrink-0 p-1 text-brand-gray hover:text-red-300"
+            className="shrink-0 p-1 text-brand-muted hover:text-red-700"
             aria-label={`删除 ${w.title}`}
           >
             <Trash2 size={14} />

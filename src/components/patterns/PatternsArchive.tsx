@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Search, Star } from "lucide-react";
 import { filterPatterns, patternCategories } from "@/lib/data";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Tag } from "@/components/ui/Tag";
 import { getFavorites } from "@/lib/storage";
 import { cn } from "@/lib/cn";
 
@@ -31,42 +33,30 @@ export function PatternsArchive() {
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-      <header className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.35em] text-brand-goldInk">
-          纹样博物馆
-        </p>
-        <h1 className="mt-3 font-serif text-4xl text-brand-primary md:text-5xl">
-          纹样档案
-        </h1>
-        <p className="mt-4 text-brand-muted">
-          分类浏览、搜索与收藏。实验素材与传统资料将明确区分标注。
-        </p>
-      </header>
+    <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
+      <SectionHeading
+        eyebrow="Digital Pattern Archive"
+        title="纹样博物馆"
+        subtitle="分类、搜索与收藏。实验素材与传统类型参考将明确区分标注。"
+      />
 
-      <div className="mt-12 flex flex-col gap-8 lg:flex-row">
-        <aside className="lg:w-64 shrink-0">
-          <p className="text-xs font-medium uppercase tracking-wider text-brand-primary">
+      <div className="mt-14 flex flex-col gap-10 lg:flex-row">
+        <aside className="lg:w-56 shrink-0">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">
             分类
           </p>
-          <ul className="mt-3 flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+          <div className="mt-4 flex flex-wrap gap-2 lg:flex-col lg:items-stretch">
             {patternCategories.map((cat) => (
-              <li key={cat}>
-                <button
-                  type="button"
-                  onClick={() => setCategory(cat)}
-                  className={cn(
-                    "w-full rounded-sm px-3 py-2 text-left text-sm transition",
-                    category === cat
-                      ? "bg-brand-primary text-brand-cream"
-                      : "text-brand-muted hover:bg-brand-primary/5"
-                  )}
-                >
-                  {cat}
-                </button>
-              </li>
+              <Tag
+                key={cat}
+                active={category === cat}
+                onClick={() => setCategory(cat)}
+                className="justify-center lg:justify-start"
+              >
+                {cat}
+              </Tag>
             ))}
-          </ul>
+          </div>
           <button
             type="button"
             onClick={() => {
@@ -74,15 +64,14 @@ export function PatternsArchive() {
               setFavoritesOnly((v) => !v);
             }}
             className={cn(
-              "mt-6 flex w-full items-center gap-2 rounded-sm border px-3 py-2 text-left text-sm transition",
+              "mt-6 flex w-full items-center gap-2 border px-3 py-2.5 text-left text-sm transition",
               favoritesOnly
                 ? "border-brand-gold bg-brand-gold/10 text-brand-primary"
-                : "border-brand-primary/15 text-brand-muted hover:border-brand-primary"
+                : "border-brand-border bg-brand-warm text-brand-muted hover:border-brand-secondary"
             )}
-            aria-pressed={favoritesOnly}
           >
             <Star
-              size={16}
+              size={15}
               className={favoritesOnly ? "fill-brand-gold text-brand-gold" : ""}
             />
             仅看收藏
@@ -103,39 +92,43 @@ export function PatternsArchive() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="搜索名称或关键词…"
               aria-label="搜索纹样"
-              className="w-full border border-brand-primary/15 bg-white/60 py-3 pl-11 pr-4 text-sm outline-none focus:border-brand-primary"
+              className="wenyu-input pl-11"
             />
           </label>
 
           <p className="mt-4 text-sm text-brand-muted">
-            共 {results.length} 条记录
-            {favoritesOnly && favoriteIds.length === 0 && " · 你还没有收藏纹样"}
+            共 {results.length} 条档案
           </p>
 
-          <div className="mt-8 columns-1 gap-4 sm:columns-2 xl:columns-3">
+          <div className="mt-10 columns-1 gap-5 sm:columns-2 xl:columns-3">
             {results.map((p, i) => (
               <Link
                 key={p.id}
                 href={`/patterns/${p.id}`}
                 className={cn(
-                  "mb-4 block break-inside-avoid overflow-hidden border border-brand-primary/10 bg-brand-cream transition hover:shadow-lg",
-                  i % 3 === 1 && "sm:mt-8"
+                  "group mb-5 block break-inside-avoid overflow-hidden border border-brand-border bg-brand-warm transition hover:shadow-archive",
+                  i % 3 === 1 && "sm:mt-6"
                 )}
               >
                 <div
                   className={cn(
-                    "relative w-full overflow-hidden bg-brand-primary/5",
+                    "relative w-full overflow-hidden bg-brand-primary/[0.03]",
                     i % 2 === 0 ? "aspect-[4/5]" : "aspect-square"
                   )}
                 >
-                  <Image src={p.image} alt={p.name} fill className="object-cover" />
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                  />
                 </div>
-                <div className="p-4">
+                <div className="border-t border-brand-border px-4 py-3">
                   <VerificationBadge status={p.verificationStatus} />
                   <h2 className="mt-2 font-serif text-lg text-brand-primary">
                     {p.name}
                   </h2>
-                  <p className="mt-1 line-clamp-2 text-sm text-brand-muted">
+                  <p className="mt-1 line-clamp-2 text-xs text-brand-muted">
                     {p.description}
                   </p>
                 </div>
@@ -144,8 +137,8 @@ export function PatternsArchive() {
           </div>
 
           {results.length === 0 && (
-            <p className="py-16 text-center text-brand-muted">
-              {favoritesOnly ? "收藏列表为空或未匹配当前筛选。" : "未找到匹配的纹样。"}
+            <p className="py-20 text-center text-brand-muted">
+              {favoritesOnly ? "收藏为空或未匹配筛选。" : "未找到匹配纹样。"}
             </p>
           )}
         </div>

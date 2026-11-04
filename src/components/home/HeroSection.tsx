@@ -6,56 +6,63 @@ import { Button } from "@/components/ui/Button";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-brand-dark text-brand-cream">
-      <div className="pattern-grid-bg absolute inset-0 opacity-30" />
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-dark via-brand-primary/40 to-brand-dark" />
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 md:grid-cols-2 md:items-center md:px-8 md:py-28 lg:py-32">
+    <section className="relative overflow-hidden bg-brand-dark">
+      <div className="paper-texture absolute inset-0 opacity-[0.07]" />
+      <div className="pattern-grid-bg absolute inset-0 opacity-20" />
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-12 md:items-end md:gap-6 md:px-8 md:py-24 lg:py-28">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          className="md:col-span-6 lg:col-span-5 lg:pb-12"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7 }}
         >
-          <p className="text-xs uppercase tracking-[0.4em] text-brand-gold">
-            纹语 WENYU
+          <p className="text-[10px] uppercase tracking-[0.55em] text-brand-gold">
+            WENYU / DIGITAL BATIK ARCHIVE
           </p>
-          <h1 className="mt-4 font-serif text-3xl leading-snug text-balance md:text-4xl lg:text-5xl">
+          <h1 className="mt-6 font-serif text-[2rem] leading-[1.15] text-brand-warm md:text-4xl lg:text-[2.75rem] text-balance">
             让古老纹样，在数字时代重新生长。
           </h1>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-brand-gray md:text-lg">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-brand-gray md:text-lg">
             探索苗侗蜡染的纹样之美、工艺之韵与数字创作的无限可能。
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button href="/patterns" variant="gold">
               探索纹样
             </Button>
-            <Button
-              href="/studio"
-              variant="secondary"
-              className="border-brand-cream/30 text-brand-cream hover:border-brand-cream hover:bg-white/10"
-            >
+            <Button href="/studio" variant="outline-light">
               开始创作
             </Button>
           </div>
         </motion.div>
+
         <motion.div
-          className="relative aspect-[4/5] max-h-[520px] w-full justify-self-end md:max-w-md lg:max-w-lg"
-          initial={{ opacity: 0, scale: 0.96 }}
+          className="relative md:col-span-6 lg:col-span-7"
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.15 }}
+          transition={{ duration: 0.9, delay: 0.1 }}
         >
-          <div className="absolute -left-6 top-8 h-full w-full border border-brand-gold/30" />
-          <div className="relative h-full overflow-hidden bg-brand-primary shadow-2xl">
-            <Image
-              src="/hero/batik-visual.svg"
-              alt="苗侗蜡染风格视觉演示（原创数字图形）"
-              fill
-              className="object-cover"
-              priority
-            />
+          <div className="relative ml-auto aspect-[4/5] max-w-lg md:max-w-none">
+            <div className="absolute -left-4 top-8 hidden h-[88%] w-[42%] overflow-hidden border border-brand-gold/25 md:block">
+              <Image
+                src="/patterns/motif-fish-type.svg"
+                alt=""
+                fill
+                className="object-cover opacity-90"
+              />
+            </div>
+            <div className="relative ml-auto aspect-[4/5] w-full max-w-md overflow-hidden border border-brand-warm/10 shadow-lift md:max-w-lg">
+              <Image
+                src="/hero/batik-visual.svg"
+                alt="蜡染风格数字视觉（原创演示）"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            <p className="absolute -bottom-6 right-0 text-[10px] tracking-wide text-brand-gray">
+              原创数字视觉 · 非实拍藏品
+            </p>
           </div>
-          <p className="absolute -bottom-8 right-0 text-[11px] text-brand-gray">
-            视觉演示 · 原创数字图形
-          </p>
         </motion.div>
       </div>
     </section>

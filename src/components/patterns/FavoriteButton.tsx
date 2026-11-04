@@ -27,10 +27,10 @@ export function FavoriteButton({ patternId }: { patternId: string }) {
           setActive(favorites.includes(patternId));
         }}
       className={cn(
-        "inline-flex items-center gap-2 rounded-sm border px-4 py-2 text-sm transition",
+        "inline-flex items-center gap-2 rounded-sm border px-4 py-2.5 text-sm transition",
         active
-          ? "border-brand-gold bg-brand-gold/10 text-brand-primary"
-          : "border-brand-primary/20 text-brand-muted hover:border-brand-primary"
+          ? "border-brand-gold bg-brand-gold/15 text-brand-primary"
+          : "border-brand-border bg-brand-warm text-brand-muted hover:border-brand-secondary"
       )}
       aria-pressed={active}
     >

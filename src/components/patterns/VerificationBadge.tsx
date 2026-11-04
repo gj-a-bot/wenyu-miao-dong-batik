@@ -8,9 +8,9 @@ const labels: Record<VerificationStatus, string> = {
 };
 
 const styles: Record<VerificationStatus, string> = {
-  verified: "bg-emerald-900/10 text-emerald-900 border-emerald-900/20",
-  pending: "bg-amber-900/10 text-amber-900 border-amber-900/20",
-  experimental: "bg-brand-primary/10 text-brand-primary border-brand-primary/20",
+  verified: "border-brand-secondary/40 bg-brand-secondary/10 text-brand-primary",
+  pending: "border-brand-gold/40 bg-brand-gold/10 text-brand-ink",
+  experimental: "border-brand-border bg-brand-warm text-brand-muted",
 };
 
 export function VerificationBadge({
@@ -23,7 +23,7 @@ export function VerificationBadge({
   return (
     <span
       className={cn(
-        "inline-block border px-2 py-0.5 text-[11px] tracking-wide",
+        "inline-block border px-2 py-0.5 text-[10px] uppercase tracking-wider",
         styles[status],
         className
       )}
