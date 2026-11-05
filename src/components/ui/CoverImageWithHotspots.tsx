@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { ImageHotspot, ImageHotspotLayer } from "@/components/ui/ImageHotspot";
+import { ProgressiveBlockImage } from "@/components/ui/ProgressiveBlockImage";
 
 export type CoverHotspot = {
   href: string;
@@ -25,28 +25,26 @@ type CoverImageWithHotspotsProps = {
 };
 
 /**
- * 主视觉按原图等比缩放（w-full h-auto），热区与画面始终对齐，缩放窗口也有效。
+ * 主视觉按原图等比缩放，热区与画面对齐；加载阶段用占位 + 整图淡入。
  */
 export function CoverImageWithHotspots({
   src,
   presentationAlt = "",
   width,
   height,
-  priority,
+  priority = true,
   hotspots,
   className,
 }: CoverImageWithHotspotsProps) {
   return (
     <div className={cn("relative w-full", className)}>
-      <Image
+      <ProgressiveBlockImage
         src={src}
-        alt={presentationAlt}
         width={width}
         height={height}
+        alt={presentationAlt}
         priority={priority}
-        className="pointer-events-none block h-auto w-full max-w-full select-none"
-        sizes="100vw"
-        role={presentationAlt ? undefined : "presentation"}
+        presentation={!presentationAlt}
       />
       <ImageHotspotLayer>
         {hotspots.map((spot) => (

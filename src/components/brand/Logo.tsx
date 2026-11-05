@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/cn";
+import { ProgressiveInlineImage } from "@/components/ui/ProgressiveBlockImage";
 
 const LOGO_SRC = "/images/brand/wenyu-logo.png";
 
@@ -28,16 +28,19 @@ export function Logo({
       )}
       aria-label="纹语 WENYU 首页"
     >
-      <Image
+      <ProgressiveInlineImage
         src={LOGO_SRC}
         alt=""
         width={360}
         height={96}
-        className={cn(
-          "h-full w-auto object-contain object-left transition-opacity duration-300 group-hover:opacity-90",
+        priority
+        wrapperClassName={cn(
+          "h-full",
           compact ? "max-w-[9.5rem]" : "max-w-[11.5rem] md:max-w-[13rem]"
         )}
-        priority
+        imageClassName={cn(
+          "h-full w-auto object-contain object-left group-hover:opacity-90"
+        )}
       />
     </Link>
   );

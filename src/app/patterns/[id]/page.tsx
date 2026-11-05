@@ -9,7 +9,7 @@ import {
 } from "@/lib/data";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
 import { FavoriteButton } from "@/components/patterns/FavoriteButton";
-import { cn } from "@/lib/cn";
+import { PatternDetailHeroImage } from "@/components/patterns/PatternDetailHeroImage";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -44,26 +44,16 @@ export default function PatternDetailPage({
     <article className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <div
-            className={cn(
-              "relative overflow-hidden border bg-brand-warm",
+          <PatternDetailHeroImage
+            src={pattern.image}
+            alt={pattern.name}
+            contain={isButterflyShowcase}
+            className={
               isButterflyShowcase
-                ? "aspect-[3/2] rounded-lg border-brand-primary/20 shadow-sm ring-1 ring-brand-gold/15"
-                : "aspect-square border-brand-border lg:aspect-[4/5]"
-            )}
-          >
-            <Image
-              src={pattern.image}
-              alt={pattern.name}
-              fill
-              className={
-                isButterflyShowcase
-                  ? "object-contain object-center p-1"
-                  : "object-cover"
-              }
-              priority
-            />
-          </div>
+                ? "aspect-[3/2] rounded-lg border border-brand-primary/20 shadow-sm ring-1 ring-brand-gold/15"
+                : "aspect-square border border-brand-border lg:aspect-[4/5]"
+            }
+          />
         </div>
         <div className="lg:col-span-5">
           <p className="text-[10px] uppercase tracking-[0.45em] text-brand-muted">

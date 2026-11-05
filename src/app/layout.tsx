@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { PageFade } from "@/components/layout/PageFade";
+import { CriticalImagePreloads } from "@/components/layout/CriticalImagePreloads";
 
 const notoSans = Noto_Sans_SC({
   subsets: ["latin"],
@@ -39,6 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className={`${notoSans.variable} ${notoSerif.variable}`}>
+      <head>
+        <CriticalImagePreloads />
+      </head>
       <body className="min-h-screen flex flex-col paper-texture font-sans">
         <AppProviders>
           <SiteHeader />
