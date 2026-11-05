@@ -1,16 +1,16 @@
 [
   {
     "id": "motif-butterfly-type",
-    "name": "蝴蝶纹（类型参考）",
-    "image": "/patterns/motif-butterfly-type.svg",
+    "name": "蝴蝶主题（概念展示）",
+    "image": "/images/patterns/pattern-butterfly-detail.png",
     "category": "传统母题",
-    "keywords": ["蝴蝶", "苗族", "母题"],
-    "description": "苗族蜡染与刺绣中常见的蝴蝶母题之示意化线稿，用于档案分类演示，非特定藏品复刻。",
-    "features": ["对称翅形", "中心轴", "适合居中构图"],
-    "source": "类型参考：公开图录与学界对苗族「蝴蝶妈妈」母题的普遍讨论；具体藏品与页码由团队核对后补录。",
-    "verificationStatus": "verified",
+    "keywords": ["蝴蝶", "蜡染", "母题", "概念展示"],
+    "description": "以蜡染质感呈现的蝴蝶主题视觉，用于博物馆卡片与详情页展示交互，非特定馆藏或田野实物的复刻。",
+    "features": ["中心对称蝶形", "蜡染留白肌理", "周边花叶陪衬"],
+    "source": "纹语项目 · 数字视觉概念素材（本地 PNG），仅供界面演示与分类体验",
+    "verificationStatus": "experimental",
     "relatedCraftIds": ["draft", "wax-dot", "finish"],
-    "culturalNote": "蝴蝶母题在苗侗地区民间叙事与艺术中广泛出现，常与族群起源传说相关联；本条目仅作类型学归档，不对接单一纹样登记号，寓意表述以团队核实的文献与田野为准。"
+    "culturalNote": "蝴蝶类母题在苗侗等地民间艺术与叙事中时有出现，但本图不对应任何已核实登记的传统纹样编号，亦不对具体族群归属或寓意作学术断言；若需对接文献或藏品，请以后续核实的档案条目为准。"
   },
   {
     "id": "motif-fish-type",

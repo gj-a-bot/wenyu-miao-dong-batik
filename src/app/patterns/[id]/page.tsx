@@ -9,6 +9,7 @@ import {
 } from "@/lib/data";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
 import { FavoriteButton } from "@/components/patterns/FavoriteButton";
+import { cn } from "@/lib/cn";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -33,6 +34,8 @@ export default function PatternDetailPage({
   const pattern = getPatternById(params.id);
   if (!pattern) notFound();
 
+  const isButterflyShowcase = pattern.id === "motif-butterfly-type";
+
   const relatedWorks = galleryWorks.filter(
     (w) => w.sourcePatternId === pattern.id
   );
@@ -41,12 +44,23 @@ export default function PatternDetailPage({
     <article className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <div className="relative aspect-square overflow-hidden border border-brand-border bg-brand-warm lg:aspect-[4/5]">
+          <div
+            className={cn(
+              "relative overflow-hidden border bg-brand-warm",
+              isButterflyShowcase
+                ? "aspect-[3/2] rounded-lg border-brand-primary/20 shadow-sm ring-1 ring-brand-gold/15"
+                : "aspect-square border-brand-border lg:aspect-[4/5]"
+            )}
+          >
             <Image
               src={pattern.image}
               alt={pattern.name}
               fill
-              className="object-cover"
+              className={
+                isButterflyShowcase
+                  ? "object-contain object-center p-1"
+                  : "object-cover"
+              }
               priority
             />
           </div>
