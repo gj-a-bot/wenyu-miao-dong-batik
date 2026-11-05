@@ -1,0 +1,13 @@
+---
+description: 功能完成后同步 GitHub 与 Vercel
+alwaysApply: true
+---
+
+完成用户请求的代码或资源改动后，在汇报「已完成」之前默认执行：
+
+1. `git status` 确认变更
+2. `git add` + `git commit`（仅在有未提交改动时；用户未要求时不 amend）
+3. `git push origin main`（需 Smart Mode 授权时重试）
+4. 在项目目录执行 `npx vercel deploy --prod --yes`（已 link 的 wenyu 项目），或确认 Git 连接触发自动部署
+
+若 push 或 deploy 失败，在回复中说明原因与下一步，不要假装已上线。
