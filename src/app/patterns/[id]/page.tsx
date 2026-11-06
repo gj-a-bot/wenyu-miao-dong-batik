@@ -9,7 +9,7 @@ import {
 } from "@/lib/data";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
 import { FavoriteButton } from "@/components/patterns/FavoriteButton";
-import { PatternDetailHeroImage } from "@/components/patterns/PatternDetailHeroImage";
+import { PatternDetailHeroWithLightbox } from "@/components/patterns/PatternDetailHeroWithLightbox";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -44,11 +44,10 @@ export default function PatternDetailPage({
     <article className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <PatternDetailHeroImage
-            src={pattern.image}
-            alt={pattern.name}
-            contain={isButterflyShowcase}
-            className={
+          <PatternDetailHeroWithLightbox
+            pattern={pattern}
+            isButterflyShowcase={isButterflyShowcase}
+            imageClassName={
               isButterflyShowcase
                 ? "aspect-[3/2] rounded-lg border border-brand-primary/20 shadow-sm ring-1 ring-brand-gold/15"
                 : "aspect-square border border-brand-border lg:aspect-[4/5]"
