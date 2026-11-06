@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
+import { LeiboxDotGridLoader } from "@/components/leibox/LeiboxDotGridLoader";
 
 type PatternDetailHeroImageProps = {
   src: string;
@@ -28,12 +29,13 @@ export function PatternDetailHeroImage({
     >
       <div
         className={cn(
-          "absolute inset-0 bg-gradient-to-br from-brand-paper via-logo-surface to-brand-primary/[0.06]",
-          "transition-opacity duration-300",
-          ready ? "opacity-0" : "opacity-100"
+          "absolute inset-0 z-[1] transition-opacity duration-300",
+          ready ? "pointer-events-none opacity-0" : "opacity-100"
         )}
-        aria-hidden
-      />
+        aria-hidden={ready}
+      >
+        <LeiboxDotGridLoader />
+      </div>
       <Image
         src={src}
         alt={alt}
@@ -43,7 +45,7 @@ export function PatternDetailHeroImage({
         sizes="(min-width: 1024px) 58vw, 100vw"
         onLoadingComplete={() => setReady(true)}
         className={cn(
-          "transition-opacity duration-500 ease-out",
+          "relative z-[2] transition-opacity duration-500 ease-out",
           ready ? "opacity-100" : "opacity-0",
           contain ? "object-contain object-center p-1" : "object-cover"
         )}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image, { type ImageProps } from "next/image";
 import { cn } from "@/lib/cn";
+import { LeiboxDotGridLoader } from "@/components/leibox/LeiboxDotGridLoader";
 
 type ProgressiveBlockImageProps = {
   src: string;
@@ -37,12 +38,13 @@ export function ProgressiveBlockImage({
     >
       <div
         className={cn(
-          "absolute inset-0 bg-gradient-to-br from-brand-paper via-logo-surface to-brand-primary/[0.06]",
-          "transition-opacity duration-300 motion-reduce:transition-none",
+          "absolute inset-0 z-[1] transition-opacity duration-300 motion-reduce:transition-none",
           ready ? "pointer-events-none opacity-0" : "opacity-100"
         )}
-        aria-hidden
-      />
+        aria-hidden={ready}
+      >
+        <LeiboxDotGridLoader className="min-h-[120px]" />
+      </div>
       <Image
         src={src}
         alt={alt}
@@ -53,7 +55,7 @@ export function ProgressiveBlockImage({
         role={presentation ? "presentation" : undefined}
         onLoadingComplete={() => setReady(true)}
         className={cn(
-          "object-contain object-center transition-opacity duration-500 ease-out motion-reduce:transition-none motion-reduce:opacity-100",
+          "relative z-[2] object-contain object-center transition-opacity duration-500 ease-out motion-reduce:transition-none motion-reduce:opacity-100",
           ready ? "opacity-100" : "opacity-0",
           imageClassName
         )}

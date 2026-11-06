@@ -31,3 +31,7 @@ yarn-error.log*
 next-env.d.ts
 .vercel
 .env*
+
+# Cursor / npx skills (本地可重装)
+.agents/
+skills-lock.json
