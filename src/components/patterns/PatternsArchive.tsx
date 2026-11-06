@@ -135,14 +135,16 @@ export function PatternsArchive() {
 
           <div className="mt-10 columns-1 gap-5 sm:columns-2 xl:columns-3">
             {results.map((p, i) => {
-              const isButterflyShowcase = p.id === "motif-butterfly-type";
+              const isArchiveShowcaseImage = p.image.startsWith(
+                "/images/patterns/"
+              );
               return (
               <Link
                 key={p.id}
                 href={`/patterns/${p.id}`}
                 className={cn(
                   "group mb-5 block break-inside-avoid overflow-hidden border bg-brand-warm transition duration-300",
-                  isButterflyShowcase
+                  isArchiveShowcaseImage
                     ? "rounded-lg border-brand-primary/15 shadow-sm hover:border-brand-gold/45 hover:shadow-lift"
                     : "border-brand-border hover:shadow-archive",
                   i % 3 === 1 && "sm:mt-6"
@@ -151,7 +153,7 @@ export function PatternsArchive() {
                 <div
                   className={cn(
                     "relative w-full overflow-hidden bg-brand-primary/[0.04]",
-                    isButterflyShowcase
+                    isArchiveShowcaseImage
                       ? "aspect-[3/2]"
                       : i % 2 === 0
                         ? "aspect-[4/5]"
@@ -164,7 +166,7 @@ export function PatternsArchive() {
                     fill
                     className={cn(
                       "object-cover transition duration-700",
-                      isButterflyShowcase
+                      isArchiveShowcaseImage
                         ? "object-center group-hover:scale-[1.02]"
                         : "group-hover:scale-[1.03]"
                     )}

@@ -34,7 +34,9 @@ export default function PatternDetailPage({
   const pattern = getPatternById(params.id);
   if (!pattern) notFound();
 
-  const isButterflyShowcase = pattern.id === "motif-butterfly-type";
+  const isArchiveShowcaseImage = pattern.image.startsWith(
+    "/images/patterns/"
+  );
 
   const relatedWorks = galleryWorks.filter(
     (w) => w.sourcePatternId === pattern.id
@@ -47,9 +49,9 @@ export default function PatternDetailPage({
           <PatternDetailHeroImage
             src={pattern.image}
             alt={pattern.name}
-            contain={isButterflyShowcase}
+            contain={isArchiveShowcaseImage}
             className={
-              isButterflyShowcase
+              isArchiveShowcaseImage
                 ? "aspect-[3/2] rounded-lg border border-brand-primary/20 shadow-sm ring-1 ring-brand-gold/15"
                 : "aspect-square border border-brand-border lg:aspect-[4/5]"
             }
