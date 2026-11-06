@@ -10,6 +10,7 @@ type PatternDetailHeroImageProps = {
   alt: string;
   contain?: boolean;
   className?: string;
+  imageClassName?: string;
 };
 
 export function PatternDetailHeroImage({
@@ -17,6 +18,7 @@ export function PatternDetailHeroImage({
   alt,
   contain,
   className,
+  imageClassName,
 }: PatternDetailHeroImageProps) {
   const [ready, setReady] = useState(false);
 
@@ -47,7 +49,8 @@ export function PatternDetailHeroImage({
         className={cn(
           "relative z-[2] transition-opacity duration-500 ease-out",
           ready ? "opacity-100" : "opacity-0",
-          contain ? "object-contain object-center p-1" : "object-cover"
+          contain ? "object-contain object-center p-1" : "object-cover",
+          imageClassName
         )}
       />
     </div>

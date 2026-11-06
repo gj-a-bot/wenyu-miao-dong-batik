@@ -1,8 +1,9 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { craftSteps, getCraftStepById } from "@/lib/data";
 import type { Metadata } from "next";
 import { CraftStepLayout } from "@/components/craft/CraftStepLayout";
+import { CraftStepMedia } from "@/components/craft/CraftStepMedia";
+import { isCraftVideoSrc } from "@/lib/craft-media";
 
 export function generateStaticParams() {
   return craftSteps.map((s) => ({ id: s.id }));
@@ -26,10 +27,15 @@ export default function CraftDetailPage({
   const step = getCraftStepById(params.id);
   if (!step) notFound();
 
+  const mediaSrc = step.video ?? step.image;
+  const isDye = step.id === "dye";
+  const isVideo = isCraftVideoSrc(mediaSrc);
+
   return (
     <CraftStepLayout stepId={step.id}>
       <p className="text-[10px] uppercase tracking-[0.45em] text-brand-muted">
-        步骤 {String(step.order).padStart(2, "0")} / {String(craftSteps.length).padStart(2, "0")}
+        步骤 {String(step.order).padStart(2, "0")} /{" "}
+        {String(craftSteps.length).padStart(2, "0")}
       </p>
       <h1 className="mt-3 font-serif text-4xl text-brand-primary">{step.name}</h1>
       <p className="mt-4 max-w-2xl text-lg text-brand-muted">{step.summary}</p>
@@ -37,33 +43,35 @@ export default function CraftDetailPage({
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
         <div
           className={
-            step.id === "dye"
+            isDye
               ? "relative aspect-video overflow-hidden border border-brand-border/80 bg-logo-surface ring-1 ring-brand-gold/15"
               : "relative aspect-[4/3] overflow-hidden border border-brand-border bg-brand-warm"
           }
         >
-          <Image
-            src={step.image}
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className={
-              step.id === "dye"
+          <CraftStepMedia
+            src={mediaSrc}
+            stepId={step.id}
+            variant="detail"
+            imageClassName={
+              isDye && !isVideo
                 ? "object-contain object-center"
                 : "object-cover"
             }
-            role="presentation"
           />
           <span
             className={
-              step.id === "dye"
-                ? "absolute bottom-3 left-3 max-w-[85%] bg-brand-dark/70 px-2 py-1 text-[10px] tracking-wide text-brand-warm/95 backdrop-blur-sm"
-                : "absolute left-3 top-3 bg-brand-warm/95 px-2 py-1 text-[10px] uppercase tracking-wider text-brand-muted"
+              isDye
+                ? "absolute bottom-3 left-3 z-10 max-w-[85%] bg-brand-dark/70 px-2 py-1 text-[10px] tracking-wide text-brand-warm/95 backdrop-blur-sm"
+                : "absolute left-3 top-3 z-10 bg-brand-warm/95 px-2 py-1 text-[10px] uppercase tracking-wider text-brand-muted"
             }
           >
-            {step.id === "dye"
-              ? "概念视觉素材 · 非实拍工艺记录"
-              : "工艺示意图 · 非实拍"}
+            {isDye
+              ? isVideo
+                ? "概念演示短片 · 非实拍工艺记录"
+                : "概念视觉素材 · 非实拍工艺记录"
+              : isVideo
+                ? "演示短片 · 非实拍"
+                : "工艺示意图 · 非实拍"}
           </span>
         </div>
         <div className="space-y-8">

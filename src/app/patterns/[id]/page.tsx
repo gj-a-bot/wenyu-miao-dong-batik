@@ -37,6 +37,7 @@ export default function PatternDetailPage({
   const isArchiveShowcaseImage = pattern.image.startsWith(
     "/images/patterns/"
   );
+  const isVortexShowcase = pattern.id === "motif-spiral-type";
 
   const relatedWorks = galleryWorks.filter(
     (w) => w.sourcePatternId === pattern.id
@@ -52,8 +53,15 @@ export default function PatternDetailPage({
             contain={isArchiveShowcaseImage}
             className={
               isArchiveShowcaseImage
-                ? "aspect-[3/2] rounded-lg border border-brand-primary/20 shadow-sm ring-1 ring-brand-gold/15"
+                ? isVortexShowcase
+                  ? "aspect-[3/2] rounded-lg border border-brand-secondary/25 bg-[#eef1ed] shadow-sm ring-1 ring-brand-border/70"
+                  : "aspect-[3/2] rounded-lg border border-brand-primary/20 shadow-sm ring-1 ring-brand-gold/15"
                 : "aspect-square border border-brand-border lg:aspect-[4/5]"
+            }
+            imageClassName={
+              isVortexShowcase
+                ? "object-contain object-[50%_52%] brightness-[0.98] saturate-[0.9]"
+                : undefined
             }
           />
         </div>

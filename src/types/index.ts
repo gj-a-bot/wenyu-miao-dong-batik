@@ -21,7 +21,10 @@ export interface CraftStep {
   summary: string;
   description: string;
   tools: string[];
+  /** 列表缩略与静态封面；可为 PNG/SVG */
   image: string;
+  /** 可选：详情页主区播放的演示短片（public 路径 .mp4），列表仍用 image */
+  video?: string;
   notes: string[];
   caution: string;
 }

@@ -138,6 +138,7 @@ export function PatternsArchive() {
               const isArchiveShowcaseImage = p.image.startsWith(
                 "/images/patterns/"
               );
+              const isVortexDetail = p.id === "motif-spiral-type";
               return (
               <Link
                 key={p.id}
@@ -145,7 +146,9 @@ export function PatternsArchive() {
                 className={cn(
                   "group mb-5 block break-inside-avoid overflow-hidden border bg-brand-warm transition duration-300",
                   isArchiveShowcaseImage
-                    ? "rounded-lg border-brand-primary/15 shadow-sm hover:border-brand-gold/45 hover:shadow-lift"
+                    ? isVortexDetail
+                      ? "rounded-lg border-brand-secondary/25 shadow-sm ring-1 ring-brand-border/60 hover:border-brand-primary/35 hover:shadow-lift"
+                      : "rounded-lg border-brand-primary/15 shadow-sm hover:border-brand-gold/45 hover:shadow-lift"
                     : "border-brand-border hover:shadow-archive",
                   i % 3 === 1 && "sm:mt-6"
                 )}
@@ -167,7 +170,9 @@ export function PatternsArchive() {
                     className={cn(
                       "object-cover transition duration-700",
                       isArchiveShowcaseImage
-                        ? "object-center group-hover:scale-[1.02]"
+                        ? isVortexDetail
+                          ? "object-[50%_56%] brightness-[0.97] saturate-[0.92] group-hover:scale-[1.02]"
+                          : "object-center group-hover:scale-[1.02]"
                         : "group-hover:scale-[1.03]"
                     )}
                   />

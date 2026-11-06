@@ -40,6 +40,7 @@
     "description": "染色次数与染液浓度会影响蓝色深浅与层次。具体工艺需参考可核实资料与传承人经验。",
     "tools": ["染缸", "靛蓝或其他植物染（依实际）", "晾架"],
     "image": "/images/craft/craft-indigo-dye.png",
+    "video": "/videos/craft-indigo-dye.mp4",
     "notes": ["浸染时间影响色深", "多次浸染可加深层次"],
     "caution": "染液配方与环保处理请以当地规范为准。"
   },

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { craftSteps } from "@/lib/data";
 import { cn } from "@/lib/cn";
+import { CraftStepMedia } from "@/components/craft/CraftStepMedia";
 import { CraftStepNav } from "@/components/craft/CraftStepNav";
 import { CraftCoverHero } from "@/components/craft/CraftCoverHero";
 
@@ -24,7 +25,9 @@ export function CraftFlow() {
           </aside>
 
           <div className="grid gap-6 sm:grid-cols-2">
-            {craftSteps.map((step, i) => (
+            {craftSteps.map((step, i) => {
+              const mediaSrc = step.video ?? step.image;
+              return (
               <Link
                 key={step.id}
                 href={`/craft/${step.id}`}
@@ -41,14 +44,14 @@ export function CraftFlow() {
                       : "aspect-video"
                   )}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={step.image}
-                    alt=""
-                    className="h-full w-full object-cover"
+                  <CraftStepMedia
+                    src={mediaSrc}
+                    stepId={step.id}
+                    variant="thumbnail"
+                    imageClassName="object-cover"
                   />
-                  <span className="absolute left-3 top-3 bg-brand-warm/90 px-2 py-0.5 text-[10px] uppercase tracking-wider text-brand-muted">
-                    示意图
+                  <span className="absolute left-3 top-3 z-10 bg-brand-warm/90 px-2 py-0.5 text-[10px] uppercase tracking-wider text-brand-muted">
+                    {step.video ? "演示短片" : "示意图"}
                   </span>
                 </div>
                 <div className="border-t border-brand-border p-5">
@@ -61,7 +64,8 @@ export function CraftFlow() {
                   <p className="mt-2 text-sm text-brand-muted">{step.summary}</p>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
