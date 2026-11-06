@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { isCraftVideoSrc } from "@/lib/craft-media";
+import { encodePublicAssetPath, isCraftVideoSrc } from "@/lib/craft-media";
 import { cn } from "@/lib/cn";
 
 type CraftStepMediaProps = {
@@ -22,11 +22,12 @@ export function CraftStepMedia({
 }: CraftStepMediaProps) {
   const isDye = stepId === "dye";
   const isVideo = isCraftVideoSrc(src);
+  const mediaSrc = isVideo ? encodePublicAssetPath(src) : src;
 
   if (isVideo) {
     return (
       <video
-        src={src}
+        src={mediaSrc}
         className={cn("absolute inset-0 h-full w-full", imageClassName)}
         muted={variant === "thumbnail"}
         loop={variant === "thumbnail"}

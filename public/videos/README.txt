@@ -1,7 +1,8 @@
-craft-indigo-dye.mp4
+蜡染.mp4
 
-此处为染色步骤的演示视频占位文件（靛蓝+米白渐变，约 2 秒，H.264）。
-请用你的正式工艺课堂 MP4 替换同名文件，路径保持：
-  /videos/craft-indigo-dye.mp4
+染色步骤（craft id: dye）的演示视频，路径：
+  /videos/蜡染.mp4
+对应 src/data/craft.json 中该步骤的 "video" 字段。
 
-若文件名或路径变更，请同步修改 src/data/craft.json 中对应步骤的 "video" 字段。
+若重命名或更换文件，请同步修改 JSON 中的路径。
+旧占位文件 craft-indigo-dye.mp4 若不再需要可删除。
