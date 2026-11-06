@@ -39,10 +39,6 @@ body {
   color: var(--color-ink);
 }
 
-.image-lightbox-dialog::backdrop {
-  background: rgba(16, 43, 56, 0.88);
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
