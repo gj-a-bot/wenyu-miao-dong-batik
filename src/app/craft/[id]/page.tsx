@@ -35,10 +35,35 @@ export default function CraftDetailPage({
       <p className="mt-4 max-w-2xl text-lg text-brand-muted">{step.summary}</p>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
-        <div className="relative aspect-[4/3] overflow-hidden border border-brand-border bg-brand-warm">
-          <Image src={step.image} alt={step.name} fill className="object-cover" />
-          <span className="absolute left-3 top-3 bg-brand-warm/95 px-2 py-1 text-[10px] uppercase tracking-wider text-brand-muted">
-            工艺示意图 · 非实拍
+        <div
+          className={
+            step.id === "dye"
+              ? "relative aspect-video overflow-hidden border border-brand-border/80 bg-logo-surface ring-1 ring-brand-gold/15"
+              : "relative aspect-[4/3] overflow-hidden border border-brand-border bg-brand-warm"
+          }
+        >
+          <Image
+            src={step.image}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className={
+              step.id === "dye"
+                ? "object-contain object-center"
+                : "object-cover"
+            }
+            role="presentation"
+          />
+          <span
+            className={
+              step.id === "dye"
+                ? "absolute bottom-3 left-3 max-w-[85%] bg-brand-dark/70 px-2 py-1 text-[10px] tracking-wide text-brand-warm/95 backdrop-blur-sm"
+                : "absolute left-3 top-3 bg-brand-warm/95 px-2 py-1 text-[10px] uppercase tracking-wider text-brand-muted"
+            }
+          >
+            {step.id === "dye"
+              ? "概念视觉素材 · 非实拍工艺记录"
+              : "工艺示意图 · 非实拍"}
           </span>
         </div>
         <div className="space-y-8">
