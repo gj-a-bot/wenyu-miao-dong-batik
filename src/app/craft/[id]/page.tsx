@@ -3,6 +3,7 @@ import { craftSteps, getCraftStepById } from "@/lib/data";
 import type { Metadata } from "next";
 import { CraftStepLayout } from "@/components/craft/CraftStepLayout";
 import { CraftStepMedia } from "@/components/craft/CraftStepMedia";
+import { RouteImagePreload } from "@/components/layout/RouteImagePreload";
 import { isCraftVideoSrc } from "@/lib/craft-media";
 
 export function generateStaticParams() {
@@ -32,7 +33,9 @@ export default function CraftDetailPage({
   const isVideo = isCraftVideoSrc(mediaSrc);
 
   return (
-    <CraftStepLayout stepId={step.id}>
+    <>
+      {isDye && step.image ? <RouteImagePreload href={step.image} /> : null}
+      <CraftStepLayout stepId={step.id}>
       <p className="text-[10px] uppercase tracking-[0.45em] text-brand-muted">
         步骤 {String(step.order).padStart(2, "0")} /{" "}
         {String(craftSteps.length).padStart(2, "0")}
@@ -50,8 +53,10 @@ export default function CraftDetailPage({
         >
           <CraftStepMedia
             src={mediaSrc}
+            posterSrc={step.image}
             stepId={step.id}
             variant="detail"
+            priority
             imageClassName={
               isDye && !isVideo
                 ? "object-contain object-center"
@@ -111,5 +116,6 @@ export default function CraftDetailPage({
         </div>
       </div>
     </CraftStepLayout>
+    </>
   );
 }

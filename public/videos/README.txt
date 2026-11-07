@@ -6,3 +6,8 @@
 
 若重命名或更换文件，请同步修改 JSON 中的路径。
 旧占位文件 craft-indigo-dye.mp4 若不再需要可删除。
+
+性能建议（原片较大时）：
+  node scripts/optimize-craft-video.mjs
+  生成 蜡染-optimized.mp4 后在 craft.json 的 dye 步骤改 video 路径；
+  -movflags +faststart 有利于边下边播。

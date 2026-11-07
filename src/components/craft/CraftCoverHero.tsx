@@ -32,6 +32,7 @@ export function CraftCoverHero() {
         width={COVER_W}
         height={COVER_H}
         priority
+        placeholder="lite"
         hotspots={CRAFT_COVER_HOTSPOTS}
       />
       <h1 className="sr-only">

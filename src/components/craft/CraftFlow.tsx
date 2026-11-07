@@ -46,8 +46,10 @@ export function CraftFlow() {
                 >
                   <CraftStepMedia
                     src={mediaSrc}
+                    posterSrc={step.image}
                     stepId={step.id}
                     variant="thumbnail"
+                    priority={i === 0}
                     imageClassName="object-cover"
                   />
                   <span className="absolute left-3 top-3 z-10 bg-brand-warm/90 px-2 py-0.5 text-[10px] uppercase tracking-wider text-brand-muted">

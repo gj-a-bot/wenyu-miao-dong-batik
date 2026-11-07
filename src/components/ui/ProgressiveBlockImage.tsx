@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image, { type ImageProps } from "next/image";
 import { cn } from "@/lib/cn";
+import { BrandImagePlaceholder } from "@/components/ui/BrandImagePlaceholder";
 import { LeiboxDotGridLoader } from "@/components/leibox/LeiboxDotGridLoader";
 
 type ProgressiveBlockImageProps = {
@@ -15,6 +16,8 @@ type ProgressiveBlockImageProps = {
   className?: string;
   imageClassName?: string;
   presentation?: boolean;
+  /** lite：轻量旋转占位，适合工艺/列表封面，减少首屏 JS */
+  placeholder?: "brand" | "lite";
 };
 
 /** 加载完成前显示品牌色占位，整图一次性淡入，避免 PNG 逐行刷出 */
@@ -28,8 +31,11 @@ export function ProgressiveBlockImage({
   className,
   imageClassName,
   presentation,
+  placeholder = "brand",
 }: ProgressiveBlockImageProps) {
   const [ready, setReady] = useState(false);
+  const Placeholder =
+    placeholder === "lite" ? BrandImagePlaceholder : LeiboxDotGridLoader;
 
   return (
     <div
@@ -43,13 +49,14 @@ export function ProgressiveBlockImage({
         )}
         aria-hidden={ready}
       >
-        <LeiboxDotGridLoader className="min-h-[120px]" />
+        <Placeholder className="min-h-[120px]" />
       </div>
       <Image
         src={src}
         alt={alt}
         fill
         priority={priority}
+        quality={priority ? 82 : 76}
         fetchPriority={priority ? "high" : "auto"}
         sizes={sizes}
         role={presentation ? "presentation" : undefined}

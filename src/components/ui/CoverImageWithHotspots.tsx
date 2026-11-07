@@ -22,6 +22,7 @@ type CoverImageWithHotspotsProps = {
   priority?: boolean;
   hotspots: CoverHotspot[];
   className?: string;
+  placeholder?: "brand" | "lite";
 };
 
 /**
@@ -35,6 +36,7 @@ export function CoverImageWithHotspots({
   priority = true,
   hotspots,
   className,
+  placeholder,
 }: CoverImageWithHotspotsProps) {
   return (
     <div className={cn("relative w-full", className)}>
@@ -45,6 +47,7 @@ export function CoverImageWithHotspots({
         alt={presentationAlt}
         priority={priority}
         presentation={!presentationAlt}
+        placeholder={placeholder}
       />
       <ImageHotspotLayer>
         {hotspots.map((spot) => (
