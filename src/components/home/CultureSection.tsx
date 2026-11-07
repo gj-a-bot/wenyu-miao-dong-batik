@@ -1,9 +1,14 @@
 import Image from "next/image";
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function CultureSection() {
   return (
-    <section className="border-b border-brand-border bg-brand-warm">
+    <BatikTextureSurface
+      as="section"
+      variant="band"
+      className="border-b border-brand-border bg-brand-warm"
+    >
       <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -27,6 +32,6 @@ export function CultureSection() {
           </div>
         </div>
       </div>
-    </section>
+    </BatikTextureSurface>
   );
 }

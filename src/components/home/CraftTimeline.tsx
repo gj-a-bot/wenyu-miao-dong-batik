@@ -3,11 +3,16 @@
 import Link from "next/link";
 import { craftSteps } from "@/lib/data";
 import { motion } from "framer-motion";
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function CraftTimeline() {
   return (
-    <section className="border-y border-brand-border bg-brand-paper pattern-grid-bg">
+    <BatikTextureSurface
+      as="section"
+      variant="band"
+      className="border-y border-brand-border bg-brand-paper pattern-grid-bg"
+    >
       <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
         <SectionHeading
           index="03"
@@ -51,6 +56,6 @@ export function CraftTimeline() {
           进入工艺数字课堂 →
         </Link>
       </div>
-    </section>
+    </BatikTextureSurface>
   );
 }

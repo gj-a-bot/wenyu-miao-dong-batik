@@ -59,6 +59,105 @@ body {
   background-size: 56px 56px;
 }
 
+/* 蜡染肌理：/images/textures/batik-texture-bg.png — 局部点缀，勿整站铺满 */
+@layer components {
+  .wenyu-batik-section {
+    background-color: var(--color-warm);
+    background-image: linear-gradient(
+        180deg,
+        rgba(250, 248, 242, 0.93) 0%,
+        rgba(245, 241, 232, 0.9) 50%,
+        rgba(250, 248, 242, 0.94) 100%
+      ),
+      url("/images/textures/batik-texture-bg.png");
+    background-size: auto, 680px;
+    background-repeat: no-repeat, repeat;
+    background-position: center, center;
+  }
+
+  .wenyu-batik-band {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .wenyu-batik-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: linear-gradient(
+        180deg,
+        rgba(250, 248, 242, 0.9) 0%,
+        rgba(245, 241, 232, 0.86) 100%
+      ),
+      url("/images/textures/batik-texture-bg.png");
+    background-size: auto, 640px;
+    background-repeat: no-repeat, repeat;
+    background-position: center, center;
+    opacity: 0.55;
+  }
+
+  .wenyu-batik-band > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .wenyu-batik-card-accent {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--color-warm);
+  }
+
+  .wenyu-batik-card-accent::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(46%, 220px);
+    height: min(42%, 180px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.1;
+    background-image: linear-gradient(
+        225deg,
+        rgba(250, 248, 242, 0.2) 0%,
+        transparent 65%
+      ),
+      url("/images/textures/batik-texture-bg.png");
+    background-size: cover;
+    background-position: center;
+    -webkit-mask-image: linear-gradient(225deg, black 20%, transparent 78%);
+    mask-image: linear-gradient(225deg, black 20%, transparent 78%);
+  }
+
+  .wenyu-batik-card-accent > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .wenyu-batik-divider {
+    display: block;
+    width: 100%;
+    height: 3px;
+    border: 0;
+    margin: 0;
+    pointer-events: none;
+    background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(23, 59, 80, 0.08) 18%,
+        rgba(196, 154, 98, 0.2) 50%,
+        rgba(23, 59, 80, 0.08) 82%,
+        transparent 100%
+      ),
+      url("/images/textures/batik-texture-bg.png");
+    background-size: 100% 100%, 320px;
+    background-repeat: no-repeat, repeat;
+    opacity: 0.42;
+  }
+}
+
 .wenyu-input {
   @apply w-full border border-brand-border bg-brand-warm/80 px-4 py-3 text-sm text-brand-ink transition placeholder:text-brand-muted/70 focus:border-brand-secondary focus:bg-brand-warm;
 }

@@ -1,3 +1,4 @@
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const sections = [
@@ -47,6 +48,13 @@ export default function AboutPage() {
         eyebrow="Project Archive"
         title="关于纹语"
         subtitle="WENYU — Miao-Dong Batik Digital Interactive Heritage System"
+      />
+
+      <BatikTextureSurface
+        as="div"
+        variant="divider"
+        className="mt-14"
+        aria-hidden
       />
 
       <div className="mt-16 space-y-16">
