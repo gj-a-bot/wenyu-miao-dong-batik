@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { galleryCategories, galleryWorks } from "@/lib/data";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { GalleryCoverHero } from "@/components/gallery/GalleryCoverHero";
 import { Tag } from "@/components/ui/Tag";
 import { cn } from "@/lib/cn";
 
@@ -20,14 +20,18 @@ export function GalleryExhibition() {
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
-      <SectionHeading
-        eyebrow="Digital Exhibition"
-        title="让传统纹样，在新的媒介中继续生长。"
-        subtitle="展览式呈现项目演示作品，均标注为样例，非真实用户投稿。"
-      />
+    <>
+      <GalleryCoverHero />
 
-      <div className="mt-10 flex flex-wrap gap-2">
+      <div
+        id="gallery-works"
+        className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
+      >
+      <p className="max-w-2xl text-sm leading-relaxed text-brand-muted">
+        展览式呈现项目演示作品，均标注为样例，非真实用户投稿。
+      </p>
+
+      <div className="mt-8 flex flex-wrap gap-2">
         {galleryCategories.map((cat) => (
           <Tag key={cat} active={category === cat} onClick={() => setCategory(cat)}>
             {cat}
@@ -70,6 +74,7 @@ export function GalleryExhibition() {
           </Link>
         ))}
       </div>
-    </div>
+      </div>
+    </>
   );
 }
