@@ -15,9 +15,9 @@ import {
   STUDIO_CANVAS_SIZE,
   STUDIO_EXPORT_SIZE,
 } from "@/lib/studio-canvas";
+import { StudioHeroVisual } from "@/components/studio/StudioHeroVisual";
 import { StudioSavedWorksList } from "@/components/studio/StudioSavedWorksList";
 import { ColorField, RangeField } from "@/components/ui/Field";
-import { Logo } from "@/components/brand/Logo";
 import { Download, RotateCcw, Save, Sparkles } from "lucide-react";
 import { cn } from "@/lib/cn";
 
@@ -138,20 +138,19 @@ export function StudioWorkspace() {
 
   return (
     <div className="flex min-h-[calc(100vh-5rem)] flex-col bg-brand-paper">
+      <StudioHeroVisual />
+
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-border bg-brand-warm px-4 py-4 md:px-8">
-        <div className="flex items-center gap-6">
-          <Logo compact />
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.4em] text-brand-muted">
-              数字共创实验室
-            </p>
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="mt-1 w-full max-w-xs border-b border-transparent bg-transparent font-serif text-xl text-brand-primary outline-none focus:border-brand-gold"
-              aria-label="项目名称"
-            />
-          </div>
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-brand-muted">
+            作品名称
+          </p>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="mt-1 w-full max-w-xs border-b border-transparent bg-transparent font-serif text-xl text-brand-primary outline-none focus:border-brand-gold"
+            aria-label="项目名称"
+          />
         </div>
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={reset} className="wenyu-chip gap-2">
