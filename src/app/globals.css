@@ -236,22 +236,6 @@ body {
     z-index: 1;
   }
 
-  /** 封面主视觉：遮掉设计稿上半浅色，与靛蓝站点底统一 */
-  .wenyu-cover-indigo-topwash {
-    pointer-events: none;
-    position: absolute;
-    inset-inline: 0;
-    top: 0;
-    z-index: 4;
-    height: min(44%, 380px);
-    background: linear-gradient(
-      180deg,
-      var(--color-primary) 0%,
-      rgba(23, 59, 80, 0.94) 52%,
-      transparent 100%
-    );
-  }
-
   .wenyu-batik-divider {
     display: block;
     width: 100%;
