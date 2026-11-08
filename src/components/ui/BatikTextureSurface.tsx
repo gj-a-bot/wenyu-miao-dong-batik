@@ -6,6 +6,10 @@ const VARIANT_CLASS = {
   section: "wenyu-batik-section",
   /** 叠在现有底色上，伪元素承载肌理，不挡交互 */
   band: "wenyu-batik-band",
+  /** 靛蓝底 + 蜡染肌理（首页共创等板块） */
+  bandIndigo: "wenyu-batik-band-indigo",
+  /** 数字共创工作台：整区密铺蜡染 */
+  studioRich: "wenyu-batik-studio",
   /** 卡片右上淡角饰，主体仍为暖白底 */
   accent: "wenyu-batik-card-accent",
   /** 章节间细条分隔（3px） */

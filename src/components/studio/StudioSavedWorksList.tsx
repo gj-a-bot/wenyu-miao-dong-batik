@@ -20,7 +20,7 @@ export function StudioSavedWorksList({
 
   if (works.length === 0) {
     return (
-      <p className="mt-4 text-[11px] leading-relaxed text-brand-muted">
+      <p className="mt-4 text-[11px] leading-relaxed text-brand-ink/85">
         暂无本地保存。保存后在此加载或删除。
       </p>
     );
@@ -41,7 +41,7 @@ export function StudioSavedWorksList({
               className="h-10 w-10 shrink-0 object-cover border border-brand-border"
             />
           ) : (
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-brand-border text-[10px] text-brand-muted">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-brand-border text-[10px] text-brand-secondary">
               无预览
             </span>
           )}
@@ -53,7 +53,7 @@ export function StudioSavedWorksList({
             >
               {w.title || "未命名"}
             </button>
-            <p className="text-[10px] text-brand-muted">{w.createdAt}</p>
+            <p className="text-[10px] text-brand-secondary">{w.createdAt}</p>
           </div>
           <button
             type="button"
@@ -61,7 +61,7 @@ export function StudioSavedWorksList({
               deleteStudioWork(w.id);
               setWorks(getStudioWorks<SavedStudioWork>());
             }}
-            className="shrink-0 p-1 text-brand-muted hover:text-red-700"
+            className="shrink-0 p-1 text-brand-secondary hover:text-red-700"
             aria-label={`删除 ${w.title}`}
           >
             <Trash2 size={14} />

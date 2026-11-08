@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { patterns } from "@/lib/data";
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
 import { ArrowUpRight } from "lucide-react";
@@ -9,7 +10,12 @@ export function FeaturedPatterns() {
   const featured = patterns.slice(0, 4);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">
+    <BatikTextureSurface
+      as="section"
+      variant="band"
+      className="w-full bg-brand-paper"
+    >
+      <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
       <div className="flex flex-wrap items-end justify-between gap-6 border-b border-brand-border pb-8">
         <SectionHeading
           index="02"
@@ -57,6 +63,7 @@ export function FeaturedPatterns() {
           </Link>
         ))}
       </div>
-    </section>
+      </div>
+    </BatikTextureSurface>
   );
 }

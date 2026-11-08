@@ -19,7 +19,7 @@ const HOME_COVER_HOTSPOTS: CoverHotspot[] = [
 export function HeroSection() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-logo-surface"
+      className="relative w-full overflow-hidden"
       aria-label="首页主视觉"
     >
       <motion.div

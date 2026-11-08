@@ -13,6 +13,7 @@ import {
   CoverImageWithHotspots,
   type CoverHotspot,
 } from "@/components/ui/CoverImageWithHotspots";
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 
 const MUSEUM_COVER_SRC = "/images/museum/pattern-museum-cover.png";
 const COVER_W = 1920;
@@ -54,21 +55,29 @@ export function PatternsArchive() {
   return (
     <>
       <section
-        className="relative w-full overflow-hidden bg-logo-surface"
+        className="relative w-full overflow-hidden"
         aria-label="纹样博物馆封面"
       >
-        <CoverImageWithHotspots
-          src={MUSEUM_COVER_SRC}
-          width={COVER_W}
-          height={COVER_H}
-          priority
-          hotspots={MUSEUM_COVER_HOTSPOTS}
-        />
+        <div className="relative mx-auto w-full">
+          <CoverImageWithHotspots
+            src={MUSEUM_COVER_SRC}
+            width={COVER_W}
+            height={COVER_H}
+            priority
+            placeholder="lite"
+            hotspots={MUSEUM_COVER_HOTSPOTS}
+          />
+        </div>
         <h1 className="sr-only">
           纹样博物馆 — 探索苗侗蜡染的纹样之美。在数字世界中，遇见千年传承的纹样艺术。
         </h1>
       </section>
 
+      <BatikTextureSurface
+        as="div"
+        variant="band"
+        className="w-full bg-brand-paper"
+      >
       <div
         id="pattern-archive"
         className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
@@ -199,6 +208,7 @@ export function PatternsArchive() {
         </div>
       </div>
       </div>
+      </BatikTextureSurface>
     </>
   );
 }

@@ -9,7 +9,6 @@ const GALLERY_HERO_SRC = "/images/gallery/gallery-exhibition.png";
 const COVER_W = 1920;
 const COVER_H = 1080;
 
-/** 与全站主视觉稿一致的 logo / 底部 CTA 比例热区（1920×1080） */
 const GALLERY_COVER_HOTSPOTS: CoverHotspot[] = [
   { href: "/", label: "纹语 WENYU 首页", x: 0.01, y: 0.028, w: 0.28, h: 0.23 },
   {
@@ -30,16 +29,14 @@ const GALLERY_COVER_HOTSPOTS: CoverHotspot[] = [
   },
 ];
 
-/**
- * 数字作品展厅顶部概念主视觉；图内品牌与按钮由热区接入真实跳转，不叠加重复文案。
- */
+/** 作品展厅封面 — 与首页 Hero 同布局与尺寸策略 */
 export function GalleryCoverHero() {
   return (
     <section
-      className="relative w-full overflow-hidden border-b border-brand-border bg-logo-surface"
+      className="relative w-full overflow-hidden"
       aria-label="数字作品展厅主视觉"
     >
-      <div className="relative mx-auto w-full max-w-[1920px]">
+      <div className="relative mx-auto w-full">
         <CoverImageWithHotspots
           src={GALLERY_HERO_SRC}
           width={COVER_W}
@@ -47,8 +44,6 @@ export function GalleryCoverHero() {
           priority
           placeholder="lite"
           hotspots={GALLERY_COVER_HOTSPOTS}
-          blockClassName="max-md:!aspect-[5/4] max-md:max-h-[min(72vw,420px)]"
-          imageClassName="object-cover object-[50%_44%] md:object-contain md:object-center"
         />
       </div>
       <h1 className="sr-only">

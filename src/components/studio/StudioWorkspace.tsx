@@ -16,6 +16,7 @@ import {
   STUDIO_EXPORT_SIZE,
 } from "@/lib/studio-canvas";
 import { StudioHeroVisual } from "@/components/studio/StudioHeroVisual";
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { StudioSavedWorksList } from "@/components/studio/StudioSavedWorksList";
 import { ColorField, RangeField } from "@/components/ui/Field";
 import { Download, RotateCcw, Save, Sparkles } from "lucide-react";
@@ -137,12 +138,18 @@ export function StudioWorkspace() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-5rem)] flex-col bg-brand-paper">
+    <div className="flex min-h-[calc(100vh-5rem)] flex-col">
       <StudioHeroVisual />
 
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-border bg-brand-warm px-4 py-4 md:px-8">
+      <BatikTextureSurface
+        as="div"
+        variant="studioRich"
+        className="flex w-full flex-1 flex-col"
+      >
+        <div id="studio-workspace" className="flex min-h-0 flex-1 flex-col scroll-mt-24">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-border/80 bg-brand-warm/92 px-4 py-4 backdrop-blur-[2px] md:px-8">
         <div>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-brand-muted">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-brand-goldInk">
             作品名称
           </p>
           <input
@@ -170,8 +177,8 @@ export function StudioWorkspace() {
       </div>
 
       <div className="grid flex-1 lg:grid-cols-[260px_1fr_300px]">
-        <aside className="border-b border-brand-border bg-brand-warm/80 p-5 lg:border-b-0 lg:border-r overflow-y-auto max-h-[42vh] lg:max-h-none">
-          <h2 className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">素材库</h2>
+        <aside className="border-b border-brand-border/80 bg-brand-warm/90 p-5 backdrop-blur-[2px] lg:border-b-0 lg:border-r overflow-y-auto max-h-[42vh] lg:max-h-none">
+          <h2 className="text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">素材库</h2>
           <ul className="mt-4 space-y-2">
             {studioAssets.map((a) => (
               <li key={a.id}>
@@ -186,18 +193,27 @@ export function StudioWorkspace() {
                   )}
                 >
                   <span className="block text-sm">{a.name}</span>
-                  <span className="text-[10px] opacity-80">{a.label}</span>
+                  <span
+                    className={cn(
+                      "text-[10px]",
+                      config.assetId === a.id
+                        ? "text-brand-warm/85"
+                        : "text-brand-secondary"
+                    )}
+                  >
+                    {a.label}
+                  </span>
                 </button>
               </li>
             ))}
           </ul>
-          <h2 className="mt-8 text-[11px] uppercase tracking-[0.3em] text-brand-muted">
+          <h2 className="mt-8 text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">
             我的作品
           </h2>
           <StudioSavedWorksList refreshKey={worksRefresh} onLoad={loadSavedWork} />
         </aside>
 
-        <div className="flex items-center justify-center p-6 md:p-10 bg-[#EBE6DC]">
+        <div className="flex items-center justify-center bg-brand-primary/[0.035] p-6 md:p-10">
           <div className="border border-brand-border bg-brand-warm p-3 shadow-archive">
             <canvas
               ref={canvasRef}
@@ -209,8 +225,8 @@ export function StudioWorkspace() {
           </div>
         </div>
 
-        <aside className="border-t border-brand-border bg-brand-warm/80 p-5 lg:border-t-0 lg:border-l overflow-y-auto">
-          <h2 className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">设计参数</h2>
+        <aside className="border-t border-brand-border/80 bg-brand-warm/90 p-5 backdrop-blur-[2px] lg:border-t-0 lg:border-l overflow-y-auto">
+          <h2 className="text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">设计参数</h2>
           <div className="mt-5 space-y-5">
             <ColorField label="主色" value={config.primaryColor} onChange={(v) => update({ primaryColor: v })} />
             <ColorField label="点缀色" value={config.accentColor} onChange={(v) => update({ accentColor: v })} />
@@ -228,7 +244,7 @@ export function StudioWorkspace() {
             <h3 className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-brand-goldInk">
               <Sparkles size={14} /> 规则辅助（非 AI）
             </h3>
-            <p className="mt-2 text-[11px] leading-relaxed text-brand-muted">
+            <p className="mt-2 text-[11px] leading-relaxed text-brand-ink/90">
               预设配色与排列由本地规则生成；未接入大模型 API。
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -248,7 +264,7 @@ export function StudioWorkspace() {
             <button
               type="button"
               onClick={aiAssistPlaceholder}
-              className="mt-4 w-full border border-dashed border-brand-border py-2.5 text-[11px] text-brand-muted hover:border-brand-gold hover:text-brand-primary"
+              className="mt-4 w-full border border-dashed border-brand-secondary/40 py-2.5 text-[11px] text-brand-primary hover:border-brand-gold hover:text-brand-goldInk"
             >
               AI 辅助入口（接口预留）
             </button>
@@ -266,6 +282,8 @@ export function StudioWorkspace() {
           </div>
         </aside>
       </div>
+        </div>
+      </BatikTextureSurface>
     </div>
   );
 }

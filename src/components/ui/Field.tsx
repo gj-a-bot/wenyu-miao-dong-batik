@@ -11,7 +11,7 @@ export function ColorField({
 }) {
   return (
     <label className="block">
-      <span className="text-xs uppercase tracking-wider text-brand-muted">
+      <span className="text-xs font-medium uppercase tracking-wider text-brand-primary">
         {label}
       </span>
       <input
@@ -44,9 +44,13 @@ export function RangeField({
   const display = format ? format(value) : String(value);
   return (
     <label className="block">
-      <div className="flex justify-between text-xs text-brand-muted">
-        <span className="uppercase tracking-wider">{label}</span>
-        <span className="tabular-nums text-brand-ink">{display}</span>
+      <div className="flex justify-between text-xs">
+        <span className="font-medium uppercase tracking-wider text-brand-primary">
+          {label}
+        </span>
+        <span className="tabular-nums font-medium text-brand-goldInk">
+          {display}
+        </span>
       </div>
       <input
         type="range"

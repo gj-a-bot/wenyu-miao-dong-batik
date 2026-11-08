@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { galleryWorks } from "@/lib/data";
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function GalleryPreview() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">
+    <BatikTextureSurface as="section" variant="band" className="w-full bg-brand-paper">
+    <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
       <SectionHeading
         index="04"
         eyebrow="Exhibition"
@@ -42,6 +44,7 @@ export function GalleryPreview() {
       >
         进入展厅 →
       </Link>
-    </section>
+    </div>
+    </BatikTextureSurface>
   );
 }

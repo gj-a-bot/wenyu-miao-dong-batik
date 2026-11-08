@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { galleryCategories, galleryWorks } from "@/lib/data";
 import { GalleryCoverHero } from "@/components/gallery/GalleryCoverHero";
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { Tag } from "@/components/ui/Tag";
 import { cn } from "@/lib/cn";
 
@@ -23,11 +24,16 @@ export function GalleryExhibition() {
     <>
       <GalleryCoverHero />
 
+      <BatikTextureSurface
+        as="div"
+        variant="band"
+        className="w-full bg-brand-paper"
+      >
       <div
         id="gallery-works"
         className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
       >
-      <p className="max-w-2xl text-sm leading-relaxed text-brand-muted">
+      <p className="max-w-2xl text-sm leading-relaxed text-brand-ink/90">
         展览式呈现项目演示作品，均标注为样例，非真实用户投稿。
       </p>
 
@@ -67,7 +73,7 @@ export function GalleryExhibition() {
               <h2 className="mt-3 font-serif text-3xl text-brand-primary group-hover:text-brand-goldInk">
                 {work.title}
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-brand-muted">
+              <p className="mt-4 text-sm leading-relaxed text-brand-ink/88">
                 {work.description}
               </p>
             </div>
@@ -75,6 +81,7 @@ export function GalleryExhibition() {
         ))}
       </div>
       </div>
+      </BatikTextureSurface>
     </>
   );
 }

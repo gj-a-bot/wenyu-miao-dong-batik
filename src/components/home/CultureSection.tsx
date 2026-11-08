@@ -7,7 +7,7 @@ export function CultureSection() {
     <BatikTextureSurface
       as="section"
       variant="band"
-      className="border-b border-brand-border bg-brand-warm"
+      className="w-full border-b border-brand-border bg-brand-warm"
     >
       <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
         <div className="grid gap-16 lg:grid-cols-12">
@@ -20,14 +20,32 @@ export function CultureSection() {
             />
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:col-span-7 lg:grid-cols-3">
-            <div className="relative aspect-[3/4] overflow-hidden border border-brand-border sm:col-span-1 sm:mt-10">
-              <Image src="/patterns/geo-rhombus-weave.svg" alt="" fill className="object-cover" />
+            <div className="relative aspect-[3/4] overflow-hidden border border-brand-border bg-brand-warm sm:col-span-1 sm:mt-10">
+              <Image
+                src="/images/patterns/pattern-geometric-diamond-grid-detail.png"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 25vw, 50vw"
+                className="object-cover"
+              />
             </div>
-            <div className="relative aspect-square overflow-hidden border border-brand-border">
-              <Image src="/patterns/abstract-indigo-mist.svg" alt="" fill className="object-cover" />
+            <div className="relative aspect-square overflow-hidden border border-brand-border bg-brand-warm">
+              <Image
+                src="/images/patterns/pattern-fog-detail.png"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 20vw, 45vw"
+                className="object-cover"
+              />
             </div>
-            <div className="relative aspect-[4/5] overflow-hidden border border-brand-border sm:col-span-2 lg:col-span-1 lg:mt-16">
-              <Image src="/patterns/motif-butterfly-type.svg" alt="" fill className="object-cover" />
+            <div className="relative aspect-[4/5] overflow-hidden border border-brand-border bg-brand-warm sm:col-span-2 lg:col-span-1 lg:mt-16">
+              <Image
+                src="/images/patterns/pattern-butterfly-detail.png"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 20vw, 50vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>

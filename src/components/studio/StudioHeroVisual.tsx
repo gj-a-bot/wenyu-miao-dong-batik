@@ -1,67 +1,37 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
-import { cn } from "@/lib/cn";
-import { LeiboxDotGridLoader } from "@/components/leibox/LeiboxDotGridLoader";
-import { ProgressiveBlockImage } from "@/components/ui/ProgressiveBlockImage";
+import {
+  CoverImageWithHotspots,
+  type CoverHotspot,
+} from "@/components/ui/CoverImageWithHotspots";
 
 const STUDIO_HERO_SRC = "/images/studio/studio-editor-visual.png";
-const HERO_W = 1920;
-const HERO_H = 1080;
+const COVER_W = 1920;
+const COVER_H = 1080;
+
+const STUDIO_HERO_HOTSPOTS: CoverHotspot[] = [
+  { href: "/", label: "纹语 WENYU 首页", x: 0.01, y: 0.028, w: 0.28, h: 0.23 },
+  { href: "#studio-workspace", label: "进入工作台", x: 0.038, y: 0.678, w: 0.2, h: 0.14 },
+];
 
 /**
- * 数字共创实验室顶部主视觉（图内已含品牌与界面示意，不再叠加文案或假按钮）。
+ * 数字共创顶部主视觉 — 与首页同比例宽幅 contain 展示，封面区不加额外底色。
  */
 export function StudioHeroVisual() {
-  const [mobileReady, setMobileReady] = useState(false);
-
   return (
     <section
-      className="relative w-full overflow-hidden border-b border-brand-border bg-logo-surface"
+      className="relative w-full overflow-hidden"
       aria-label="数字共创实验室主视觉"
     >
-      <div className="relative mx-auto w-full max-w-[1920px]">
-        <div
-          className="relative aspect-[5/4] w-full overflow-hidden md:hidden"
-          style={{ maxHeight: "min(72vw, 420px)" }}
-        >
-          <div
-            className={cn(
-              "absolute inset-0 z-[1] transition-opacity duration-300",
-              mobileReady ? "pointer-events-none opacity-0" : "opacity-100"
-            )}
-            aria-hidden={mobileReady}
-          >
-            <LeiboxDotGridLoader className="min-h-[120px]" />
-          </div>
-          <Image
-            src={STUDIO_HERO_SRC}
-            alt=""
-            fill
-            priority
-            fetchPriority="high"
-            sizes="100vw"
-            role="presentation"
-            onLoadingComplete={() => setMobileReady(true)}
-            className={cn(
-              "object-cover object-[56%_46%] transition-opacity duration-500 ease-out",
-              mobileReady ? "opacity-100" : "opacity-0"
-            )}
-          />
-        </div>
-
-        <div className="hidden md:block">
-          <ProgressiveBlockImage
-            src={STUDIO_HERO_SRC}
-            width={HERO_W}
-            height={HERO_H}
-            priority
-            presentation
-            sizes="100vw"
-            imageClassName="object-contain object-center"
-          />
-        </div>
+      <div className="relative mx-auto w-full">
+        <CoverImageWithHotspots
+          src={STUDIO_HERO_SRC}
+          width={COVER_W}
+          height={COVER_H}
+          priority
+          placeholder="lite"
+          hotspots={STUDIO_HERO_HOTSPOTS}
+        />
       </div>
       <h1 className="sr-only">纹语 WENYU — 数字共创实验室</h1>
     </section>

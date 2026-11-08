@@ -65,19 +65,42 @@ body {
     background-color: var(--color-warm);
     background-image: linear-gradient(
         180deg,
-        rgba(250, 248, 242, 0.93) 0%,
-        rgba(245, 241, 232, 0.9) 50%,
-        rgba(250, 248, 242, 0.94) 100%
+        rgba(250, 248, 242, 0.82) 0%,
+        rgba(245, 241, 232, 0.76) 50%,
+        rgba(250, 248, 242, 0.84) 100%
       ),
       url("/images/textures/batik-texture-bg.png");
-    background-size: auto, 680px;
-    background-repeat: no-repeat, repeat;
+    background-size: auto, min(480px, 52vw);
+    background-repeat: repeat, repeat;
     background-position: center, center;
+  }
+
+  /** 数字共创工作台：更密铺蜡染底，减少大块留白 */
+  .wenyu-batik-studio {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    background-color: var(--color-paper);
+    background-image: linear-gradient(
+        180deg,
+        rgba(250, 248, 242, 0.8) 0%,
+        rgba(245, 241, 232, 0.74) 100%
+      ),
+      url("/images/textures/batik-texture-bg.png");
+    background-size: auto, min(420px, 44vw);
+    background-repeat: repeat, repeat;
+    background-position: center, center;
+  }
+
+  .wenyu-batik-studio > * {
+    position: relative;
+    z-index: 1;
   }
 
   .wenyu-batik-band {
     position: relative;
     isolation: isolate;
+    width: 100%;
   }
 
   .wenyu-batik-band::before {
@@ -88,17 +111,50 @@ body {
     pointer-events: none;
     background-image: linear-gradient(
         180deg,
-        rgba(250, 248, 242, 0.9) 0%,
-        rgba(245, 241, 232, 0.86) 100%
+        rgba(250, 248, 242, 0.76) 0%,
+        rgba(245, 241, 232, 0.7) 50%,
+        rgba(250, 248, 242, 0.78) 100%
       ),
       url("/images/textures/batik-texture-bg.png");
-    background-size: auto, 640px;
-    background-repeat: no-repeat, repeat;
+    background-size: auto, min(520px, 55vw);
+    background-repeat: repeat, repeat;
     background-position: center, center;
-    opacity: 0.55;
+    opacity: 1;
   }
 
   .wenyu-batik-band > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /** 靛蓝章节（如首页共创 CTA）— 肌理与深蓝叠压，与暖白章节同一套图 */
+  .wenyu-batik-band-indigo {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    background-color: var(--color-primary);
+  }
+
+  .wenyu-batik-band-indigo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: linear-gradient(
+        165deg,
+        rgba(23, 59, 80, 0.78) 0%,
+        rgba(16, 43, 56, 0.84) 55%,
+        rgba(23, 59, 80, 0.8) 100%
+      ),
+      url("/images/textures/batik-texture-bg.png");
+    background-size: auto, min(440px, 46vw);
+    background-repeat: repeat, repeat;
+    background-position: center, center;
+    opacity: 1;
+  }
+
+  .wenyu-batik-band-indigo > * {
     position: relative;
     z-index: 1;
   }

@@ -4,16 +4,22 @@ import { cn } from "@/lib/cn";
 import { CraftStepMedia } from "@/components/craft/CraftStepMedia";
 import { CraftStepNav } from "@/components/craft/CraftStepNav";
 import { CraftCoverHero } from "@/components/craft/CraftCoverHero";
+import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 
 export function CraftFlow() {
   return (
     <>
       <CraftCoverHero />
 
-      <div
-        id="craft-steps"
-        className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
+      <BatikTextureSurface
+        as="div"
+        variant="band"
+        className="w-full bg-brand-paper"
       >
+        <div
+          id="craft-steps"
+          className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
+        >
         <div className="grid gap-12 lg:grid-cols-[220px_1fr]">
           <aside className="hidden lg:block">
             <p className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">
@@ -70,7 +76,8 @@ export function CraftFlow() {
             })}
           </div>
         </div>
-      </div>
+        </div>
+      </BatikTextureSurface>
     </>
   );
 }

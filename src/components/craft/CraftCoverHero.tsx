@@ -24,17 +24,19 @@ const CRAFT_COVER_HOTSPOTS: CoverHotspot[] = [
 export function CraftCoverHero() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-logo-surface"
+      className="relative w-full overflow-hidden"
       aria-label="工艺课堂主视觉"
     >
-      <CoverImageWithHotspots
-        src={CRAFT_COVER_SRC}
-        width={COVER_W}
-        height={COVER_H}
-        priority
-        placeholder="lite"
-        hotspots={CRAFT_COVER_HOTSPOTS}
-      />
+      <div className="relative mx-auto w-full">
+        <CoverImageWithHotspots
+          src={CRAFT_COVER_SRC}
+          width={COVER_W}
+          height={COVER_H}
+          priority
+          placeholder="lite"
+          hotspots={CRAFT_COVER_HOTSPOTS}
+        />
+      </div>
       <h1 className="sr-only">
         一场关于蜡与蓝的创作 — 探索苗侗蜡染的制作工艺，感受千年传承的手工之美
       </h1>
