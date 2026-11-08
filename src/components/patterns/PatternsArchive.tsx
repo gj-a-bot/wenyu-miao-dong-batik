@@ -73,18 +73,14 @@ export function PatternsArchive() {
         </h1>
       </section>
 
-      <BatikTextureSurface
-        as="div"
-        variant="band"
-        className="w-full bg-brand-paper"
-      >
+      <BatikTextureSurface as="div" variant="band" className="w-full">
       <div
         id="pattern-archive"
         className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
       >
       <div className="flex flex-col gap-10 lg:flex-row">
         <aside className="lg:w-56 shrink-0">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-brand-gray">
             分类
           </p>
           <div className="mt-4 flex flex-wrap gap-2 lg:flex-col lg:items-stretch">
@@ -138,7 +134,7 @@ export function PatternsArchive() {
             />
           </label>
 
-          <p className="mt-4 text-sm text-brand-muted">
+          <p className="mt-4 text-sm text-brand-gray">
             共 {results.length} 条档案
           </p>
 
@@ -201,7 +197,7 @@ export function PatternsArchive() {
           </div>
 
           {results.length === 0 && (
-            <p className="py-20 text-center text-brand-muted">
+            <p className="py-20 text-center text-brand-gray">
               {favoritesOnly ? "收藏为空或未匹配筛选。" : "未找到匹配纹样。"}
             </p>
           )}

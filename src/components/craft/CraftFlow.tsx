@@ -11,18 +11,14 @@ export function CraftFlow() {
     <>
       <CraftCoverHero />
 
-      <BatikTextureSurface
-        as="div"
-        variant="band"
-        className="w-full bg-brand-paper"
-      >
+      <BatikTextureSurface as="div" variant="band" className="w-full">
         <div
           id="craft-steps"
           className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
         >
         <div className="grid gap-12 lg:grid-cols-[220px_1fr]">
           <aside className="hidden lg:block">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-brand-muted">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-brand-gray">
               步骤索引
             </p>
             <div className="mt-4">

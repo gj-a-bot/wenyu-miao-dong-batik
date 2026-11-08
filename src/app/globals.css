@@ -16,7 +16,7 @@
 }
 
 body {
-  @apply bg-brand-paper text-brand-ink antialiased;
+  @apply bg-brand-primary text-brand-warm antialiased;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -30,7 +30,7 @@ body {
   button:focus-visible,
   input:focus-visible,
   [tabindex]:focus-visible {
-    @apply outline-none ring-2 ring-brand-gold/60 ring-offset-2 ring-offset-brand-paper;
+    @apply outline-none ring-2 ring-brand-gold/60 ring-offset-2 ring-offset-brand-primary;
   }
 }
 
@@ -52,22 +52,64 @@ body {
 
 .pattern-grid-bg {
   background-image: linear-gradient(
-      rgba(23, 59, 80, 0.03) 1px,
+      rgba(245, 241, 232, 0.06) 1px,
       transparent 1px
     ),
-    linear-gradient(90deg, rgba(23, 59, 80, 0.03) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(245, 241, 232, 0.06) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
-/* 蜡染肌理：/images/textures/batik-texture-bg.png — 局部点缀，勿整站铺满 */
+/* 蜡染肌理：/images/textures/batik-texture-bg.png — 靛蓝叠压为主底色 */
 @layer components {
-  .wenyu-batik-section {
-    background-color: var(--color-warm);
+  .wenyu-batik-indigo-texture {
     background-image: linear-gradient(
-        180deg,
-        rgba(250, 248, 242, 0.82) 0%,
-        rgba(245, 241, 232, 0.76) 50%,
-        rgba(250, 248, 242, 0.84) 100%
+        165deg,
+        rgba(23, 59, 80, 0.78) 0%,
+        rgba(16, 43, 56, 0.84) 55%,
+        rgba(23, 59, 80, 0.8) 100%
+      ),
+      url("/images/textures/batik-texture-bg.png");
+    background-size: auto, min(440px, 46vw);
+    background-repeat: repeat, repeat;
+    background-position: center, center;
+  }
+
+  /** 整站壳层：固定铺满视口的靛蓝蜡染底 */
+  .wenyu-batik-site-shell {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--color-primary);
+  }
+
+  .wenyu-batik-site-shell::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: var(--color-primary);
+    background-image: linear-gradient(
+        165deg,
+        rgba(23, 59, 80, 0.78) 0%,
+        rgba(16, 43, 56, 0.84) 55%,
+        rgba(23, 59, 80, 0.8) 100%
+      ),
+      url("/images/textures/batik-texture-bg.png");
+    background-size: auto, min(440px, 46vw);
+    background-repeat: repeat, repeat;
+    background-position: center, center;
+  }
+
+  .wenyu-batik-section {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    background-color: var(--color-primary);
+    background-image: linear-gradient(
+        165deg,
+        rgba(23, 59, 80, 0.78) 0%,
+        rgba(16, 43, 56, 0.84) 55%,
+        rgba(23, 59, 80, 0.8) 100%
       ),
       url("/images/textures/batik-texture-bg.png");
     background-size: auto, min(480px, 52vw);
@@ -75,16 +117,17 @@ body {
     background-position: center, center;
   }
 
-  /** 数字共创工作台：更密铺蜡染底，减少大块留白 */
+  /** 数字共创工作台：靛蓝密铺蜡染底 */
   .wenyu-batik-studio {
     position: relative;
     isolation: isolate;
     width: 100%;
-    background-color: var(--color-paper);
+    background-color: var(--color-primary);
     background-image: linear-gradient(
-        180deg,
-        rgba(250, 248, 242, 0.8) 0%,
-        rgba(245, 241, 232, 0.74) 100%
+        165deg,
+        rgba(23, 59, 80, 0.78) 0%,
+        rgba(16, 43, 56, 0.84) 55%,
+        rgba(23, 59, 80, 0.8) 100%
       ),
       url("/images/textures/batik-texture-bg.png");
     background-size: auto, min(420px, 44vw);
@@ -101,6 +144,7 @@ body {
     position: relative;
     isolation: isolate;
     width: 100%;
+    background-color: var(--color-primary);
   }
 
   .wenyu-batik-band::before {
@@ -110,10 +154,10 @@ body {
     z-index: 0;
     pointer-events: none;
     background-image: linear-gradient(
-        180deg,
-        rgba(250, 248, 242, 0.76) 0%,
-        rgba(245, 241, 232, 0.7) 50%,
-        rgba(250, 248, 242, 0.78) 100%
+        165deg,
+        rgba(23, 59, 80, 0.78) 0%,
+        rgba(16, 43, 56, 0.84) 55%,
+        rgba(23, 59, 80, 0.8) 100%
       ),
       url("/images/textures/batik-texture-bg.png");
     background-size: auto, min(520px, 55vw);
@@ -190,6 +234,22 @@ body {
   .wenyu-batik-card-accent > * {
     position: relative;
     z-index: 1;
+  }
+
+  /** 封面主视觉：遮掉设计稿上半浅色，与靛蓝站点底统一 */
+  .wenyu-cover-indigo-topwash {
+    pointer-events: none;
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    z-index: 4;
+    height: min(44%, 380px);
+    background: linear-gradient(
+      180deg,
+      var(--color-primary) 0%,
+      rgba(23, 59, 80, 0.94) 52%,
+      transparent 100%
+    );
   }
 
   .wenyu-batik-divider {

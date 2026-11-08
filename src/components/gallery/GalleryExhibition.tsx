@@ -24,16 +24,12 @@ export function GalleryExhibition() {
     <>
       <GalleryCoverHero />
 
-      <BatikTextureSurface
-        as="div"
-        variant="band"
-        className="w-full bg-brand-paper"
-      >
+      <BatikTextureSurface as="div" variant="band" className="w-full">
       <div
         id="gallery-works"
         className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
       >
-      <p className="max-w-2xl text-sm leading-relaxed text-brand-ink/90">
+      <p className="max-w-2xl text-sm leading-relaxed text-brand-gray">
         展览式呈现项目演示作品，均标注为样例，非真实用户投稿。
       </p>
 

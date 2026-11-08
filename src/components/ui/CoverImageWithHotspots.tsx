@@ -25,6 +25,8 @@ type CoverImageWithHotspotsProps = {
   placeholder?: "brand" | "lite";
   imageClassName?: string;
   blockClassName?: string;
+  /** 主视觉含浅色素块时，顶部靛蓝渐变与全站底色对齐 */
+  indigoTopWash?: boolean;
 };
 
 /**
@@ -41,9 +43,16 @@ export function CoverImageWithHotspots({
   placeholder,
   imageClassName,
   blockClassName,
+  indigoTopWash = true,
 }: CoverImageWithHotspotsProps) {
   return (
-    <div className={cn("relative w-full", className)}>
+    <div
+      className={cn(
+        "relative w-full",
+        indigoTopWash && "bg-brand-primary",
+        className
+      )}
+    >
       <ProgressiveBlockImage
         src={src}
         width={width}
@@ -52,9 +61,12 @@ export function CoverImageWithHotspots({
         priority={priority}
         presentation={!presentationAlt}
         placeholder={placeholder}
-        className={blockClassName}
+        className={cn(indigoTopWash && "bg-brand-primary", blockClassName)}
         imageClassName={imageClassName}
       />
+      {indigoTopWash && (
+        <div className="wenyu-cover-indigo-topwash" aria-hidden />
+      )}
       <ImageHotspotLayer>
         {hotspots.map((spot) => (
           <ImageHotspot

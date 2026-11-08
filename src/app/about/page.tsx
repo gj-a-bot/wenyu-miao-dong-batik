@@ -48,6 +48,7 @@ export default function AboutPage() {
         eyebrow="Project Archive"
         title="关于纹语"
         subtitle="WENYU — Miao-Dong Batik Digital Interactive Heritage System"
+        dark
       />
 
       <BatikTextureSurface
@@ -59,17 +60,17 @@ export default function AboutPage() {
 
       <div className="mt-16 space-y-16">
         {sections.map((s) => (
-          <section key={s.n} className="border-t border-brand-border pt-10">
-            <p className="font-serif text-sm tracking-[0.35em] text-brand-goldInk">
+          <section key={s.n} className="border-t border-brand-warm/10 pt-10">
+            <p className="font-serif text-sm tracking-[0.35em] text-brand-gold">
               {s.n}
             </p>
-            <h2 className="mt-2 font-serif text-2xl text-brand-primary">{s.title}</h2>
-            <p className="mt-4 leading-relaxed text-brand-muted">{s.body}</p>
+            <h2 className="mt-2 font-serif text-2xl text-brand-warm">{s.title}</h2>
+            <p className="mt-4 leading-relaxed text-brand-gray">{s.body}</p>
           </section>
         ))}
       </div>
 
-      <section className="mt-16 border-t border-brand-border pt-8 text-sm text-brand-muted">
+      <section className="mt-16 border-t border-brand-warm/10 pt-8 text-sm text-brand-gray">
         <p>团队与指导教师信息：待填写（提交竞赛前请对照赛项规则确认是否需匿名或脱敏展示）。</p>
         <p className="mt-2">合作机构：待填写</p>
       </section>

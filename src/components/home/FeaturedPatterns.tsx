@@ -10,22 +10,19 @@ export function FeaturedPatterns() {
   const featured = patterns.slice(0, 4);
 
   return (
-    <BatikTextureSurface
-      as="section"
-      variant="band"
-      className="w-full bg-brand-paper"
-    >
+    <BatikTextureSurface as="section" variant="band" className="w-full">
       <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
-      <div className="flex flex-wrap items-end justify-between gap-6 border-b border-brand-border pb-8">
+      <div className="flex flex-wrap items-end justify-between gap-6 border-b border-brand-warm/15 pb-8">
         <SectionHeading
           index="02"
           eyebrow="Pattern Archive"
           title="纹样精选"
           subtitle="档案式呈现形态与节奏，悬停查看条目信息。"
+          dark
         />
         <Link
           href="/patterns"
-          className="inline-flex items-center gap-1 text-sm tracking-wide text-brand-primary hover:text-brand-goldInk"
+          className="inline-flex items-center gap-1 text-sm tracking-wide text-brand-gold hover:text-brand-warm"
         >
           进入博物馆 <ArrowUpRight size={16} />
         </Link>

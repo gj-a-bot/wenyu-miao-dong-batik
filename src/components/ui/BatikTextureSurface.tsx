@@ -2,9 +2,9 @@ import { cn } from "@/lib/cn";
 
 /** 全站复用蜡染肌理：局部章节 / 分隔带 / 卡片一角点缀（见 globals.css） */
 const VARIANT_CLASS = {
-  /** 宽幅章节底：暖白遮罩 + 平铺肌理，适合 section */
+  /** 宽幅章节底：靛蓝蜡染平铺 */
   section: "wenyu-batik-section",
-  /** 叠在现有底色上，伪元素承载肌理，不挡交互 */
+  /** 章节底：靛蓝蜡染（伪元素叠图） */
   band: "wenyu-batik-band",
   /** 靛蓝底 + 蜡染肌理（首页共创等板块） */
   bandIndigo: "wenyu-batik-band-indigo",

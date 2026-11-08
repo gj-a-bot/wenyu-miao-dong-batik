@@ -62,12 +62,12 @@ export function SiteHeader() {
         className={cn(
           "sticky top-0 z-50 border-b transition-all duration-300",
           scrolled
-            ? "border-brand-border bg-brand-warm/95 shadow-sm backdrop-blur-md"
-            : "border-transparent bg-brand-paper/95 backdrop-blur-sm"
+            ? "border-brand-warm/10 bg-brand-dark/92 shadow-sm backdrop-blur-md"
+            : "border-transparent bg-brand-primary/88 backdrop-blur-sm"
         )}
       >
         <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between px-4 md:h-[4.75rem] md:px-8">
-          <Logo />
+          <Logo tone="light" />
           <nav className="hidden items-center gap-0.5 lg:flex" aria-label="主导航">
             {navItems.map((item) => {
               const active = isNavActive(pathname, item.href);
@@ -78,8 +78,8 @@ export function SiteHeader() {
                   className={cn(
                     "relative px-4 py-2 text-[13px] tracking-wide transition-colors",
                     active
-                      ? "text-brand-primary"
-                      : "text-brand-muted hover:text-brand-primary"
+                      ? "text-brand-warm"
+                      : "text-brand-gray hover:text-brand-warm"
                   )}
                 >
                   {item.label}
@@ -92,7 +92,7 @@ export function SiteHeader() {
           </nav>
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-sm p-2 text-brand-primary lg:hidden"
+            className="inline-flex items-center justify-center rounded-sm p-2 text-brand-warm lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls={menuId}
@@ -112,7 +112,7 @@ export function SiteHeader() {
           />
           <nav
             id={menuId}
-            className="fixed inset-x-0 top-[4.25rem] z-50 max-h-[calc(100vh-4.25rem)] overflow-y-auto border-b border-brand-border bg-brand-warm px-4 py-8 shadow-archive md:top-[4.75rem] lg:hidden"
+            className="fixed inset-x-0 top-[4.25rem] z-50 max-h-[calc(100vh-4.25rem)] overflow-y-auto border-b border-brand-warm/10 bg-brand-dark px-4 py-8 shadow-archive md:top-[4.75rem] lg:hidden"
             aria-label="移动导航"
           >
             <ul className="flex flex-col gap-1">
@@ -124,10 +124,10 @@ export function SiteHeader() {
                       href={item.href}
                       onClick={closeMenu}
                       className={cn(
-                        "block border-b border-brand-border/60 py-3.5 font-serif text-lg",
+                        "block border-b border-brand-warm/10 py-3.5 font-serif text-lg",
                         active
-                          ? "text-brand-primary"
-                          : "text-brand-muted hover:text-brand-primary"
+                          ? "text-brand-warm"
+                          : "text-brand-gray hover:text-brand-warm"
                       )}
                       aria-current={active ? "page" : undefined}
                     >

@@ -7,7 +7,7 @@ export function CultureSection() {
     <BatikTextureSurface
       as="section"
       variant="band"
-      className="w-full border-b border-brand-border bg-brand-warm"
+      className="w-full border-b border-brand-warm/10"
     >
       <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
         <div className="grid gap-16 lg:grid-cols-12">
@@ -17,6 +17,7 @@ export function CultureSection() {
               eyebrow="Culture"
               title="一针一线之间，记录文化的记忆。"
               subtitle="蜡染以蜡防染、以蓝入布，在布面上留下线条与留白的对话。纹语提供数字档案与交互工具，帮助公众以可参与的方式接近这门工艺的结构之美。"
+              dark
             />
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:col-span-7 lg:grid-cols-3">

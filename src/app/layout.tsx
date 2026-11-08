@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className={`${notoSans.variable} ${notoSerif.variable}`}>
-      <body className="min-h-screen flex flex-col paper-texture font-sans">
+      <body className="wenyu-batik-site-shell min-h-screen flex flex-col font-sans">
         <AppProviders>
           <SiteHeader />
           <main className="flex-1">

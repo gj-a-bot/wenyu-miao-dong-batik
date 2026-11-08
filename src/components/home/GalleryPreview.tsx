@@ -6,13 +6,14 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function GalleryPreview() {
   return (
-    <BatikTextureSurface as="section" variant="band" className="w-full bg-brand-paper">
+    <BatikTextureSurface as="section" variant="band" className="w-full">
     <div className="mx-auto max-w-7xl px-4 py-24 md:px-8">
       <SectionHeading
         index="04"
         eyebrow="Exhibition"
         title="作品展厅"
         subtitle="项目演示级数字再创作，均标注为样例作品。"
+        dark
       />
       <div className="mt-14 grid gap-8 md:grid-cols-3">
         {galleryWorks.map((work, i) => (
@@ -32,7 +33,7 @@ export function GalleryPreview() {
                 演示
               </span>
             </div>
-            <h3 className="mt-4 font-serif text-xl text-brand-primary group-hover:text-brand-goldInk">
+            <h3 className="mt-4 font-serif text-xl text-brand-warm group-hover:text-brand-gold">
               {work.title}
             </h3>
           </Link>
@@ -40,7 +41,7 @@ export function GalleryPreview() {
       </div>
       <Link
         href="/gallery"
-        className="mt-10 inline-block text-sm text-brand-primary hover:underline"
+        className="mt-10 inline-block text-sm text-brand-gold hover:underline"
       >
         进入展厅 →
       </Link>
