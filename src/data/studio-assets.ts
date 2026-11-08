@@ -69,4 +69,32 @@ export const DEFAULT_STUDIO_CONFIG = {
   repeatX: 3,
   repeatY: 3,
   spacing: 10,
+  waxCrackle: 0.28,
+  waxBleed: 0.32,
 };
+
+export const STUDIO_THEMES = [
+  "蝴蝶",
+  "鱼纹",
+  "涡纹",
+  "对称花型",
+  "几何菱格",
+  "抽象雾纹",
+] as const;
+
+export const STUDIO_SCENES = [
+  "帆布包",
+  "海报",
+  "书签",
+  "手机壁纸",
+  "围巾",
+  "展览画芯",
+] as const;
+
+export const STUDIO_STYLES = [
+  "苗侗蜡染",
+  "极简留白",
+  "对称仪式",
+  "流线现代",
+  "复古靛蓝",
+] as const;

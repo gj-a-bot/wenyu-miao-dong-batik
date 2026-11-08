@@ -1,4 +1,4 @@
-import { studioAssets } from "@/data/studio-assets";
+import { DEFAULT_STUDIO_CONFIG, studioAssets } from "@/data/studio-assets";
 import { StudioConfig } from "@/types";
 
 export const STUDIO_CANVAS_SIZE = 640;
@@ -16,6 +16,51 @@ export function scaleStudioConfigForCanvas(
     offsetX: config.offsetX * ratio,
     offsetY: config.offsetY * ratio,
   };
+}
+
+function drawWaxSimulation(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  crackle: number,
+  bleed: number
+) {
+  if (crackle <= 0 && bleed <= 0) return;
+
+  if (bleed > 0) {
+    const g = ctx.createRadialGradient(
+      w * 0.35,
+      h * 0.4,
+      w * 0.08,
+      w * 0.5,
+      h * 0.5,
+      w * 0.72
+    );
+    g.addColorStop(0, `rgba(23, 59, 80, ${bleed * 0.22})`);
+    g.addColorStop(1, "rgba(23, 59, 80, 0)");
+    ctx.save();
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+    ctx.restore();
+  }
+
+  if (crackle > 0) {
+    ctx.save();
+    ctx.strokeStyle = "rgba(250, 248, 242, 0.85)";
+    ctx.lineWidth = Math.max(0.6, w / 520);
+    ctx.globalAlpha = crackle * 0.55;
+    const lines = Math.floor(18 + crackle * 36);
+    for (let i = 0; i < lines; i++) {
+      const t = (i * 97) % 360;
+      const x0 = (w * ((i * 41) % 100)) / 100;
+      const y0 = (h * ((i * 59) % 100)) / 100;
+      ctx.beginPath();
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x0 + Math.cos(t) * w * 0.08, y0 + Math.sin(t) * h * 0.06);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
 }
 
 export function drawStudio(
@@ -60,4 +105,21 @@ export function drawStudio(
       ctx.restore();
     }
   }
+
+  drawWaxSimulation(
+    ctx,
+    w,
+    h,
+    c.waxCrackle ?? 0,
+    c.waxBleed ?? 0
+  );
+}
+
+export function normalizeStudioConfig(
+  partial: Partial<StudioConfig> | StudioConfig
+): StudioConfig {
+  return {
+    ...DEFAULT_STUDIO_CONFIG,
+    ...partial,
+  };
 }

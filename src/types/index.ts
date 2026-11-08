@@ -74,4 +74,33 @@ export interface StudioConfig {
   repeatX: number;
   repeatY: number;
   spacing: number;
+  /** 蜡染冰裂纹模拟强度 0–1 */
+  waxCrackle?: number;
+  /** 靛蓝渗染/雾感 0–1 */
+  waxBleed?: number;
 }
+
+export type CreativeProductId = "tote" | "poster" | "bookmark" | "wallpaper";
+
+export type StudioDesignBrief = {
+  prompt: string;
+  theme?: string;
+  scene?: string;
+  style?: string;
+  palette?: string;
+};
+
+export type StudioDesignPlan = {
+  id: string;
+  title: string;
+  composition: string;
+  matchedPatternIds: string[];
+  config: StudioConfig;
+};
+
+export type StudioDesignResponse = {
+  mode: "live" | "demo";
+  provider?: "ollama" | "openai";
+  notice: string;
+  plans: StudioDesignPlan[];
+};

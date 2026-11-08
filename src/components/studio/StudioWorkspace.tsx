@@ -1,25 +1,26 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  DEFAULT_STUDIO_CONFIG,
-  layoutPresets,
-  presetPalettes,
-  studioAssets,
-} from "@/data/studio-assets";
-import { SavedStudioWork, StudioConfig } from "@/types";
+import { DEFAULT_STUDIO_CONFIG, studioAssets } from "@/data/studio-assets";
+import { SavedStudioWork, StudioConfig, StudioDesignPlan, CreativeProductId } from "@/types";
 import { saveStudioWork } from "@/lib/storage";
 import {
   drawStudio,
-  scaleStudioConfigForCanvas,
+  normalizeStudioConfig,
   STUDIO_CANVAS_SIZE,
-  STUDIO_EXPORT_SIZE,
 } from "@/lib/studio-canvas";
+import {
+  downloadStudioPng,
+  downloadStudioSvg,
+  renderStudioToCanvas,
+} from "@/lib/studio-export";
 import { StudioHeroVisual } from "@/components/studio/StudioHeroVisual";
 import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { StudioSavedWorksList } from "@/components/studio/StudioSavedWorksList";
-import { ColorField, RangeField } from "@/components/ui/Field";
-import { Download, RotateCcw, Save, Sparkles } from "lucide-react";
+import { StudioAdvancedPanel } from "@/components/studio/StudioAdvancedPanel";
+import { StudioAiDesigner } from "@/components/studio/StudioAiDesigner";
+import { StudioMockupPreview } from "@/components/studio/StudioMockupPreview";
+import { Download, Layers, Palette, RotateCcw, Save, Shapes, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 function createPreviewThumbnail(
@@ -42,55 +43,65 @@ function createPreviewThumbnail(
   }
 }
 
+type LeftTab = "assets" | "advanced" | "works" | "mockup";
+
 export function StudioWorkspace() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [config, setConfig] = useState<StudioConfig>(DEFAULT_STUDIO_CONFIG);
+  const [config, setConfig] = useState<StudioConfig>(
+    normalizeStudioConfig(DEFAULT_STUDIO_CONFIG)
+  );
   const [title, setTitle] = useState("未命名实验");
-  const [assistMsg, setAssistMsg] = useState("");
   const [worksRefresh, setWorksRefresh] = useState(0);
+  const [leftTab, setLeftTab] = useState<LeftTab>("assets");
+  const [stageMode, setStageMode] = useState<"canvas" | "mockup">("canvas");
+  const [product, setProduct] = useState<CreativeProductId>("tote");
+  const [statusMsg, setStatusMsg] = useState("");
+  const [hasLiveLlm, setHasLiveLlm] = useState<boolean | null>(null);
+  const [llmProvider, setLlmProvider] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/studio/llm-status")
+      .then((r) => r.json())
+      .then(
+        (data: {
+          hasLiveLlm?: boolean;
+          provider?: string | null;
+          demoFallback?: boolean;
+        }) => {
+          if (cancelled) return;
+          setHasLiveLlm(Boolean(data.hasLiveLlm));
+          setLlmProvider(data.provider ?? null);
+        }
+      )
+      .catch(() => {
+        if (!cancelled) setHasLiveLlm(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || stageMode !== "canvas") return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     drawStudio(ctx, canvas.width, canvas.height, config);
-  }, [config]);
+  }, [config, stageMode]);
 
   const update = (partial: Partial<StudioConfig>) => {
-    setConfig((prev) => ({ ...prev, ...partial }));
+    setConfig((prev) => normalizeStudioConfig({ ...prev, ...partial }));
   };
 
   const reset = () => {
-    setConfig({ ...DEFAULT_STUDIO_CONFIG });
-    setAssistMsg("");
-  };
-
-  const exportPng = () => {
-    const off = document.createElement("canvas");
-    off.width = STUDIO_EXPORT_SIZE;
-    off.height = STUDIO_EXPORT_SIZE;
-    const ctx = off.getContext("2d");
-    if (!ctx) return;
-    const scaled = scaleStudioConfigForCanvas(
-      config,
-      STUDIO_CANVAS_SIZE,
-      STUDIO_EXPORT_SIZE
-    );
-    drawStudio(ctx, STUDIO_EXPORT_SIZE, STUDIO_EXPORT_SIZE, scaled);
-    const link = document.createElement("a");
-    link.download = `${title || "wenyu-studio"}.png`;
-    link.href = off.toDataURL("image/png");
-    link.click();
+    setConfig(normalizeStudioConfig(DEFAULT_STUDIO_CONFIG));
+    setStatusMsg("");
   };
 
   const saveWork = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) {
-      setAssistMsg("无法读取画布，保存失败。");
-      return;
-    }
-    const previewDataUrl = createPreviewThumbnail(canvas);
+    const off = renderStudioToCanvas(config, STUDIO_CANVAS_SIZE);
+    const previewDataUrl = createPreviewThumbnail(off);
     const ok = saveStudioWork({
       id: `local-${Date.now()}`,
       title,
@@ -98,44 +109,33 @@ export function StudioWorkspace() {
       config,
       previewDataUrl,
     });
-    setAssistMsg(
+    setStatusMsg(
       ok
-        ? "已保存到浏览器本地存储（含缩略图预览）。"
-        : "保存失败：浏览器存储不可用或空间已满，请导出 PNG 备份。"
+        ? "已保存到浏览器本地（含缩略图与设计参数）。"
+        : "保存失败：请尝试导出 PNG 备份。"
     );
     if (ok) setWorksRefresh((k) => k + 1);
   };
 
   const loadSavedWork = (work: SavedStudioWork) => {
-    setConfig({ ...DEFAULT_STUDIO_CONFIG, ...work.config });
+    setConfig(normalizeStudioConfig(work.config));
     setTitle(work.title);
-    setAssistMsg(`已加载：${work.title}`);
+    setStatusMsg(`已加载：${work.title}`);
+    setStageMode("canvas");
   };
 
-  const applyPalette = (p: (typeof presetPalettes)[0]) => {
-    update({
-      primaryColor: p.primary,
-      backgroundColor: p.background,
-      accentColor: p.accent,
-    });
-    setAssistMsg(`已应用配色方案：${p.name}（规则驱动，非 AI 生成）。`);
+  const applyPlan = (next: StudioConfig, plan: StudioDesignPlan) => {
+    setConfig(normalizeStudioConfig(next));
+    setStatusMsg(`已应用 ${plan.title}。`);
+    setStageMode("canvas");
   };
 
-  const applyLayout = (l: (typeof layoutPresets)[0]) => {
-    update({
-      repeatX: l.repeatX,
-      repeatY: l.repeatY,
-      scale: l.scale,
-      spacing: l.spacing,
-    });
-    setAssistMsg(`已应用排列方案：${l.name}（规则驱动）。`);
-  };
-
-  const aiAssistPlaceholder = () => {
-    setAssistMsg(
-      "AI 模型接口尚未配置。当前提供配色与排列预设；接入后可通过 storageApiExtension 同步。"
-    );
-  };
+  const tabs: { id: LeftTab; label: string; icon: React.ReactNode }[] = [
+    { id: "assets", label: "素材", icon: <Shapes size={14} /> },
+    { id: "advanced", label: "高级", icon: <Palette size={14} /> },
+    { id: "works", label: "作品", icon: <Layers size={14} /> },
+    { id: "mockup", label: "文创", icon: <ShoppingBag size={14} /> },
+  ];
 
   return (
     <div className="flex min-h-[calc(100vh-5rem)] flex-col">
@@ -146,142 +146,217 @@ export function StudioWorkspace() {
         variant="studioRich"
         className="flex w-full flex-1 flex-col"
       >
-        <div id="studio-workspace" className="flex min-h-0 flex-1 flex-col scroll-mt-24">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-border/80 bg-brand-warm/92 px-4 py-4 backdrop-blur-[2px] md:px-8">
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.35em] text-brand-goldInk">
-            作品名称
-          </p>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 w-full max-w-xs border-b border-transparent bg-transparent font-serif text-xl text-brand-primary outline-none focus:border-brand-gold"
-            aria-label="项目名称"
-          />
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <button type="button" onClick={reset} className="wenyu-chip gap-2">
-            <RotateCcw size={15} /> 重置
-          </button>
-          <button type="button" onClick={saveWork} className="wenyu-chip gap-2">
-            <Save size={15} /> 保存
-          </button>
-          <button
-            type="button"
-            onClick={exportPng}
-            className="inline-flex items-center gap-2 bg-brand-primary px-5 py-2.5 text-sm tracking-wide text-brand-warm"
-          >
-            <Download size={15} /> 导出 PNG
-          </button>
-        </div>
-      </div>
+        <div
+          id="studio-workspace"
+          className="flex min-h-0 flex-1 flex-col scroll-mt-24"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-border/80 bg-brand-warm/92 px-4 py-4 backdrop-blur-[2px] md:px-8">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.35em] text-brand-goldInk">
+                数字共创实验室 2.0
+              </p>
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="mt-1 w-full max-w-md border-b border-transparent bg-transparent font-serif text-xl text-brand-primary outline-none focus:border-brand-gold"
+                aria-label="作品名称"
+              />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button type="button" onClick={reset} className="wenyu-chip gap-2">
+                <RotateCcw size={15} /> 重置
+              </button>
+              <button type="button" onClick={saveWork} className="wenyu-chip gap-2">
+                <Save size={15} /> 保存
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadStudioSvg(config, title)}
+                className="wenyu-chip gap-2"
+              >
+                <Download size={15} /> SVG
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadStudioPng(config, title)}
+                className="inline-flex items-center gap-2 bg-brand-primary px-5 py-2.5 text-sm tracking-wide text-brand-warm"
+              >
+                <Download size={15} /> PNG
+              </button>
+            </div>
+          </div>
 
-      <div className="grid flex-1 lg:grid-cols-[260px_1fr_300px]">
-        <aside className="border-b border-brand-border/80 bg-brand-warm/90 p-5 backdrop-blur-[2px] lg:border-b-0 lg:border-r overflow-y-auto max-h-[42vh] lg:max-h-none">
-          <h2 className="text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">素材库</h2>
-          <ul className="mt-4 space-y-2">
-            {studioAssets.map((a) => (
-              <li key={a.id}>
-                <button
-                  type="button"
-                  onClick={() => update({ assetId: a.id })}
-                  className={cn(
-                    "w-full border px-3 py-3 text-left transition",
-                    config.assetId === a.id
-                      ? "border-brand-primary bg-brand-primary text-brand-warm"
-                      : "border-brand-border bg-brand-paper hover:border-brand-secondary"
-                  )}
-                >
-                  <span className="block text-sm">{a.name}</span>
-                  <span
+          {statusMsg && (
+            <p className="border-b border-brand-border/60 bg-brand-paper/90 px-4 py-2 text-xs text-brand-ink md:px-8">
+              {statusMsg}
+            </p>
+          )}
+
+          <div className="grid flex-1 lg:grid-cols-[minmax(240px,280px)_1fr_minmax(280px,320px)]">
+            <aside className="flex max-h-[40vh] flex-col border-b border-brand-border/80 bg-brand-warm/90 backdrop-blur-[2px] lg:max-h-none lg:border-b-0 lg:border-r">
+              <nav className="flex border-b border-brand-border/80">
+                {tabs.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() => {
+                      setLeftTab(t.id);
+                      if (t.id === "mockup") setStageMode("mockup");
+                    }}
                     className={cn(
-                      "text-[10px]",
-                      config.assetId === a.id
-                        ? "text-brand-warm/85"
-                        : "text-brand-secondary"
+                      "flex flex-1 flex-col items-center gap-0.5 py-3 text-[10px] tracking-widest",
+                      leftTab === t.id
+                        ? "bg-brand-primary text-brand-warm"
+                        : "text-brand-secondary hover:bg-brand-paper"
                     )}
                   >
-                    {a.label}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-          <h2 className="mt-8 text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">
-            我的作品
-          </h2>
-          <StudioSavedWorksList refreshKey={worksRefresh} onLoad={loadSavedWork} />
-        </aside>
-
-        <div className="flex items-center justify-center bg-brand-primary/[0.035] p-6 md:p-10">
-          <div className="border border-brand-border bg-brand-warm p-3 shadow-archive">
-            <canvas
-              ref={canvasRef}
-              width={640}
-              height={640}
-              className="max-w-full"
-              aria-label="创作画布"
-            />
-          </div>
-        </div>
-
-        <aside className="border-t border-brand-border/80 bg-brand-warm/90 p-5 backdrop-blur-[2px] lg:border-t-0 lg:border-l overflow-y-auto">
-          <h2 className="text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">设计参数</h2>
-          <div className="mt-5 space-y-5">
-            <ColorField label="主色" value={config.primaryColor} onChange={(v) => update({ primaryColor: v })} />
-            <ColorField label="点缀色" value={config.accentColor} onChange={(v) => update({ accentColor: v })} />
-            <ColorField label="背景色" value={config.backgroundColor} onChange={(v) => update({ backgroundColor: v })} />
-            <RangeField label="尺度" value={config.scale} min={0.2} max={1.5} step={0.05} onChange={(v) => update({ scale: v })} format={(v) => v.toFixed(2)} />
-            <RangeField label="旋转" value={config.rotation} min={0} max={360} onChange={(v) => update({ rotation: v })} format={(v) => `${v}°`} />
-            <RangeField label="横向重复" value={config.repeatX} min={1} max={8} onChange={(v) => update({ repeatX: v })} />
-            <RangeField label="纵向重复" value={config.repeatY} min={1} max={8} onChange={(v) => update({ repeatY: v })} />
-            <RangeField label="间距" value={config.spacing} min={0} max={40} onChange={(v) => update({ spacing: v })} format={(v) => `${v}px`} />
-            <RangeField label="水平偏移" value={config.offsetX} min={-120} max={120} onChange={(v) => update({ offsetX: v })} format={(v) => `${v}px`} />
-            <RangeField label="垂直偏移" value={config.offsetY} min={-120} max={120} onChange={(v) => update({ offsetY: v })} format={(v) => `${v}px`} />
-          </div>
-
-          <div className="mt-8 border-t border-brand-border pt-6">
-            <h3 className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-brand-goldInk">
-              <Sparkles size={14} /> 规则辅助（非 AI）
-            </h3>
-            <p className="mt-2 text-[11px] leading-relaxed text-brand-ink/90">
-              预设配色与排列由本地规则生成；未接入大模型 API。
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {presetPalettes.map((p) => (
-                <button key={p.name} type="button" onClick={() => applyPalette(p)} className="wenyu-chip text-[11px]">
-                  {p.name}
-                </button>
-              ))}
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {layoutPresets.map((l) => (
-                <button key={l.name} type="button" onClick={() => applyLayout(l)} className="wenyu-chip text-[11px]">
-                  {l.name}
-                </button>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={aiAssistPlaceholder}
-              className="mt-4 w-full border border-dashed border-brand-secondary/40 py-2.5 text-[11px] text-brand-primary hover:border-brand-gold hover:text-brand-goldInk"
-            >
-              AI 辅助入口（接口预留）
-            </button>
-            {assistMsg && (
-              <p
-                className={cn(
-                  "mt-3 text-xs leading-relaxed",
-                  assistMsg.includes("失败") ? "text-red-800" : "text-brand-goldInk"
+                    {t.icon}
+                    {t.label}
+                  </button>
+                ))}
+              </nav>
+              <div className="flex-1 overflow-y-auto p-5">
+                {leftTab === "assets" && (
+                  <>
+                    <h2 className="text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">
+                      纹样素材库
+                    </h2>
+                    <ul className="mt-4 space-y-2">
+                      {studioAssets.map((a) => (
+                        <li key={a.id}>
+                          <button
+                            type="button"
+                            onClick={() => update({ assetId: a.id })}
+                            className={cn(
+                              "w-full border px-3 py-3 text-left transition",
+                              config.assetId === a.id
+                                ? "border-brand-primary bg-brand-primary text-brand-warm"
+                                : "border-brand-border bg-brand-paper hover:border-brand-secondary"
+                            )}
+                          >
+                            <span className="block text-sm">{a.name}</span>
+                            <span
+                              className={cn(
+                                "text-[10px]",
+                                config.assetId === a.id
+                                  ? "text-brand-warm/85"
+                                  : "text-brand-secondary"
+                              )}
+                            >
+                              {a.label}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
                 )}
-                role="status"
-              >
-                {assistMsg}
-              </p>
-            )}
+                {leftTab === "advanced" && (
+                  <StudioAdvancedPanel
+                    config={config}
+                    onChange={update}
+                    onPalette={(p) => {
+                      update({
+                        primaryColor: p.primary,
+                        backgroundColor: p.background,
+                        accentColor: p.accent,
+                      });
+                      setStatusMsg(`已应用配色：${p.name}`);
+                    }}
+                    onLayout={(l) => {
+                      update({
+                        repeatX: l.repeatX,
+                        repeatY: l.repeatY,
+                        scale: l.scale,
+                        spacing: l.spacing,
+                      });
+                      setStatusMsg(`已应用排列：${l.name}`);
+                    }}
+                  />
+                )}
+                {leftTab === "works" && (
+                  <>
+                    <h2 className="text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">
+                      本地作品
+                    </h2>
+                    <p className="mt-2 text-[10px] text-brand-secondary">
+                      加载历史作品将恢复全部设计参数与蜡染模拟强度。
+                    </p>
+                    <StudioSavedWorksList
+                      refreshKey={worksRefresh}
+                      onLoad={loadSavedWork}
+                    />
+                  </>
+                )}
+                {leftTab === "mockup" && (
+                  <StudioMockupPreview
+                    config={config}
+                    product={product}
+                    onProductChange={setProduct}
+                  />
+                )}
+              </div>
+            </aside>
+
+            <div className="flex flex-col items-center justify-center bg-brand-primary/[0.04] p-4 md:p-8">
+              <div className="mb-4 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setStageMode("canvas")}
+                  className={cn(
+                    "wenyu-chip text-[11px]",
+                    stageMode === "canvas" && "border-brand-gold bg-brand-primary text-brand-warm"
+                  )}
+                >
+                  创作画布
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setStageMode("mockup")}
+                  className={cn(
+                    "wenyu-chip text-[11px]",
+                    stageMode === "mockup" && "border-brand-gold bg-brand-primary text-brand-warm"
+                  )}
+                >
+                  文创预览
+                </button>
+              </div>
+              {stageMode === "canvas" ? (
+                <div className="border border-brand-border bg-brand-warm p-3 shadow-archive">
+                  <canvas
+                    ref={canvasRef}
+                    width={STUDIO_CANVAS_SIZE}
+                    height={STUDIO_CANVAS_SIZE}
+                    className="max-w-[min(100vw-2rem,640px)]"
+                    aria-label="创作画布"
+                  />
+                </div>
+              ) : (
+                <StudioMockupPreview
+                  config={config}
+                  product={product}
+                  onProductChange={setProduct}
+                  className="w-full"
+                />
+              )}
+            </div>
+
+            <aside className="max-h-[50vh] overflow-y-auto border-t border-brand-border/80 bg-brand-warm/92 p-5 backdrop-blur-[2px] lg:max-h-none lg:border-t-0 lg:border-l">
+              <StudioAiDesigner
+                onApplyPlan={applyPlan}
+                isLive={hasLiveLlm ?? undefined}
+                statusNotice={
+                  hasLiveLlm === null
+                    ? undefined
+                    : hasLiveLlm
+                      ? llmProvider === "openai"
+                        ? "OpenAI 已配置，设计方案由服务端 API 生成。"
+                        : "Ollama 可访问，设计方案由本机模型经服务端转发。"
+                      : undefined
+                }
+              />
+            </aside>
           </div>
-        </aside>
-      </div>
         </div>
       </BatikTextureSurface>
     </div>
