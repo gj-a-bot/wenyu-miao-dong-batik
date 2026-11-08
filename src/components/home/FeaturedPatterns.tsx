@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { patterns } from "@/lib/data";
 import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
+import { BatikDisplayFrame } from "@/components/ui/BatikDisplayFrame";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
 import { ArrowUpRight } from "lucide-react";
@@ -32,11 +33,14 @@ export function FeaturedPatterns() {
           <Link
             key={p.id}
             href={`/patterns/${p.id}`}
-            className={`group block overflow-hidden border border-brand-border bg-brand-warm transition duration-500 hover:shadow-archive ${
+            className={`group block bg-brand-warm transition duration-500 ${
               i === 1 ? "lg:translate-y-8" : i === 3 ? "lg:-translate-y-6" : ""
             }`}
           >
-            <div className="relative aspect-square overflow-hidden bg-brand-primary/5">
+            <BatikDisplayFrame
+              mat="warm"
+              className="wenyu-batik-display-frame--lift aspect-square w-full"
+            >
               <Image
                 src={p.image}
                 alt={p.name}
@@ -50,7 +54,7 @@ export function FeaturedPatterns() {
                   {p.description}
                 </p>
               </div>
-            </div>
+            </BatikDisplayFrame>
             <div className="border-t border-brand-border px-4 py-3">
               <p className="text-[10px] uppercase tracking-widest text-brand-muted">
                 {p.category}

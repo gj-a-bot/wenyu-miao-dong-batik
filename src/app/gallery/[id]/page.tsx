@@ -7,6 +7,7 @@ import {
   getPatternById,
 } from "@/lib/data";
 import { galleryAspectStyle, galleryImagePosition } from "@/lib/gallery-frame";
+import { BatikDisplayFrame } from "@/components/ui/BatikDisplayFrame";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -43,8 +44,10 @@ export default function GalleryDetailPage({
       <h1 className="mt-3 font-serif text-4xl md:text-5xl">{work.title}</h1>
       <p className="wenyu-muted mt-2 text-sm">{work.createdAt}</p>
 
-      <div
-        className="relative mt-12 w-full max-h-[min(82vh,920px)] overflow-hidden border border-brand-warm/15 bg-brand-dark shadow-lift"
+      <BatikDisplayFrame
+        mat="dark"
+        prominent
+        className="wenyu-batik-display-frame--lift mt-12 w-full max-h-[min(82vh,920px)]"
         style={galleryAspectStyle(work)}
       >
         <Image
@@ -56,7 +59,7 @@ export default function GalleryDetailPage({
           sizes="(min-width: 1024px) 80vw, 96vw"
           priority
         />
-      </div>
+      </BatikDisplayFrame>
 
       <div className="mt-12 grid gap-12 lg:grid-cols-2">
         <section>

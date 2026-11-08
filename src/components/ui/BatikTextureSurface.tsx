@@ -12,8 +12,8 @@ const VARIANT_CLASS = {
   studioRich: "wenyu-batik-studio",
   /** 卡片右上淡角饰，主体仍为暖白底 */
   accent: "wenyu-batik-card-accent",
-  /** 章节间细条分隔（3px） */
-  divider: "wenyu-batik-divider",
+  /** 章节标题分隔：框饰图顶栏装饰线 */
+  divider: "wenyu-batik-divider wenyu-batik-border-rule",
 } as const;
 
 export type BatikTextureVariant = keyof typeof VARIANT_CLASS;

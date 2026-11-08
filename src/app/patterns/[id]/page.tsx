@@ -9,6 +9,8 @@ import {
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
 import { FavoriteButton } from "@/components/patterns/FavoriteButton";
 import { PatternDetailHeroImage } from "@/components/patterns/PatternDetailHeroImage";
+import { BatikDisplayFrame } from "@/components/ui/BatikDisplayFrame";
+import { cn } from "@/lib/cn";
 import { GalleryWorkFrame } from "@/components/gallery/GalleryWorkFrame";
 import type { Metadata } from "next";
 
@@ -47,23 +49,28 @@ export default function PatternDetailPage({
     <article className="wenyu-on-indigo mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <PatternDetailHeroImage
-            src={pattern.image}
-            alt={pattern.name}
-            contain={isArchiveShowcaseImage}
-            className={
+          <BatikDisplayFrame
+            mat="warm"
+            prominent
+            className={cn(
+              "wenyu-batik-display-frame--lift w-full",
               isArchiveShowcaseImage
-                ? isVortexShowcase
-                  ? "aspect-[3/2] rounded-lg border border-brand-secondary/25 bg-[#eef1ed] shadow-sm ring-1 ring-brand-border/70"
-                  : "aspect-[3/2] rounded-lg border border-brand-primary/20 shadow-sm ring-1 ring-brand-gold/15"
-                : "aspect-square border border-brand-border lg:aspect-[4/5]"
-            }
-            imageClassName={
-              isVortexShowcase
-                ? "object-contain object-[50%_52%] brightness-[0.98] saturate-[0.9]"
-                : undefined
-            }
-          />
+                ? "aspect-[3/2]"
+                : "aspect-square lg:aspect-[4/5]"
+            )}
+          >
+            <PatternDetailHeroImage
+              src={pattern.image}
+              alt={pattern.name}
+              contain={isArchiveShowcaseImage}
+              className="absolute inset-0 h-full w-full bg-logo-surface"
+              imageClassName={
+                isVortexShowcase
+                  ? "object-contain object-[50%_52%] brightness-[0.98] saturate-[0.9]"
+                  : undefined
+              }
+            />
+          </BatikDisplayFrame>
         </div>
         <div className="lg:col-span-5">
           <p className="wenyu-eyebrow text-[10px] uppercase tracking-[0.45em]">

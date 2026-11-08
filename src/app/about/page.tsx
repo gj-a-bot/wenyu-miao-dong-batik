@@ -1,4 +1,4 @@
-import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
+import { BatikDecorativeRule } from "@/components/ui/BatikDecorativeRule";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const sections = [
@@ -51,12 +51,7 @@ export default function AboutPage() {
         dark
       />
 
-      <BatikTextureSurface
-        as="div"
-        variant="divider"
-        className="mt-14"
-        aria-hidden
-      />
+      <BatikDecorativeRule wide className="mt-14" />
 
       <div className="mt-16 space-y-16">
         {sections.map((s) => (

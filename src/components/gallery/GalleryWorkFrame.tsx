@@ -5,6 +5,7 @@ import {
   galleryAspectStyle,
   galleryImagePosition,
 } from "@/lib/gallery-frame";
+import { BatikDisplayFrame } from "@/components/ui/BatikDisplayFrame";
 
 type GalleryWorkFrameProps = {
   work: GalleryWork;
@@ -28,11 +29,14 @@ export function GalleryWorkFrame({
   children,
 }: GalleryWorkFrameProps) {
   return (
-    <div
+    <BatikDisplayFrame
+      mat="dark"
+      prominent
       className={cn(
-        "relative w-full overflow-hidden border border-brand-warm/15 bg-brand-dark shadow-archive",
+        "wenyu-batik-display-frame--lift relative w-full overflow-hidden",
         className
       )}
+      innerClassName="bg-brand-dark"
       style={galleryAspectStyle(work)}
     >
       <Image
@@ -48,6 +52,6 @@ export function GalleryWorkFrame({
         style={{ objectPosition: galleryImagePosition(work) }}
       />
       {children}
-    </div>
+    </BatikDisplayFrame>
   );
 }

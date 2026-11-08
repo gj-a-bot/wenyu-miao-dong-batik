@@ -14,6 +14,7 @@ import {
   type CoverHotspot,
 } from "@/components/ui/CoverImageWithHotspots";
 import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
+import { BatikDisplayFrame } from "@/components/ui/BatikDisplayFrame";
 
 const MUSEUM_COVER_SRC = "/images/museum/pattern-museum-cover.png";
 const COVER_W = 1920;
@@ -149,18 +150,14 @@ export function PatternsArchive() {
                 key={p.id}
                 href={`/patterns/${p.id}`}
                 className={cn(
-                  "group mb-5 block break-inside-avoid overflow-hidden border bg-brand-warm transition duration-300",
-                  isArchiveShowcaseImage
-                    ? isVortexDetail
-                      ? "rounded-lg border-brand-secondary/25 shadow-sm ring-1 ring-brand-border/60 hover:border-brand-primary/35 hover:shadow-lift"
-                      : "rounded-lg border-brand-primary/15 shadow-sm hover:border-brand-gold/45 hover:shadow-lift"
-                    : "border-brand-border hover:shadow-archive",
+                  "group mb-5 block break-inside-avoid bg-brand-warm transition duration-300",
                   i % 3 === 1 && "sm:mt-6"
                 )}
               >
-                <div
+                <BatikDisplayFrame
+                  mat="warm"
                   className={cn(
-                    "relative w-full overflow-hidden bg-brand-primary/[0.04]",
+                    "wenyu-batik-display-frame--lift w-full",
                     isArchiveShowcaseImage
                       ? "aspect-[3/2]"
                       : i % 2 === 0
@@ -181,7 +178,7 @@ export function PatternsArchive() {
                         : "group-hover:scale-[1.03]"
                     )}
                   />
-                </div>
+                </BatikDisplayFrame>
                 <div className="border-t border-brand-border px-4 py-3">
                   <VerificationBadge status={p.verificationStatus} />
                   <h2 className="mt-2 font-serif text-lg text-brand-primary">

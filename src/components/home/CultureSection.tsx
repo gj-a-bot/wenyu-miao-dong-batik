@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
+import { BatikDisplayFrame } from "@/components/ui/BatikDisplayFrame";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function CultureSection() {
@@ -21,7 +22,10 @@ export function CultureSection() {
             />
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:col-span-7 lg:grid-cols-3">
-            <div className="relative aspect-[3/4] overflow-hidden border border-brand-border bg-brand-warm sm:col-span-1 sm:mt-10">
+            <BatikDisplayFrame
+              mat="warm"
+              className="wenyu-batik-display-frame--lift aspect-[3/4] sm:col-span-1 sm:mt-10"
+            >
               <Image
                 src="/images/patterns/pattern-geometric-diamond-grid-detail.png"
                 alt=""
@@ -29,8 +33,11 @@ export function CultureSection() {
                 sizes="(min-width: 1024px) 25vw, 50vw"
                 className="object-cover"
               />
-            </div>
-            <div className="relative aspect-square overflow-hidden border border-brand-border bg-brand-warm">
+            </BatikDisplayFrame>
+            <BatikDisplayFrame
+              mat="warm"
+              className="wenyu-batik-display-frame--lift aspect-square"
+            >
               <Image
                 src="/images/patterns/pattern-fog-detail.png"
                 alt=""
@@ -38,8 +45,11 @@ export function CultureSection() {
                 sizes="(min-width: 1024px) 20vw, 45vw"
                 className="object-cover"
               />
-            </div>
-            <div className="relative aspect-[4/5] overflow-hidden border border-brand-border bg-brand-warm sm:col-span-2 lg:col-span-1 lg:mt-16">
+            </BatikDisplayFrame>
+            <BatikDisplayFrame
+              mat="warm"
+              className="wenyu-batik-display-frame--lift aspect-[4/5] sm:col-span-2 lg:col-span-1 lg:mt-16"
+            >
               <Image
                 src="/images/patterns/pattern-butterfly-detail.png"
                 alt=""
@@ -47,7 +57,7 @@ export function CultureSection() {
                 sizes="(min-width: 1024px) 20vw, 50vw"
                 className="object-cover"
               />
-            </div>
+            </BatikDisplayFrame>
           </div>
         </div>
       </div>

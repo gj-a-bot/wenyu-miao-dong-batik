@@ -3,6 +3,8 @@ import { craftSteps, getCraftStepById } from "@/lib/data";
 import type { Metadata } from "next";
 import { CraftStepLayout } from "@/components/craft/CraftStepLayout";
 import { CraftStepMedia } from "@/components/craft/CraftStepMedia";
+import { BatikDisplayFrame } from "@/components/ui/BatikDisplayFrame";
+import { cn } from "@/lib/cn";
 import { RouteImagePreload } from "@/components/layout/RouteImagePreload";
 import { isCraftVideoSrc } from "@/lib/craft-media";
 
@@ -44,12 +46,14 @@ export default function CraftDetailPage({
       <p className="wenyu-body mt-4 max-w-2xl text-lg">{step.summary}</p>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
-        <div
-          className={
-            isDye
-              ? "relative aspect-video overflow-hidden border border-brand-border/80 bg-logo-surface ring-1 ring-brand-gold/15"
-              : "relative aspect-[4/3] overflow-hidden border border-brand-border bg-brand-warm"
-          }
+        <BatikDisplayFrame
+          mat="warm"
+          prominent
+          className={cn(
+            "wenyu-batik-display-frame--lift w-full",
+            isDye ? "aspect-video" : "aspect-[4/3]"
+          )}
+          innerClassName={isDye ? "bg-logo-surface" : undefined}
         >
           <CraftStepMedia
             src={mediaSrc}
@@ -78,7 +82,7 @@ export default function CraftDetailPage({
                 ? "演示短片 · 非实拍"
                 : "工艺示意图 · 非实拍"}
           </span>
-        </div>
+        </BatikDisplayFrame>
         <div className="space-y-8">
           <section>
             <h2 className="wenyu-muted text-[11px] uppercase tracking-[0.25em]">
