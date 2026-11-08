@@ -36,12 +36,12 @@ export default function CraftDetailPage({
     <>
       {isDye && step.image ? <RouteImagePreload href={step.image} /> : null}
       <CraftStepLayout stepId={step.id}>
-      <p className="text-[10px] uppercase tracking-[0.45em] text-brand-muted">
+      <p className="wenyu-eyebrow text-[10px] uppercase tracking-[0.45em]">
         步骤 {String(step.order).padStart(2, "0")} /{" "}
         {String(craftSteps.length).padStart(2, "0")}
       </p>
-      <h1 className="mt-3 font-serif text-4xl text-brand-primary">{step.name}</h1>
-      <p className="mt-4 max-w-2xl text-lg text-brand-muted">{step.summary}</p>
+      <h1 className="mt-3 font-serif text-4xl">{step.name}</h1>
+      <p className="wenyu-body mt-4 max-w-2xl text-lg">{step.summary}</p>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
         <div
@@ -81,15 +81,15 @@ export default function CraftDetailPage({
         </div>
         <div className="space-y-8">
           <section>
-            <h2 className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+            <h2 className="wenyu-muted text-[11px] uppercase tracking-[0.25em]">
               操作介绍
             </h2>
-            <p className="mt-3 leading-relaxed text-brand-ink/90">
+            <p className="wenyu-body mt-3 leading-relaxed">
               {step.description}
             </p>
           </section>
           <section>
-            <h2 className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+            <h2 className="wenyu-muted text-[11px] uppercase tracking-[0.25em]">
               工具与材料
             </h2>
             <ul className="mt-3 flex flex-wrap gap-2">
@@ -101,15 +101,15 @@ export default function CraftDetailPage({
             </ul>
           </section>
           <section>
-            <h2 className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+            <h2 className="wenyu-muted text-[11px] uppercase tracking-[0.25em]">
               注意事项
             </h2>
-            <ul className="mt-3 list-inside list-disc text-sm text-brand-muted">
+            <ul className="wenyu-muted mt-3 list-inside list-disc text-sm">
               {step.notes.map((n) => (
                 <li key={n}>{n}</li>
               ))}
             </ul>
-            <p className="mt-4 border border-brand-gold/30 bg-brand-gold/5 p-4 text-sm text-brand-ink">
+            <p className="mt-4 border border-brand-gold/35 bg-brand-gold/10 p-4 text-sm text-brand-warm/95">
               {step.caution}
             </p>
           </section>

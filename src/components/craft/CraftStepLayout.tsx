@@ -15,16 +15,16 @@ export function CraftStepLayout({
   const next = craftSteps.find((s) => s.order === (step?.order ?? 0) + 1);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
+    <div className="wenyu-on-indigo mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <div className="grid gap-12 lg:grid-cols-[240px_1fr]">
         <aside>
           <Link
             href="/craft"
-            className="text-xs tracking-wide text-brand-muted hover:text-brand-primary"
+            className="wenyu-link text-xs tracking-wide"
           >
             ← 课堂首页
           </Link>
-          <p className="mt-6 text-[11px] uppercase tracking-[0.3em] text-brand-muted">
+          <p className="wenyu-muted mt-6 text-[11px] uppercase tracking-[0.3em]">
             工艺流程
           </p>
           <div className="mt-4">
@@ -34,7 +34,7 @@ export function CraftStepLayout({
         <div>{children}</div>
       </div>
 
-      <nav className="mt-16 flex flex-wrap justify-between gap-4 border-t border-brand-border pt-8">
+      <nav className="wenyu-divider mt-16 flex flex-wrap justify-between gap-4 border-t pt-8">
         {prev ? (
           <Button href={`/craft/${prev.id}`} variant="secondary" className="px-5 py-2.5 text-xs">
             ← {prev.name}

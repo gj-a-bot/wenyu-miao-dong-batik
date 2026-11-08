@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -10,6 +9,7 @@ import {
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
 import { FavoriteButton } from "@/components/patterns/FavoriteButton";
 import { PatternDetailHeroImage } from "@/components/patterns/PatternDetailHeroImage";
+import { GalleryWorkFrame } from "@/components/gallery/GalleryWorkFrame";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -44,7 +44,7 @@ export default function PatternDetailPage({
   );
 
   return (
-    <article className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
+    <article className="wenyu-on-indigo mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <PatternDetailHeroImage
@@ -66,28 +66,28 @@ export default function PatternDetailPage({
           />
         </div>
         <div className="lg:col-span-5">
-          <p className="text-[10px] uppercase tracking-[0.45em] text-brand-muted">
+          <p className="wenyu-eyebrow text-[10px] uppercase tracking-[0.45em]">
             Archive Record
           </p>
           <VerificationBadge status={pattern.verificationStatus} className="mt-3" />
-          <h1 className="mt-4 font-serif text-4xl text-brand-primary">
+          <h1 className="mt-4 font-serif text-4xl">
             {pattern.name}
           </h1>
-          <p className="mt-2 text-sm text-brand-muted">{pattern.category}</p>
-          <p className="mt-6 leading-relaxed text-brand-ink/85">
+          <p className="wenyu-muted mt-2 text-sm">{pattern.category}</p>
+          <p className="wenyu-body mt-6 leading-relaxed">
             {pattern.description}
           </p>
           <div className="mt-8">
             <FavoriteButton patternId={pattern.id} />
           </div>
 
-          <dl className="mt-10 space-y-8 border-t border-brand-border pt-8">
+          <dl className="wenyu-divider mt-10 space-y-8 border-t pt-8">
             <div>
-              <dt className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+              <dt className="wenyu-muted text-[11px] uppercase tracking-[0.25em]">
                 图案特征
               </dt>
               <dd className="mt-2">
-                <ul className="list-inside list-disc text-sm text-brand-muted">
+                <ul className="wenyu-muted list-inside list-disc text-sm">
                   {pattern.features.map((f) => (
                     <li key={f}>{f}</li>
                   ))}
@@ -95,21 +95,21 @@ export default function PatternDetailPage({
               </dd>
             </div>
             <div>
-              <dt className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+              <dt className="wenyu-muted text-[11px] uppercase tracking-[0.25em]">
                 资料来源
               </dt>
-              <dd className="mt-2 text-sm text-brand-muted">{pattern.source}</dd>
+              <dd className="wenyu-muted mt-2 text-sm">{pattern.source}</dd>
             </div>
             <div>
-              <dt className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+              <dt className="wenyu-muted text-[11px] uppercase tracking-[0.25em]">
                 文化说明
               </dt>
-              <dd className="mt-2 text-sm leading-relaxed text-brand-muted">
+              <dd className="wenyu-muted mt-2 text-sm leading-relaxed">
                 {pattern.culturalNote}
               </dd>
             </div>
             <div>
-              <dt className="text-[11px] uppercase tracking-[0.25em] text-brand-muted">
+              <dt className="wenyu-muted text-[11px] uppercase tracking-[0.25em]">
                 相关工艺
               </dt>
               <dd className="mt-3 flex flex-wrap gap-2">
@@ -133,20 +133,18 @@ export default function PatternDetailPage({
       </div>
 
       {relatedWorks.length > 0 && (
-        <section className="mt-20 border-t border-brand-border pt-16">
-          <h2 className="font-serif text-2xl text-brand-primary">相关演示作品</h2>
+        <section className="wenyu-divider mt-20 border-t pt-16">
+          <h2 className="font-serif text-2xl">相关演示作品</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {relatedWorks.map((w) => (
               <Link key={w.id} href={`/gallery/${w.id}`} className="group">
-                <div className="relative aspect-[3/4] overflow-hidden border border-brand-border">
-                  <Image
-                    src={w.thumbnail}
-                    alt={w.title}
-                    fill
-                    className="object-cover transition group-hover:scale-[1.02]"
-                  />
-                </div>
-                <p className="mt-3 text-sm text-brand-primary">{w.title}</p>
+                <GalleryWorkFrame
+                  work={w}
+                  sizes="(min-width: 768px) 22vw, 80vw"
+                />
+                <p className="mt-3 text-sm text-brand-warm group-hover:text-brand-gold">
+                  {w.title}
+                </p>
               </Link>
             ))}
           </div>
@@ -154,7 +152,7 @@ export default function PatternDetailPage({
       )}
 
       <div className="mt-12">
-        <Link href="/patterns" className="text-sm text-brand-primary hover:underline">
+        <Link href="/patterns" className="wenyu-link text-sm">
           ← 返回纹样博物馆
         </Link>
       </div>

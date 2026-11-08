@@ -6,6 +6,7 @@ import {
   getGalleryWorkById,
   getPatternById,
 } from "@/lib/data";
+import { galleryAspectStyle, galleryImagePosition } from "@/lib/gallery-frame";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -35,30 +36,39 @@ export default function GalleryDetailPage({
     : undefined;
 
   return (
-    <article className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-      <p className="text-xs uppercase tracking-[0.35em] text-brand-goldInk">
+    <article className="wenyu-on-indigo mx-auto max-w-7xl px-4 py-16 md:px-8">
+      <p className="wenyu-eyebrow text-xs uppercase tracking-[0.35em]">
         {work.isDemo ? "项目演示作品" : "作品"}
       </p>
-      <h1 className="mt-3 font-serif text-4xl text-brand-primary md:text-5xl">
-        {work.title}
-      </h1>
-      <p className="mt-2 text-sm text-brand-muted">{work.createdAt}</p>
+      <h1 className="mt-3 font-serif text-4xl md:text-5xl">{work.title}</h1>
+      <p className="wenyu-muted mt-2 text-sm">{work.createdAt}</p>
 
-      <div className="mt-12 relative aspect-[3/4] max-h-[80vh] w-full overflow-hidden bg-brand-dark md:aspect-auto md:h-[70vh]">
-        <Image src={work.image} alt={work.title} fill className="object-contain" />
+      <div
+        className="relative mt-12 w-full max-h-[min(82vh,920px)] overflow-hidden border border-brand-warm/15 bg-brand-dark shadow-lift"
+        style={galleryAspectStyle(work)}
+      >
+        <Image
+          src={work.image}
+          alt={work.title}
+          fill
+          className="object-contain"
+          style={{ objectPosition: galleryImagePosition(work) }}
+          sizes="(min-width: 1024px) 80vw, 96vw"
+          priority
+        />
       </div>
 
       <div className="mt-12 grid gap-12 lg:grid-cols-2">
         <section>
-          <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
+          <h2 className="wenyu-eyebrow text-sm font-medium uppercase tracking-wider">
             创作说明
           </h2>
-          <p className="mt-4 leading-relaxed text-brand-muted">{work.description}</p>
+          <p className="wenyu-body mt-4 leading-relaxed">{work.description}</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {work.palette.map((c) => (
               <span
                 key={c}
-                className="inline-flex items-center gap-2 border border-brand-primary/10 px-2 py-1 text-xs"
+                className="inline-flex items-center gap-2 border border-brand-warm/20 bg-brand-dark/40 px-2 py-1 text-xs text-brand-warm/90"
               >
                 <span
                   className="h-4 w-4 rounded-full border border-black/10"
@@ -71,25 +81,33 @@ export default function GalleryDetailPage({
         </section>
 
         {source && (
-          <section className="border border-brand-primary/10 bg-white/40 p-6">
-            <h2 className="text-sm font-medium uppercase tracking-wider text-brand-primary">
+          <section className="wenyu-panel p-6">
+            <h2 className="wenyu-eyebrow text-sm font-medium uppercase tracking-wider">
               原始纹样参考
             </h2>
             <div className="mt-4 grid grid-cols-2 gap-4">
-              <div className="relative aspect-square bg-brand-primary/5">
-                <Image src={source.image} alt={source.name} fill className="object-cover" />
+              <div className="relative aspect-square overflow-hidden border border-brand-warm/10 bg-brand-dark/60">
+                <Image
+                  src={source.image}
+                  alt={source.name}
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="relative aspect-square bg-brand-primary/5 opacity-90">
-                <Image src={work.image} alt="" fill className="object-cover" />
+              <div className="relative aspect-square overflow-hidden border border-brand-warm/10 bg-brand-dark/60">
+                <Image
+                  src={work.image}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: galleryImagePosition(work) }}
+                />
               </div>
             </div>
-            <p className="mt-4 text-sm text-brand-muted">
+            <p className="wenyu-muted mt-4 text-sm">
               左：档案纹样「{source.name}」 · 右：本演示再设计
             </p>
-            <Link
-              href={`/patterns/${source.id}`}
-              className="mt-4 inline-block text-sm text-brand-primary hover:underline"
-            >
+            <Link href={`/patterns/${source.id}`} className="wenyu-link mt-4 inline-block text-sm">
               查看纹样档案 →
             </Link>
           </section>
@@ -100,11 +118,11 @@ export default function GalleryDetailPage({
         <a
           href={work.image}
           download
-          className="inline-flex border border-brand-primary px-6 py-3 text-sm text-brand-primary hover:bg-brand-primary hover:text-brand-cream"
+          className="inline-flex border border-brand-gold/50 px-6 py-3 text-sm text-brand-gold transition hover:border-brand-gold hover:bg-brand-gold/10 hover:text-brand-warm"
         >
-          下载 SVG 演示文件
+          下载演示文件
         </a>
-        <Link href="/gallery" className="inline-flex items-center px-6 py-3 text-sm text-brand-muted hover:text-brand-primary">
+        <Link href="/gallery" className="wenyu-link inline-flex items-center px-6 py-3 text-sm">
           ← 返回展厅
         </Link>
       </div>

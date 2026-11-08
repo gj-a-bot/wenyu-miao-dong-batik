@@ -45,6 +45,42 @@ body {
   }
 }
 
+/** 靛蓝章节上的正文层级（博物馆/工艺/展厅详情等） */
+@layer components {
+  .wenyu-on-indigo {
+    @apply text-brand-gray;
+  }
+
+  .wenyu-on-indigo :where(h1, h2, h3) {
+    @apply text-brand-warm;
+  }
+
+  .wenyu-on-indigo .wenyu-eyebrow {
+    @apply text-brand-gold;
+  }
+
+  .wenyu-on-indigo .wenyu-muted {
+    @apply text-brand-gray;
+  }
+
+  .wenyu-on-indigo .wenyu-body {
+    color: rgba(250, 248, 242, 0.92);
+  }
+
+  .wenyu-on-indigo .wenyu-link {
+    @apply text-brand-gold underline-offset-4 hover:text-brand-warm hover:underline;
+  }
+
+  .wenyu-on-indigo .wenyu-divider {
+    border-color: rgba(250, 248, 242, 0.12);
+  }
+
+  .wenyu-on-indigo .wenyu-panel {
+    border-color: rgba(250, 248, 242, 0.15);
+    @apply border bg-brand-dark/45 backdrop-blur-[2px];
+  }
+}
+
 .paper-texture {
   background-color: var(--color-paper);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");

@@ -40,6 +40,9 @@ export interface GalleryWork {
   isDemo: boolean;
   sourcePatternId?: string;
   palette: string[];
+  /** 展示框宽高比，如 "480/648" */
+  frameAspect?: string;
+  objectPosition?: string;
 }
 
 export interface StudioAsset {
