@@ -2,7 +2,12 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { galleryCategories, galleryWorks } from "@/lib/data";
+import { galleryWorks } from "@/lib/data";
+import {
+  galleryExhibitFilters,
+  galleryExhibitLabel,
+  matchGalleryExhibitFilter,
+} from "@/lib/gallery-exhibit";
 import { GalleryCoverHero } from "@/components/gallery/GalleryCoverHero";
 import { GalleryWorkFrame } from "@/components/gallery/GalleryWorkFrame";
 import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
@@ -14,9 +19,7 @@ export function GalleryExhibition() {
 
   const items = useMemo(
     () =>
-      category === "全部"
-        ? galleryWorks
-        : galleryWorks.filter((w) => w.category === category),
+      galleryWorks.filter((w) => matchGalleryExhibitFilter(w, category)),
     [category]
   );
 
@@ -30,11 +33,11 @@ export function GalleryExhibition() {
           className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
         >
           <p className="max-w-2xl text-sm leading-relaxed text-brand-warm/90">
-            展览式呈现项目演示作品，均标注为样例，非真实用户投稿。
+            展厅区分传统实物、工艺记录与数字再创作；当前条目均为项目演示样例。
           </p>
 
           <div className="mt-8 flex flex-wrap gap-2">
-            {galleryCategories.map((cat) => (
+            {galleryExhibitFilters.map((cat) => (
               <Tag
                 key={cat}
                 active={category === cat}
@@ -64,7 +67,8 @@ export function GalleryExhibition() {
                   sizes="(min-width: 768px) 55vw, 92vw"
                 >
                   <span className="absolute left-4 top-4 border border-brand-warm/30 bg-brand-dark/85 px-2 py-1 text-[10px] uppercase tracking-wider text-brand-warm">
-                    演示作品
+                    {galleryExhibitLabel(work)}
+                    {work.isDemo ? " · 演示" : ""}
                   </span>
                 </GalleryWorkFrame>
                 <div className="md:col-span-5 md:[direction:ltr]">

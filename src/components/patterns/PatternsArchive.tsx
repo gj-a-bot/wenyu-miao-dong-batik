@@ -4,8 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, Star } from "lucide-react";
-import { filterPatterns, patternCategories } from "@/lib/data";
+import {
+  filterMuseumPatterns,
+  museumCategoryFilters,
+  museumEthnicityFilters,
+  museumRegionFilters,
+} from "@/lib/pattern-catalog";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
+import { ArchiveStatusBadges } from "@/components/patterns/ArchiveStatusBadges";
 import { Tag } from "@/components/ui/Tag";
 import { getFavorites } from "@/lib/storage";
 import { cn } from "@/lib/cn";
@@ -34,6 +40,8 @@ const MUSEUM_COVER_HOTSPOTS: CoverHotspot[] = [
 
 export function PatternsArchive() {
   const [category, setCategory] = useState("全部");
+  const [ethnicity, setEthnicity] = useState("全部");
+  const [region, setRegion] = useState("全部");
   const [query, setQuery] = useState("");
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
@@ -44,13 +52,15 @@ export function PatternsArchive() {
 
   const results = useMemo(
     () =>
-      filterPatterns({
+      filterMuseumPatterns({
         category,
+        ethnicity,
+        region,
         query,
         favoritesOnly,
         favoriteIds,
       }),
-    [category, query, favoritesOnly, favoriteIds]
+    [category, ethnicity, region, query, favoritesOnly, favoriteIds]
   );
 
   return (
@@ -85,7 +95,7 @@ export function PatternsArchive() {
             分类
           </p>
           <div className="mt-4 flex flex-wrap gap-2 lg:flex-col lg:items-stretch">
-            {patternCategories.map((cat) => (
+            {museumCategoryFilters.map((cat) => (
               <Tag
                 key={cat}
                 active={category === cat}
@@ -96,6 +106,37 @@ export function PatternsArchive() {
               </Tag>
             ))}
           </div>
+          <p className="mt-8 text-[11px] uppercase tracking-[0.3em] text-brand-gray">
+            民族
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 lg:flex-col lg:items-stretch">
+            {["全部", ...museumEthnicityFilters].map((eth) => (
+              <Tag
+                key={eth}
+                active={ethnicity === eth}
+                onClick={() => setEthnicity(eth)}
+                className="justify-center lg:justify-start"
+              >
+                {eth}
+              </Tag>
+            ))}
+          </div>
+          <p className="mt-6 text-[11px] uppercase tracking-[0.3em] text-brand-gray">
+            地区·支系
+          </p>
+          <select
+            value={region}
+            onChange={(e) => setRegion(e.target.value)}
+            className="wenyu-input mt-3 w-full text-sm"
+            aria-label="按地区支系筛选"
+          >
+            <option value="全部">全部</option>
+            {museumRegionFilters.map((r) => (
+              <option key={r} value={r}>
+                {r.length > 36 ? `${r.slice(0, 36)}…` : r}
+              </option>
+            ))}
+          </select>
           <button
             type="button"
             onClick={() => {
@@ -141,9 +182,10 @@ export function PatternsArchive() {
 
           <div className="mt-10 columns-1 gap-5 sm:columns-2 xl:columns-3">
             {results.map((p, i) => {
-              const isArchiveShowcaseImage = p.image.startsWith(
-                "/images/patterns/"
-              );
+              const isPlaceholder = p.image.includes("archive-image-pending");
+              const isExperimental = p.kind === "experimental";
+              const isArchiveShowcaseImage =
+                isExperimental && p.image.startsWith("/images/patterns/");
               const isVortexDetail = p.id === "motif-spiral-type";
               return (
               <Link
@@ -158,7 +200,7 @@ export function PatternsArchive() {
                   mat="warm"
                   className={cn(
                     "wenyu-batik-display-frame--lift w-full",
-                    isArchiveShowcaseImage
+                    isPlaceholder || isArchiveShowcaseImage
                       ? "aspect-[3/2]"
                       : i % 2 === 0
                         ? "aspect-[4/5]"
@@ -167,23 +209,40 @@ export function PatternsArchive() {
                 >
                   <Image
                     src={p.image}
-                    alt={p.name}
+                    alt={
+                      isPlaceholder ? `${p.name}（配图待补充）` : p.name
+                    }
                     fill
                     className={cn(
-                      "object-cover transition duration-700",
+                      "transition duration-700",
+                      isPlaceholder
+                        ? "object-contain p-6 bg-logo-surface"
+                        : "object-cover",
                       isArchiveShowcaseImage
                         ? isVortexDetail
                           ? "object-[50%_56%] brightness-[0.97] saturate-[0.92] group-hover:scale-[1.02]"
                           : "object-center group-hover:scale-[1.02]"
-                        : "group-hover:scale-[1.03]"
+                        : !isPlaceholder && "group-hover:scale-[1.03]"
                     )}
                   />
                 </BatikDisplayFrame>
                 <div className="border-t border-brand-border px-4 py-3">
-                  <VerificationBadge status={p.verificationStatus} />
+                  {p.kind === "archive" ? (
+                    <ArchiveStatusBadges
+                      sourceStatus={p.sourceStatus}
+                      imageStatus={p.imageStatus}
+                    />
+                  ) : (
+                    <VerificationBadge status={p.verificationStatus} />
+                  )}
                   <h2 className="mt-2 font-serif text-lg text-brand-primary">
                     {p.name}
                   </h2>
+                  <p className="mt-1 text-[10px] text-brand-gray">
+                    {p.kind === "archive"
+                      ? p.region.slice(0, 40)
+                      : p.category}
+                  </p>
                   <p className="mt-1 line-clamp-2 text-xs text-brand-muted">
                     {p.description}
                   </p>

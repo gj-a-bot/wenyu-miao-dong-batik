@@ -1,4 +1,8 @@
 import { StudioAsset } from "@/types";
+import licensedRaw from "@/data/studio-assets-licensed.json";
+
+/** 经审核批准、可公开的授权 SVG（见 svg-review.csv，status=approved 后录入） */
+export const studioLicensedAssets = licensedRaw as StudioAsset[];
 
 export const studioAssets: StudioAsset[] = [
   {

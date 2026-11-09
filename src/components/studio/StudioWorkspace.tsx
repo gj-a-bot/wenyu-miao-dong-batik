@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { DEFAULT_STUDIO_CONFIG, studioAssets } from "@/data/studio-assets";
+import {
+  DEFAULT_STUDIO_CONFIG,
+  studioAssets,
+  studioLicensedAssets,
+} from "@/data/studio-assets";
 import { SavedStudioWork, StudioConfig, StudioDesignPlan, CreativeProductId } from "@/types";
 import { saveStudioWork } from "@/lib/storage";
 import {
@@ -221,6 +225,9 @@ export function StudioWorkspace() {
                     <h2 className="text-[11px] font-medium uppercase tracking-[0.32em] text-brand-primary">
                       纹样素材库
                     </h2>
+                    <p className="mt-2 text-[10px] leading-relaxed text-brand-muted">
+                      实验几何纹样可随时使用；外部授权 SVG 须审核通过后才会出现在下方列表。
+                    </p>
                     <ul className="mt-4 space-y-2">
                       {studioAssets.map((a) => (
                         <li key={a.id}>
@@ -249,6 +256,38 @@ export function StudioWorkspace() {
                         </li>
                       ))}
                     </ul>
+                    {studioLicensedAssets.length > 0 ? (
+                      <>
+                        <h3 className="mt-8 text-[11px] font-medium uppercase tracking-[0.28em] text-brand-primary">
+                          授权纹样
+                        </h3>
+                        <ul className="mt-3 space-y-2">
+                          {studioLicensedAssets.map((a) => (
+                            <li key={a.id}>
+                              <button
+                                type="button"
+                                onClick={() => update({ assetId: a.id })}
+                                className={cn(
+                                  "w-full border px-3 py-3 text-left transition",
+                                  config.assetId === a.id
+                                    ? "border-brand-primary bg-brand-primary text-brand-warm"
+                                    : "border-brand-gold/40 bg-brand-gold/5 hover:border-brand-gold"
+                                )}
+                              >
+                                <span className="block text-sm">{a.name}</span>
+                                <span className="text-[10px] text-brand-goldInk">
+                                  已审核授权素材
+                                </span>
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : (
+                      <p className="mt-6 border border-dashed border-brand-border px-3 py-2 text-[10px] text-brand-muted">
+                        暂无通过审核的授权 SVG（8 项均在台账 pending）。
+                      </p>
+                    )}
                   </>
                 )}
                 {leftTab === "advanced" && (
