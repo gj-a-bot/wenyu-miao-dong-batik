@@ -32,11 +32,13 @@ export default function CraftDetailPage({
 
   const mediaSrc = step.video ?? step.image;
   const isDye = step.id === "dye";
+  const isDraft = step.id === "draft";
   const isVideo = isCraftVideoSrc(mediaSrc);
+  const preloadCover = (isDye || isDraft) && step.image;
 
   return (
     <>
-      {isDye && step.image ? <RouteImagePreload href={step.image} /> : null}
+      {preloadCover ? <RouteImagePreload href={step.image} /> : null}
       <CraftStepLayout stepId={step.id}>
       <p className="wenyu-eyebrow text-[10px] uppercase tracking-[0.45em]">
         步骤 {String(step.order).padStart(2, "0")} /{" "}
@@ -51,7 +53,7 @@ export default function CraftDetailPage({
           prominent
           className={cn(
             "wenyu-batik-display-frame--lift w-full",
-            isDye ? "aspect-video" : "aspect-[4/3]"
+            isDye || (isDraft && isVideo) ? "aspect-video" : "aspect-[4/3]"
           )}
           innerClassName={isDye ? "bg-logo-surface" : undefined}
         >
