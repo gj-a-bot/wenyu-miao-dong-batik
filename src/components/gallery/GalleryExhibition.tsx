@@ -6,7 +6,6 @@ import { galleryCategories, galleryWorks } from "@/lib/data";
 import { GalleryCoverHero } from "@/components/gallery/GalleryCoverHero";
 import { GalleryWorkFrame } from "@/components/gallery/GalleryWorkFrame";
 import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
-import { BatikDecorativeRule } from "@/components/ui/BatikDecorativeRule";
 import { Tag } from "@/components/ui/Tag";
 import { cn } from "@/lib/cn";
 
@@ -25,20 +24,14 @@ export function GalleryExhibition() {
     <>
       <GalleryCoverHero />
 
-      <BatikTextureSurface as="div" variant="band" className="relative w-full">
-        <span
-          className="wenyu-batik-border-corner wenyu-batik-border-corner--br hidden md:block"
-          aria-hidden
-        />
+      <BatikTextureSurface as="div" variant="band" className="w-full">
         <div
           id="gallery-works"
-          className="relative z-[1] mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
+          className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
         >
           <p className="max-w-2xl text-sm leading-relaxed text-brand-warm/90">
             展览式呈现项目演示作品，均标注为样例，非真实用户投稿。
           </p>
-
-          <BatikDecorativeRule wide className="mt-10" />
 
           <div className="mt-8 flex flex-wrap gap-2">
             {galleryCategories.map((cat) => (

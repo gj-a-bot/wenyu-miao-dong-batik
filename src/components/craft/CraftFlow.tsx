@@ -6,8 +6,6 @@ import { CraftStepNav } from "@/components/craft/CraftStepNav";
 import { CraftCoverHero } from "@/components/craft/CraftCoverHero";
 import { BatikTextureSurface } from "@/components/ui/BatikTextureSurface";
 import { BatikDisplayFrame } from "@/components/ui/BatikDisplayFrame";
-import { BatikDecorativeRule } from "@/components/ui/BatikDecorativeRule";
-
 export function CraftFlow() {
   return (
     <>
@@ -18,8 +16,6 @@ export function CraftFlow() {
           id="craft-steps"
           className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-16 pt-10 md:px-8 md:pb-20 md:pt-14"
         >
-        <BatikDecorativeRule wide className="mb-12" />
-
         <div className="grid gap-12 lg:grid-cols-[220px_1fr]">
           <aside className="hidden lg:block">
             <p className="text-[11px] uppercase tracking-[0.3em] text-brand-gray">
