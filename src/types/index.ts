@@ -1,5 +1,111 @@
 export type VerificationStatus = "verified" | "pending" | "experimental";
 
+/** 文化档案纹样核验状态（patterns.archive.json）— 兼容旧字段 */
+export type ArchiveVerificationStatus =
+  | "verified"
+  | "needs_review"
+  | "image_pending"
+  | "source_pending"
+  | "experimental";
+
+/** 文化来源核验（与配图审核分离） */
+export type PatternArchiveSourceStatus =
+  | "needs_review"
+  | "partially_verified"
+  | "verified"
+  | "source_pending";
+
+/** 纹样配图审核 */
+export type PatternArchiveImageStatus =
+  | "image_pending"
+  | "matched_pending"
+  | "approved"
+  | "restricted";
+
+export type PatternArchiveSource = {
+  title: string;
+  url: string;
+  publisher?: string;
+};
+
+export interface PatternArchive {
+  id: string;
+  name: string;
+  ethnicity: string[];
+  region: string;
+  subgroup?: string;
+  regionalDifferences?: string;
+  culturalMeaning?: string;
+  originStory?: string;
+  image?: string | null;
+  imageSource?: string | null;
+  sources: PatternArchiveSource[];
+  /** @deprecated 兼容旧消费方；请优先使用 sourceStatus + imageStatus */
+  verificationStatus: ArchiveVerificationStatus;
+  sourceStatus: PatternArchiveSourceStatus;
+  imageStatus: PatternArchiveImageStatus;
+  notes?: string | null;
+  tags: string[];
+  needsReviewMarkers?: {
+    regionalDifferences?: boolean;
+    culturalMeaning?: boolean;
+    originStory?: boolean;
+  };
+}
+
+export type CraftReferenceParameter = {
+  name: string;
+  range: string;
+  unit?: string | null;
+  basis: string;
+  sourceNote: string;
+};
+
+export type CraftMiaoStepSource = {
+  title: string;
+  publisher?: string;
+  url?: string;
+  localPath?: string;
+};
+
+export interface CraftMiaoStep {
+  id: string;
+  order: number;
+  name: string;
+  optional?: boolean;
+  optionalNote?: string | null;
+  applicableScope: string;
+  workingConditions?: string | null;
+  toolsAndMaterials?: string | null;
+  operationSteps: string[];
+  qualityCheck?: string | null;
+  abnormalHandling?: string | null;
+  referenceParameters?: CraftReferenceParameter[];
+  images: string[];
+  videos: string[];
+  sources: CraftMiaoStepSource[];
+  rawSection?: string | null;
+}
+
+export interface CraftMiao12Document {
+  meta: {
+    title: string;
+    ethnicScope: string;
+    regionScope: string;
+    dongNationalityNote: string;
+    ichReference: string;
+    referenceParametersDisclaimer?: string;
+    supplementaryContent?: {
+      id: string;
+      name: string;
+      type: string;
+      note: string;
+      publicAssets?: Record<string, string>;
+    }[];
+  };
+  steps: CraftMiaoStep[];
+}
+
 export interface Pattern {
   id: string;
   name: string;

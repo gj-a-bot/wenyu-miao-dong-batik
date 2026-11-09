@@ -35,3 +35,7 @@ next-env.d.ts
 # Cursor / npx skills (本地可重装)
 .agents/
 skills-lock.json
+
+# 第二阶段：原始研究资料（禁止进入公开 GitHub）
+/research/materials/raw/
+/public/收集材料/

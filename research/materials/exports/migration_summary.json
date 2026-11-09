@@ -1,0 +1,15 @@
+{
+  "migrated_at": "2026-11-09T10:48:54.971212+00:00",
+  "source_dir": "C:\\Users\\Administrator\\Desktop\\纹语wenyu\\public\\收集材料",
+  "file_count": 84,
+  "skipped_temp": 1,
+  "all_sha256_match": true,
+  "by_format": {
+    "xlsx": 1,
+    "docx": 4,
+    "txt": 1,
+    "mp4": 2,
+    "png": 68,
+    "svg": 8
+  }
+}

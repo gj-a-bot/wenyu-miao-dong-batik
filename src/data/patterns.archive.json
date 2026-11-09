@@ -1,0 +1,486 @@
+[
+  {
+    "id": "wo-tuo-danzhai-baili",
+    "name": "窝妥纹（涡旋纹）",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族·丹寨白领苗",
+    "subgroup": "苗族·丹寨白领苗",
+    "regionalDifferences": "同为螺旋/涡形，各地差异明显：丹寨白领苗为大涡旋、成对排布，多用于嫁衣背部；织金苗为细密多层小螺旋、成片密集排布（即螺旋细圈纹）。二者形态、疏密、排布方式均不同，切勿混同。（（豆）",
+    "culturalMeaning": "窝妥是丹寨白领苗的标志性几何纹样，螺旋象征祖先迁徙时跨越江河激流留下的水涡印记，寓意生命循环、生生不息、团圆圆满。多用于白领苗女性嫁衣背部，是白领苗区别于其他苗族支系的重要身份标识。（豆）",
+    "originStory": "这种图案是祖宗传下来的固定不变的，相传是为了纪念祖先经水路迁徙到贵州的这段历史。",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "https://www.qdndz.gov.cn/zjdz/whly/201704/t20170407_73425174.html",
+        "url": "https://www.qdndz.gov.cn/zjdz/whly/201704/t20170407_73425174.html"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。 与窝妥纹（丹寨）、亻革家旋涡纹（黄平）、丹寨螺旋+太阳芒组合纹样为三条独立档案，禁止合并。",
+    "tags": [
+      "涡"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": true,
+      "culturalMeaning": true,
+      "originStory": false
+    }
+  },
+  {
+    "id": "butterfly-mama-mei-bang",
+    "name": "蝴蝶妈妈纹（妹榜妹留）",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族·黔东南丹寨、台江、雷山（各地苗族均有）",
+    "subgroup": "苗族·黔东南丹寨、台江、雷山（各地苗族均有）",
+    "regionalDifferences": "黔东南各地苗族普遍崇拜蝴蝶妈妈，但构图侧重不同：丹寨苗多为整幅居中大蝴蝶，周围环绕鱼、鸟；台江苗常与枫树纹组合（枫树孕育蝴蝶妈妈）；湘西苗蝴蝶纹更趋几何简化。（豆）",
+    "culturalMeaning": "据布依族古歌《射太阳》记载，蝴蝶曾在危难时刻拯救了布依族先民，因此被视为吉祥的象征。（贵州省非物质文化遗产）",
+    "originStory": "蝴蝶纹来源于苗族神话古歌中的《妹榜妹留》与《十二个蛋》的故事。故事讲述了苗族起源：枫树化为蝴蝶，蝴蝶妈妈同水泡谈情说爱，生下12个蛋，由鹤宇鸟孵化，生出万物——雷公、水龙、蛇、虎、羊，大象、野猪等，其中一个蛋孵化出人类，即苗族的祖先姜央。这就是传说中的苗族始祖姜央为“妹榜妹留”所生的故事，苗语“妹榜妹留”意译为汉语就是“蝴蝶妈妈”省文旅厅澎湃政务（蜡染版本）：[https://m.thepaper.cn/newsDetail_forward_4912950](https://m.thepaper.cn/newsDetail_forward_4912950)",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "www.gzfwz.org.cn",
+        "url": "https://www.gzfwz.org.cn/xmccrml/gjml/gjj/depgy/202407/t20240712_85094420.html"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。 文化寓意字段同时出现布依族《射太阳》与苗族《妹榜妹留》体系材料；叙事与民族归属须分源展示，禁止混写为同一起源。",
+    "tags": [
+      "蝶"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": true,
+      "culturalMeaning": false,
+      "originStory": false
+    }
+  },
+  {
+    "id": "fish-pattern-qiandongnan",
+    "name": "鱼纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族·黔东南丹寨、剑河、榕江（都柳江、清水江沿岸）",
+    "subgroup": "苗族·黔东南丹寨、剑河、榕江（都柳江、清水江沿岸）",
+    "regionalDifferences": "丹寨苗鱼纹常与蝴蝶、水草搭配，圆润写实；清水江苗（剑河）鱼纹偏细长几何化（鱼骨纹），更强调渔猎生计；都柳江苗（榕江、从江）鱼纹多成对出现，多用于孩童背带。（豆）",
+    "culturalMeaning": "一方面，借用鱼纹“延年有余”的寓意表达对丰衣足食生活的期盼；另一方面，鱼多子的特征也被认为是对“多子多孙”的美好祝福。（丹寨县人民政府文旅专栏）",
+    "originStory": "源自苗族古老的渔猎与稻作生活：先民沿江捕鱼为生，将鱼纳入信仰，取其多子、富足寓意，逐渐固化为蜡染传统纹样。（豆）",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "www.qdndz.gov.cn",
+        "url": "https://www.qdndz.gov.cn/zjdz/whly/201704/t20170407_73425174.html"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。",
+    "tags": [
+      "鱼"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": true,
+      "culturalMeaning": false,
+      "originStory": true
+    }
+  },
+  {
+    "id": "golden-pheasant-danzhai",
+    "name": "锦鸡纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族·丹寨白领苗（锦鸡苗支系）",
+    "subgroup": "苗族·丹寨白领苗（锦鸡苗支系）",
+    "regionalDifferences": "为丹寨白领苗（又称锦鸡苗）的特有图腾，其他苗族支系较少以锦鸡为主纹；侗族虽也用鸟纹，但形态不同（侗族鸟纹更写实、多与稻田搭配）。丹寨锦鸡纹长尾华美、昂首独立。（豆）",
+    "culturalMeaning": "锦鸡，又名金鸡，是我国独有的珍贵品种，是苗族的吉祥物，图腾的象征（贵州非遗文化保护中心）",
+    "originStory": "源于丹寨白领苗的图腾传说：古时先民迁徙途中，锦鸡引路使其寻得沃土定居，从此锦鸡被视为引路神鸟，刻入蜡染世代崇敬。（中国绿色时报）",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "http://www.greentimes.com/greentimepaper/html/2018-04/16/content_3320578.htm",
+        "url": "http://www.greentimes.com/greentimepaper/html/2018-04/16/content_3320578.htm"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。",
+    "tags": [
+      "锦鸡"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": true,
+      "culturalMeaning": false,
+      "originStory": false
+    }
+  },
+  {
+    "id": "eight-petal-flower",
+    "name": "八角花纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族·黄平、丹寨（黔东南苗通用）",
+    "subgroup": "苗族·黄平、丹寨（黔东南苗通用）",
+    "regionalDifferences": "黄平苗八角花为八瓣放射、规整对称，多作独立主花；丹寨苗八角花偏小，常作边框辅助纹样搭配蝴蝶、鱼纹；侗族亦有八角花，但花瓣更圆润。（豆）",
+    "culturalMeaning": "八瓣放射对称的花朵，对应八方天地，寓意八方平安、四季顺遂，是苗族喜爱的吉祥植物纹样，常用于盛装蜡染与服饰装饰。（豆）",
+    "originStory": "取材自然界八瓣花卉：苗族以“八”应八方方位，将花朵符号化，寄托祈求八方安宁、家宅平安的愿望。（豆）",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "https://lanmama.lib.hku.hk/items/show/34",
+        "url": "https://lanmama.lib.hku.hk/items/show/34"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。",
+    "tags": [
+      "八角"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": true,
+      "culturalMeaning": true,
+      "originStory": true
+    }
+  },
+  {
+    "id": "cattle-farming-danzhai",
+    "name": "牧牛农耕纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "）苗族（丹寨白领苗，黔东南丹寨）",
+    "subgroup": "）苗族（丹寨白领苗，黔东南丹寨）",
+    "regionalDifferences": "。丹寨白领苗这类农耕叙事纹样造型简约稚拙，人物、水牛、稻禾、飞鸟组合在同一画面；其他苗族支系的牛题材纹样多见斗牛纹，侧重表现斗牛祭祀场景，较少搭配禾苗、放牧人物。（豆）",
+    "culturalMeaning": "水牛是苗族农耕根基，稻禾象征粮食丰收，飞鸟代表祥和安宁，寄托苗族人期盼风调雨顺、五谷丰登、生活安稳的愿望。（豆）",
+    "originStory": "取材丹寨苗族日常农耕放牧生活，是记录田园劳作场景的叙事型蜡染纹样（豆）",
+    "image": null,
+    "imageSource": "百度",
+    "sources": [
+      {
+        "title": "https://www.guizhou.gov.cn/dcgz/rwgz/mzys/202109/t20210915_70425680.html",
+        "url": "https://www.guizhou.gov.cn/dcgz/rwgz/mzys/202109/t20210915_70425680.html"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "restricted",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。",
+    "tags": [
+      "农耕"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": true,
+      "culturalMeaning": true,
+      "originStory": true
+    }
+  },
+  {
+    "id": "bronze-drum-sun-ray",
+    "name": "铜鼓太阳芒纹",
+    "ethnicity": [
+      "苗族",
+      "侗族"
+    ],
+    "region": "苗族、侗族共有（丹寨、安顺、黎平、榕江）",
+    "subgroup": "苗族、侗族共有（丹寨、安顺、黎平、榕江）",
+    "regionalDifferences": "苗族铜鼓芒纹芒线细长密集、放射强烈（以惠水、长顺苗最典型）；侗族铜鼓芒纹芒线较短圆润、更柔和；安顺苗铜鼓纹偏几何规整。",
+    "culturalMeaning": "为贵州民间蜡染最为古老的纹样，苗族人通过铜鼓纹，表达对先祖的缅怀，亦表现了对太阳的崇拜（贵州省文旅厅官方澎湃政务号）",
+    "originStory": "苗族蜡染最早是对铜鼓上的纹样的摹取。做法是将布蒙在铜鼓上，用蜡在布上来回摩擦，再经过染，铜鼓上的纹样就转移到了布上。（贵州省人民政府官网《贵州苗族蜡染》）",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "www.ihchina.cn",
+        "url": "https://www.ihchina.cn/project_details/10482"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "铜鼓太阳芒纹涉及苗族与侗族共有表述，展示须保留民族区分。",
+    "tags": [
+      "铜鼓",
+      "太阳"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": false,
+      "culturalMeaning": false,
+      "originStory": false
+    }
+  },
+  {
+    "id": "water-wave-pattern",
+    "name": "水波纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族",
+    "subgroup": "苗族",
+    "regionalDifferences": "苗族水波纹（江河纹）多作连续波浪带、记录迁徙，线条起伏大；侗族水波纹常与禾苗纹、鱼纹组合，象征稻作灌溉；各地走向疏密不同。",
+    "culturalMeaning": "模拟江河流水，记录苗侗祖先跋山涉水迁徙的历史，表达对江河的敬畏与对水源滋养的感恩，寓意路途平安、生生不息。（豆·）",
+    "originStory": "源自苗侗民族的迁徙记忆与傍水生活：两族先民沿江河迁徙定居，以水纹记录来路、感谢江河滋养，固化为传统纹样。（豆）",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "www.qdndz.gov.cn",
+        "url": "https://www.qdndz.gov.cn/zjdz/whly/201704/t20170407_73425177.html"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。 水波纹字段涉及苗族及苗侗迁徙表述，须分民族语境核验。",
+    "tags": [
+      "水"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": false,
+      "culturalMeaning": true,
+      "originStory": true
+    }
+  },
+  {
+    "id": "bird-pattern-baili-miao",
+    "name": "鸟纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族・丹寨白领苗",
+    "subgroup": "苗族・丹寨白领苗",
+    "regionalDifferences": "丹寨白领苗蜡染鸟纹线条细密、舒展，常与花草、蝴蝶、涡纹组合；凯里、黄平一带苗鸟纹更夸张抽象，强调鸟冠和翅膀；台江、施秉等地同类纹样多见于刺绣，较少作为蜡染主纹大面积出现。",
+    "culturalMeaning": "苗族蜡染中的鸟纹多为欢快生动的形象，苗族姑娘借此纹样，寄托着对生活的美好憧憬与希冀（贵州省文旅厅官方澎湃政务号（官方！",
+    "originStory": null,
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "https://m.thepaper.cn/newsDetail_forward_7258014",
+        "url": "https://m.thepaper.cn/newsDetail_forward_7258014"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": null,
+    "tags": [
+      "鸟"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": false,
+      "culturalMeaning": false,
+      "originStory": false
+    }
+  },
+  {
+    "id": "gejia-vortex-huangping",
+    "name": "旋涡纹（革家圆涡纹",
+    "ethnicity": [
+      "苗族",
+      "亻革家"
+    ],
+    "region": "亻革家（苗族支系，黔东南黄平重安",
+    "subgroup": "亻革家（苗族支系，黔东南黄平重安",
+    "regionalDifferences": "丹寨窝妥为成对双线对旋，造型简洁；革家旋涡纹是大量细碎螺旋密集填充圆形框架，更繁复，多用于袖片。",
+    "culturalMeaning": "漩涡象征流水、生命轮回，代表生生不息、追溯祖先源流，护佑族人安稳顺遂。（豆）",
+    "originStory": "黄平亻革家蜡染偏爱细密几何纹样，手艺人以蜡刀绘制回旋卷曲的漩涡线条，多成组排布、填充在圆形区域内，依靠族群女性代代口传手授传承，属于亻革家经典几何纹样，区别于丹寨窝妥纹。（豆）",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "szb.eyesnews.cn",
+        "url": "http://szb.eyesnews.cn/pc/cont/202412/22/content_142092.html"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。 与窝妥纹（丹寨）、亻革家旋涡纹（黄平）、丹寨螺旋+太阳芒组合纹样为三条独立档案，禁止合并。",
+    "tags": [
+      "涡"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": false,
+      "culturalMeaning": true,
+      "originStory": true
+    }
+  },
+  {
+    "id": "miao-dragon-pattern",
+    "name": "龙纹（苗龙）",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族・丹寨白领苗",
+    "subgroup": "苗族・丹寨白领苗",
+    "regionalDifferences": "寨：造型灵动多样，作为吉祥灵物，祈福村寨平安顺遂。\n榕江：多用于祭祀仪式，偏向神圣的祭祖图腾。\n台江 / 施洞：分山龙、水龙，分别守护山林与水源，敬畏山水神灵",
+    "culturalMeaning": "源于苗族龙图腾崇拜，龙作为护佑族人的灵物，寄托祈福纳祥、村寨平安的愿望。贵州省政府官网《贵州苗族蜡染》。）",
+    "originStory": "苗族存在龙图腾崇拜，在牯脏节等重大祭祖民俗活动当中，长幡上面大量绘制龙纹。苗族手艺人不照搬汉族龙的形象，自主塑造出风格独特的苗龙，造型没有尖利爪牙，形态优美可亲。画娘手持蜡刀蘸熔蜡，将龙的形象绘制在土布上，龙纹作为独立题材列入苗族蜡染七大纹样分类，依靠苗族妇女代代口传手授传承下来（贵州省人民政府官网）",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "meiwen.gmw.cn",
+        "url": "http://meiwen.gmw.cn/2023-10/31/content_36932579.htm"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": null,
+    "tags": [
+      "龙"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": false,
+      "culturalMeaning": false,
+      "originStory": false
+    }
+  },
+  {
+    "id": "lotus-rice-pattern-paimo",
+    "name": "莲花纹（稻作莲纹）",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族・丹寨排莫苗",
+    "subgroup": "苗族・丹寨排莫苗",
+    "regionalDifferences": "丹寨排莫苗蜡染莲花多以对称团花呈现，搭配缠枝、花苞、小叶，构图饱满；台江施洞的莲纹造型更简练，常和蝴蝶、鱼组合；侗族蜡染莲纹依附水波纹，融入水田场景。",
+    "culturalMeaning": "莲花生于水田，和稻作共生，象征洁净繁茂；莲鱼同绘寓意年年有余，寄托丰收、家族兴旺的期盼（豆）",
+    "originStory": "源自苗家水田日常景观，简化提炼莲花形态入蜡染，弱化佛教含义，是本土稻作生活审美的体现（豆）",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "www.qdndz.gov.cn",
+        "url": "https://www.qdndz.gov.cn/zjdz/whly/201704/t20170407_73425174.html"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。",
+    "tags": [
+      "莲"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": false,
+      "culturalMeaning": true,
+      "originStory": true
+    }
+  },
+  {
+    "id": "swallow-small-bird-baili",
+    "name": "燕子纹（小鸟纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族・丹寨白领苗",
+    "subgroup": "苗族・丹寨白领苗",
+    "regionalDifferences": "丹寨白领苗燕子造型舒展、翅羽拉长，常和石榴、鱼、花草成套组合，线条自由写意；黄平苗鸟纹偏紧凑、多单独鸟；安顺苗鸟纹更简化几何化；白领苗的鸟纹源于古鸟图腾崇拜，燕子是其中一类吉祥小鸟，多用于被面、包袱布",
+    "culturalMeaning": "飞鸟是带给人们幸福的纹样，燕子象征吉祥、顺遂。（豆）",
+    "originStory": "《蓝花叙事：丹寨蜡染从村落走向世界的探索》，2009 凯里田野采集老蜡染被面，手上记忆博物馆馆藏",
+    "image": null,
+    "imageSource": null,
+    "sources": [
+      {
+        "title": "https://www.gzstv.com/a/33c6eb76c32e4374b6b18a7c19f0e080",
+        "url": "https://www.gzstv.com/a/33c6eb76c32e4374b6b18a7c19f0e080"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。",
+    "tags": [
+      "鸟",
+      "燕"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": false,
+      "culturalMeaning": true,
+      "originStory": false
+    }
+  },
+  {
+    "id": "phoenix-pattern-qiandongnan",
+    "name": "凤凰纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族（黔东南）",
+    "subgroup": "苗族（黔东南）",
+    "regionalDifferences": "区别于丹寨普通鸟纹、锦鸡纹；苗族凤凰造型夸张，尾羽分段呈羽状叶片，不是中原传统凤凰样式；丹寨锦鸡纹更贴近现实禽鸟形态。",
+    "culturalMeaning": "象征吉祥光明、族群兴旺、福运绵延，是苗族心中的瑞鸟图腾（豆）",
+    "originStory": "属于该文记载蜡染七大题材里的鱼鸟纹，取材自然飞鸟形象，由苗族先民在长期蜡染绘制中不断变形、艺术化传承而来（豆）",
+    "image": null,
+    "imageSource": "百度https://image.baidu.com/search/detail?adpicid=0&b_applid=10755605456333849760&bdtype=0&commodity=&copyright=&cs=2649464895%2C1338316522&di=1&fr=click-pic&fromurl=http%253A%252F%252Fbaijiahao.baidu.com%252Fs%253Fid%253D1826084722354529290%2526wfr%253Dspider%2526for%253Dpc&gsm=1e&hd=&height=0&hot=&ic=&ie=utf-8&imgformat=&imgratio=&imgspn=0&is=0%2C0&isImgSet=&latest=&lid=baa918b20014817d&lm=&objurl=https%253A%252F%252Fpic.rmb.bdstatic.com%252Fbjh%252Fnews%252Fd1a07a3fb3ba4aaf5f162ea003447614.png&os=995312897%2C3781957917&pd=image_content&pi=0&pn=28&rn=1&simid=2649464895%2C1338316522&tn=baiduimagedetail&width=0&word=%E8%95%A8%E8%8F%9C%E7%BA%B9%E8%B4%B5%E5%B7%9E%E4%B8%B9%E5%AF%A8%E8%9C%A1%E6%9F%93%E5%9B%BE%E7%89%87%E8%95%A8%E8%8F%9C%E7%BA%B9&z=",
+    "sources": [
+      {
+        "title": "https://www.guizhou.gov.cn/dcgz/rwgz/mzys/202109/t20210915_70425680.html",
+        "url": "https://www.guizhou.gov.cn/dcgz/rwgz/mzys/202109/t20210915_70425680.html"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "restricted",
+    "verificationStatus": "source_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。 备注图片来源含网络平台检索链接，不得作为馆藏主图依据。",
+    "tags": [
+      "凤"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": false,
+      "culturalMeaning": true,
+      "originStory": true
+    }
+  },
+  {
+    "id": "spiral-sun-ray-danzhai",
+    "name": "螺旋纹",
+    "ethnicity": [
+      "苗族"
+    ],
+    "region": "苗族（丹寨白领苗，黔东南丹寨",
+    "subgroup": "苗族（丹寨白领苗，黔东南丹寨",
+    "regionalDifferences": "丹寨白领苗：这类螺旋搭配外圈太阳芒，取自铜鼓形制，构图庄重对称，是本支系标志性纹样；黄平革家漩涡多为成对双线小涡旋，不带太阳芒，纹样细碎繁密，多用于袖片；其余苗族支系的螺旋大多为独立涡纹，极少和太阳芒组合（豆）",
+    "culturalMeaning": "各少数民族中都对此纹路有不同解义，而在苗族文化里，螺旋纹同样载负着对祖先的缅怀。（贵州省文旅厅官方澎湃政务号（官方！）",
+    "originStory": "该螺旋几何纹样源自铜鼓纹样，是白领苗祖传固定纹样，画娘以中心对称方式绘制回旋线条与外圈芒刺，代代传承，属于支系标志性几何纹样。（豆）",
+    "image": null,
+    "imageSource": "贵州省文旅厅官方澎湃政务号（官方！https://m.thepaper.cn/newsDetail_forward_7258014",
+    "sources": [
+      {
+        "title": "m.thepaper.cn",
+        "url": "https://m.thepaper.cn/newsDetail_forward_7258014"
+      }
+    ],
+    "sourceStatus": "needs_review",
+    "imageStatus": "image_pending",
+    "verificationStatus": "image_pending",
+    "notes": "原表含「豆」标记：相关文字待进一步核实。 与窝妥纹（丹寨）、亻革家旋涡纹（黄平）、丹寨螺旋+太阳芒组合纹样为三条独立档案，禁止合并。",
+    "tags": [
+      "螺旋"
+    ],
+    "needsReviewMarkers": {
+      "regionalDifferences": true,
+      "culturalMeaning": false,
+      "originStory": true
+    }
+  }
+]
