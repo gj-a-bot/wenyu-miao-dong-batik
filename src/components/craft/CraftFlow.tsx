@@ -1,9 +1,5 @@
 import Link from "next/link";
 import { craftSteps } from "@/lib/data";
-import {
-  craftMiaoStepSummary,
-  getCraftMiaoStepMedia,
-} from "@/lib/craft-miao";
 import { cn } from "@/lib/cn";
 import { CraftStepMedia } from "@/components/craft/CraftStepMedia";
 import { CraftStepNav } from "@/components/craft/CraftStepNav";
@@ -32,8 +28,7 @@ export function CraftFlow() {
 
           <div className="grid gap-6 sm:grid-cols-2">
             {craftSteps.map((step, i) => {
-              const media = getCraftMiaoStepMedia(step);
-              const mediaSrc = media.video ?? media.image;
+              const mediaSrc = step.video ?? step.image;
               return (
               <Link
                 key={step.id}
@@ -54,14 +49,14 @@ export function CraftFlow() {
                 >
                   <CraftStepMedia
                     src={mediaSrc}
-                    posterSrc={media.image}
+                    posterSrc={step.image}
                     stepId={step.id}
                     variant="thumbnail"
                     priority={i === 0}
                     imageClassName="object-cover"
                   />
                   <span className="absolute left-3 top-3 z-10 bg-brand-warm/90 px-2 py-0.5 text-[10px] uppercase tracking-wider text-brand-muted">
-                    {step.optional ? "可选" : media.video ? "演示" : "示意图"}
+                    {step.video ? "演示短片" : "示意图"}
                   </span>
                 </BatikDisplayFrame>
                 <div className="border-t border-brand-border p-5">
@@ -71,9 +66,7 @@ export function CraftFlow() {
                   <h2 className="mt-1 font-serif text-2xl text-brand-primary group-hover:text-brand-goldInk">
                     {step.name}
                   </h2>
-                  <p className="mt-2 text-sm text-brand-muted line-clamp-2">
-                    {craftMiaoStepSummary(step)}
-                  </p>
+                  <p className="mt-2 text-sm text-brand-muted">{step.summary}</p>
                 </div>
               </Link>
               );

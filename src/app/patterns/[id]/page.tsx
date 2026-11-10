@@ -5,6 +5,8 @@ import {
   getExperimentalPatternById,
   museumPatternList,
   ARCHIVE_IMAGE_PLACEHOLDER,
+  findBatikReferencePreview,
+  batikReferenceItems,
 } from "@/lib/pattern-catalog";
 import { getCraftStepById, galleryWorks } from "@/lib/data";
 import { VerificationBadge } from "@/components/patterns/VerificationBadge";
@@ -143,7 +145,8 @@ export default function PatternDetailPage({
   }
 
   const p = archive!;
-  const heroSrc = p.image ?? ARCHIVE_IMAGE_PLACEHOLDER;
+  const refPreview = p.image ? undefined : findBatikReferencePreview(p);
+  const heroSrc = p.image ?? refPreview?.image ?? ARCHIVE_IMAGE_PLACEHOLDER;
   const imagePending = !p.image;
 
   return (
@@ -161,9 +164,14 @@ export default function PatternDetailPage({
               contain
               className="absolute inset-0 h-full w-full bg-logo-surface"
             />
-            {imagePending ? (
+            {imagePending && !refPreview ? (
               <span className="absolute bottom-3 left-3 z-10 bg-brand-dark/80 px-2 py-1 text-[10px] tracking-wide text-brand-warm">
                 馆藏配图待补充 · 禁止沿用未审网络图
+              </span>
+            ) : null}
+            {refPreview ? (
+              <span className="absolute bottom-3 left-3 z-10 bg-brand-dark/80 px-2 py-1 text-[10px] tracking-wide text-brand-warm">
+                实物参考预览：{refPreview.title}（待与档案核对）
               </span>
             ) : null}
           </BatikDisplayFrame>
@@ -253,6 +261,33 @@ export default function PatternDetailPage({
           </dl>
         </div>
       </div>
+      <section className="wenyu-divider mt-16 border-t pt-12">
+        <h2 className="font-serif text-2xl">团队蜡染实物参考</h2>
+        <p className="wenyu-muted mt-2 text-sm">
+          下图来自你整理的「蜡染和纹样/蜡染」文件夹，已同步到站点；配对档案前仅作实物参考。
+        </p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {batikReferenceItems.slice(0, 9).map((ref) => (
+            <div
+              key={ref.id}
+              className="relative aspect-[3/4] overflow-hidden border border-brand-border bg-logo-surface"
+            >
+              <PatternDetailHeroImage
+                src={ref.image}
+                alt={ref.title}
+                contain
+                className="absolute inset-0 h-full w-full"
+              />
+              <span className="absolute bottom-2 left-2 bg-brand-dark/75 px-2 py-0.5 text-[10px] text-brand-warm">
+                {ref.title}
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="wenyu-muted mt-4 text-xs">
+          在博物馆顶部分区选择「实物参考图（24）」可浏览全部。
+        </p>
+      </section>
       <div className="mt-12">
         <Link href="/patterns" className="wenyu-link text-sm">
           ← 返回纹样博物馆

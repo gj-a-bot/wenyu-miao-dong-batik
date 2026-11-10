@@ -1,5 +1,6 @@
 import patternsData from "@/data/patterns.json";
 import archiveData from "@/data/patterns.archive.json";
+import batikReferenceData from "@/data/batik-reference.json";
 import type {
   Pattern,
   PatternArchive,
@@ -12,6 +13,29 @@ export const ARCHIVE_IMAGE_PLACEHOLDER =
 
 export const experimentalPatterns = patternsData as Pattern[];
 export const archivePatterns = archiveData as PatternArchive[];
+
+export type BatikReferenceItem = {
+  id: string;
+  title: string;
+  image: string;
+  sourceNote: string;
+  reviewStatus: string;
+};
+
+export const batikReferenceItems = batikReferenceData as BatikReferenceItem[];
+
+/** 仅用名称/标签关键词匹配团队实物图作列表预览，不写入 archive.image */
+export function findBatikReferencePreview(
+  archive: PatternArchive
+): BatikReferenceItem | undefined {
+  const keys = [...archive.tags, archive.name.replace(/[（(].*$/, "")];
+  for (const key of keys) {
+    if (!key || key.length < 1) continue;
+    const hit = batikReferenceItems.find((r) => r.title.includes(key));
+    if (hit) return hit;
+  }
+  return undefined;
+}
 
 export type MuseumPatternKind = "experimental" | "archive";
 
@@ -43,6 +67,7 @@ export type MuseumPatternListItem =
       sourceStatus: PatternArchiveSourceStatus;
       imageStatus: PatternArchiveImageStatus;
       verificationStatus: PatternArchive["verificationStatus"];
+      referencePreview?: BatikReferenceItem | null;
     };
 
 function archiveKeywords(p: PatternArchive): string[] {
@@ -57,12 +82,15 @@ function archiveDescription(p: PatternArchive): string {
 
 export function mapArchiveToListItem(p: PatternArchive): MuseumPatternListItem {
   const imagePending = !p.image;
+  const refPreview = imagePending ? findBatikReferencePreview(p) : undefined;
+  const displayImage = p.image ?? refPreview?.image ?? ARCHIVE_IMAGE_PLACEHOLDER;
   return {
     kind: "archive",
     id: p.id,
     name: p.name,
-    image: imagePending ? ARCHIVE_IMAGE_PLACEHOLDER : p.image!,
+    image: displayImage,
     imagePending,
+    referencePreview: refPreview ?? null,
     description: archiveDescription(p),
     keywords: archiveKeywords(p),
     category: "文化档案",
@@ -124,6 +152,13 @@ export const museumCategoryFilters = [
   ...Array.from(new Set(experimentalPatterns.map((p) => p.category))),
 ] as const;
 
+export function filterBatikReferences(query: string): BatikReferenceItem[] {
+  const q = query.trim().toLowerCase();
+  return batikReferenceItems.filter(
+    (r) => !q || r.title.toLowerCase().includes(q)
+  );
+}
+
 export function filterMuseumPatterns(options: {
   category?: string;
   query?: string;
@@ -131,6 +166,7 @@ export function filterMuseumPatterns(options: {
   region?: string;
   favoritesOnly?: boolean;
   favoriteIds?: string[];
+  partition?: "all" | "archive" | "experimental" | "reference";
 }): MuseumPatternListItem[] {
   const {
     category = "全部",
@@ -139,10 +175,14 @@ export function filterMuseumPatterns(options: {
     region = "全部",
     favoritesOnly = false,
     favoriteIds = [],
+    partition = "all",
   } = options;
   const q = query.trim().toLowerCase();
 
   return museumPatternList.filter((p) => {
+    if (partition === "reference") return false;
+    if (partition === "archive" && p.kind !== "archive") return false;
+    if (partition === "experimental" && p.kind !== "experimental") return false;
     const matchCat =
       category === "全部" ||
       p.category === category ||

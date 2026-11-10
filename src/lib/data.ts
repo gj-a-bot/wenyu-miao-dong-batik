@@ -2,16 +2,9 @@ import patternsData from "@/data/patterns.json";
 import craftData from "@/data/craft.json";
 import galleryData from "@/data/gallery.json";
 import { CraftStep, GalleryWork, Pattern } from "@/types";
-import {
-  craftMiaoSteps,
-  getCraftMiaoStepById,
-  resolveCraftStepId,
-} from "@/lib/craft-miao";
 
 export const patterns = patternsData as Pattern[];
-/** 站点工艺课堂主数据：十二道工序（不覆盖 craft.json 文件） */
-export const craftSteps = craftMiaoSteps;
-export const legacyCraftSteps = [...(craftData as CraftStep[])].sort(
+export const craftSteps = [...(craftData as CraftStep[])].sort(
   (a, b) => a.order - b.order
 );
 export const galleryWorks = galleryData as GalleryWork[];
@@ -20,9 +13,8 @@ export function getPatternById(id: string): Pattern | undefined {
   return patterns.find((p) => p.id === id);
 }
 
-export function getCraftStepById(id: string) {
-  const resolved = resolveCraftStepId(id);
-  return getCraftMiaoStepById(resolved);
+export function getCraftStepById(id: string): CraftStep | undefined {
+  return craftSteps.find((s) => s.id === id);
 }
 
 export function getGalleryWorkById(id: string): GalleryWork | undefined {

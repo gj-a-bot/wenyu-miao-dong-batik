@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search, Star } from "lucide-react";
 import {
+  filterBatikReferences,
   filterMuseumPatterns,
   museumCategoryFilters,
   museumEthnicityFilters,
@@ -39,6 +40,9 @@ const MUSEUM_COVER_HOTSPOTS: CoverHotspot[] = [
 ];
 
 export function PatternsArchive() {
+  const [partition, setPartition] = useState<
+    "all" | "archive" | "reference" | "experimental"
+  >("all");
   const [category, setCategory] = useState("全部");
   const [ethnicity, setEthnicity] = useState("全部");
   const [region, setRegion] = useState("全部");
@@ -59,8 +63,14 @@ export function PatternsArchive() {
         query,
         favoritesOnly,
         favoriteIds,
+        partition: partition === "reference" ? "all" : partition,
       }),
-    [category, ethnicity, region, query, favoritesOnly, favoriteIds]
+    [category, ethnicity, region, query, favoritesOnly, favoriteIds, partition]
+  );
+
+  const referenceResults = useMemo(
+    () => (partition === "reference" ? filterBatikReferences(query) : []),
+    [partition, query]
   );
 
   return (
@@ -159,7 +169,25 @@ export function PatternsArchive() {
         </aside>
 
         <div className="flex-1">
-          <label className="relative block">
+          <div className="flex flex-wrap gap-2 border-b border-brand-border pb-4">
+            {(
+              [
+                ["all", "全部"],
+                ["archive", "文化档案（15）"],
+                ["reference", "实物参考图（24）"],
+                ["experimental", "数字实验（9）"],
+              ] as const
+            ).map(([key, label]) => (
+              <Tag
+                key={key}
+                active={partition === key}
+                onClick={() => setPartition(key)}
+              >
+                {label}
+              </Tag>
+            ))}
+          </div>
+          <label className="relative mt-6 block">
             <span className="sr-only">搜索纹样</span>
             <Search
               className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-muted"
@@ -177,12 +205,54 @@ export function PatternsArchive() {
           </label>
 
           <p className="mt-4 text-sm text-brand-gray">
-            共 {results.length} 条档案
+            {partition === "reference"
+              ? `共 ${referenceResults.length} 张实物参考图（来自你整理的蜡染文件夹）`
+              : `共 ${results.length} 条条目`}
           </p>
 
+          {partition === "reference" ? (
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {referenceResults.map((ref) => (
+                <div
+                  key={ref.id}
+                  className="overflow-hidden border border-brand-border bg-brand-warm"
+                >
+                  <BatikDisplayFrame
+                    mat="warm"
+                    className="wenyu-batik-display-frame--lift aspect-[3/4] w-full"
+                  >
+                    <Image
+                      src={ref.image}
+                      alt={ref.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <span className="absolute bottom-3 left-3 z-10 bg-brand-dark/80 px-2 py-1 text-[10px] text-brand-warm">
+                      实物参考 · 待配对档案
+                    </span>
+                  </BatikDisplayFrame>
+                  <div className="px-4 py-3">
+                    <h2 className="font-serif text-lg text-brand-primary">
+                      {ref.title}
+                    </h2>
+                    <p className="mt-1 text-xs text-brand-muted">
+                      {ref.sourceNote}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+
+          {partition !== "reference" ? (
           <div className="mt-10 columns-1 gap-5 sm:columns-2 xl:columns-3">
             {results.map((p, i) => {
-              const isPlaceholder = p.image.includes("archive-image-pending");
+              const isPlaceholder =
+                p.kind === "archive" &&
+                p.imagePending &&
+                !p.referencePreview;
+              const isRefPreview =
+                p.kind === "archive" && !!p.referencePreview;
               const isExperimental = p.kind === "experimental";
               const isArchiveShowcaseImage =
                 isExperimental && p.image.startsWith("/images/patterns/");
@@ -218,6 +288,7 @@ export function PatternsArchive() {
                       isPlaceholder
                         ? "object-contain p-6 bg-logo-surface"
                         : "object-cover",
+                      isRefPreview && "brightness-[0.98] saturate-[0.95]",
                       isArchiveShowcaseImage
                         ? isVortexDetail
                           ? "object-[50%_56%] brightness-[0.97] saturate-[0.92] group-hover:scale-[1.02]"
@@ -225,6 +296,11 @@ export function PatternsArchive() {
                         : !isPlaceholder && "group-hover:scale-[1.03]"
                     )}
                   />
+                  {isRefPreview ? (
+                    <span className="absolute bottom-3 left-3 z-10 bg-brand-dark/85 px-2 py-1 text-[10px] text-brand-warm">
+                      列表预览：实物参考（待核对）
+                    </span>
+                  ) : null}
                 </BatikDisplayFrame>
                 <div className="border-t border-brand-border px-4 py-3">
                   {p.kind === "archive" ? (
@@ -251,8 +327,13 @@ export function PatternsArchive() {
               );
             })}
           </div>
+          ) : null}
 
-          {results.length === 0 && (
+          {partition === "reference" && referenceResults.length === 0 && (
+            <p className="py-20 text-center text-brand-gray">未找到匹配参考图。</p>
+          )}
+
+          {partition !== "reference" && results.length === 0 && (
             <p className="py-20 text-center text-brand-gray">
               {favoritesOnly ? "收藏为空或未匹配筛选。" : "未找到匹配纹样。"}
             </p>
