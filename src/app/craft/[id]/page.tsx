@@ -32,9 +32,14 @@ export default function CraftDetailPage({
 
   const mediaSrc = step.video ?? step.image;
   const isDye = step.id === "dye";
-  const isDraft = step.id === "draft";
   const isVideo = isCraftVideoSrc(mediaSrc);
-  const preloadCover = (isDye || isDraft) && step.image;
+  const wideVideoLayout =
+    isDye ||
+    (isVideo &&
+      (step.id === "draft" ||
+        step.id === "wax-prep" ||
+        step.id === "wax-dot"));
+  const preloadCover = wideVideoLayout && step.image;
 
   return (
     <>
@@ -53,7 +58,7 @@ export default function CraftDetailPage({
           prominent
           className={cn(
             "wenyu-batik-display-frame--lift w-full",
-            isDye || (isDraft && isVideo) ? "aspect-video" : "aspect-[4/3]"
+            wideVideoLayout ? "aspect-video" : "aspect-[4/3]"
           )}
           innerClassName={isDye ? "bg-logo-surface" : undefined}
         >

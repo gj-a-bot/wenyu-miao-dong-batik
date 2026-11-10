@@ -1,3 +1,7 @@
+蜡液准备.mp4 — 步骤 wax-prep（蜡液准备）
+点蜡.mp4 — 步骤 wax-dot（点蜡）
+蜡染.mp4 — 步骤 dye（染色）
+
 蜡染.mp4
 
 染色步骤（craft id: dye）的演示视频，路径：
