@@ -27,6 +27,8 @@
 |------|------|
 | `craft-process-cover.png` | 工艺课堂 Hero |
 | `craft-indigo-dye.png` | 染色步骤封面 + 视频 poster |
+| `craft-wax-prep.png` | 蜡液准备列表封面 + 视频 poster |
+| `craft-wax-dot.png` | 点蜡列表封面 + 视频 poster |
 | `videos/蜡染.mp4` | 染色详情懒加载视频 |
 | `gallery/*.svg`（JSON） | 演示作品卡片 — **若 `public/gallery/` 缺文件需补全** |
 | `craft/*.svg`（JSON） | 六步示意图 — **若 `public/craft/` 缺文件需补全** |
